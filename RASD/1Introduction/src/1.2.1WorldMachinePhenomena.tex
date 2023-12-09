@@ -1,0 +1,99 @@
+\subsubsection{World and Machine phenomena}
+	This section summarizes the previous description into lists of phenomena (events) that occur in the world of interest for the system to be developed. Phenomena have to be interpreted simply as events occurring in the whole domain that is being analyzed in the document, so they have been stripped of any constraint (that will be better specified in the requirements section). 
+    \newline Phenomena can be divided into:
+	\begin{itemize}
+		\item \textbf{World phenomena}: events happening outside the system and on which the system has no control.
+		\item \textbf{Machine phenomena}: events happening internally in the system, independent from the outside world.
+		\item \textbf{Shared phenomena}: events that are have an influence on both the system and the world surrounding it. Usually they are further split into two classes:
+		\begin{itemize}
+			\item \textbf{Machine controlled shared phenomena}: events triggered or initiated by the system with a relevant impact in the domain in which the system works.
+			\item \textbf{World controlled shared phenomena}: events initiated by entities of the world that are impactful for the system.
+		\end{itemize}
+	\end{itemize}
+	
+	\paragraph{World phenomena}
+	\begin{itemize}
+		\item WP1)  \textbf{Educator} wants to support students in bettering their software development skills.
+		\item WP2) \textbf{Educator} comes up with new code kata battles to publish on the system.
+		\item WP3) \textbf{Educator} writes the textual description of a new battle s/he wants to publish.
+		\item WP4) \textbf{Educator} designs the test cases and the build automation scripts of a new battle s/he wants to publish.
+		\item WP5) \textbf{Student} wants to improve their software development skills.
+		\item WP6) \textbf{Student} forks the main GitHub repository that hosts a battle to upload 	his/her code solutions.
+		\item WP7) \textbf{Student} writes an automated workflow through GitHub Actions to setup the interaction between GitHub and the system.
+		\item WP8) \textbf{Student} works at developing the code solutions for a battle.
+		\item WP9) \textbf{Student} pushes on the forked branch of the GitHub repository hosting a 	battle the code solutions, generating new commits.
+	\end{itemize}
+	
+	\paragraph{Machine phenomena}
+	\begin{itemize}
+		\item MP1) \textbf{The system} pulls new code solutions from GitHub.
+		\item MP2) \textbf{The system} runs build automation scripts and test cases on new code solutions.
+		\item MP3) \textbf{The system} calculates the percentage of test cases passed by a new code solution pulled from a GitHub repository.
+		\item MP4) \textbf{The system} calculates the amount of time passed between the beginning of a battle and the moment in which a new submission has been submitted by a student through GitHub.
+		\item MP5) \textbf{The system} runs static analysis on the new code solutions exploiting external static analysis tools.
+		\item MP6) \textbf{The system} calculates the score to be assigned to a new code solution.
+		\item MP7) \textbf{The system} computes the partial or final ranking of students for a tournament.
+		\item MP8) \textbf{The system} computes the partial or final ranking of teams for a battle.
+		\item MP9) \textbf{the system} computes the set of students that are eligible for receiving a badge (reward) at the end of a tournament.
+	\end{itemize}
+	
+	\paragraph{World controlled shared phenomena}
+	\begin{itemize}
+		\item WSP1) \textbf{User} signs up on the system for the first time and creates a new account.
+		\item WSP2) \textbf{User} inserts credentials and logs in the system.
+		\item WSP3)  \textbf{Educator} creates a new tournament.
+		\item WSP4) \textbf{Educator} defines the badges (rewards) for the tournament s/he wants to create.
+		\item WSP5) \textbf{Educator} grants permissions to create battles to other educators.
+		\item WSP6) \textbf{Educator} creates a battle in a tournament.
+		\item WSP7) \textbf{Educator} uploads on the system the textual description of the battle s/he wants to create.
+		\item WSP8) \textbf{Educator} uploads on the system the test cases and build automation scripts for the battle s/he wants to create.
+		\item WSP9) \textbf{Educator} inputs in the system the minimum and maximum number of students per group allowed for the battle s/he wants to create.
+		\item WSP10) \textbf{Educator} inputs in the system the registration deadline of the battle s/he wants to create.
+		\item WSP11) \textbf{Educator} inputs in the system the submission deadline for the students’ solutions of the battle s/he wants to create.
+		\item WSP12) \textbf{Educator} specifies to the system whether a consolidation stage is required after the submission deadline of the battle s/he wants to create.
+		\item WSP13) \textbf{Educator} selects which aspects (reliability, maintainability, security...) should be taken into account by \textbf{the system} when computing the score of the students' code solutions for the battle s/he wants to create.
+		\item WSP14) \textbf{Educator} checks the code solutions of the teams participating in a battle and assigns a personal score to each one of them.
+		\item WSP15) \textbf{Educator} closes a tournament.
+		\item WSP16) \textbf{User} opens the description page of a tournament.
+		\item WSP17) \textbf{Student} subscribes to a tournament.
+		\item WSP18) \textbf{User} opens the description page of a battle.
+		\item WSP19) \textbf{Student} sends an invitation to other students to ask to join a battle together as a team.
+		\item WSP20) \textbf{Student} joins a battle of a tournament either forming a group with other students or on his/her own.
+		\item WSP21) \textbf{User} opens his/her personal profile on the platform.
+		\item WSP22) \textbf{User} searches another user by name on the platform to see his/her personal profile.
+		\item WSP23) \textbf{User} opens the personal profile of another user on the platform.
+		\item WSP24) \textbf{User} opens the list of badges s/he own or of the ones owned by another user on the platform.
+		\item WSP25) \textbf{User} opens the partial or final ranking of students in a tournament.
+		\item WSP26) \textbf{User} opens the partial or final ranking of teams in a battle.
+		\item WSP27) \textbf{GitHub} notifies the system every time a new commit is pushed on a repository that stores the code solutions for a battle.
+	\end{itemize}
+	
+	\paragraph{Machine controlled shared phenomena}
+	\begin{itemize}
+		\item MSP1) \textbf{The system} shows to a \textbf{user} the interface to sign up for the first time on the platform.
+		\item MSP2) \textbf{The system} shows to a \textbf{user} the interface to log in the platform.
+		\item MSP3) \textbf{The system} shows to a \textbf{user} the initial page (home page) of the application.
+		\item MSP4) \textbf{The system} shows to an \textbf{educator} the interface for creating a new tournament.
+		\item MSP5) \textbf{The system} shows to an \textbf{educator} the interface for creating a new battle in an ongoing tournament.
+		\item MSP6) \textbf{The system} shows to an \textbf{educator} the interface to assign personal scores during the consolidation stage of a battle.
+		\item MSP7) \textbf{The system} shows to a \textbf{user} the list of tournaments available on the platform.
+		\item MSP8) \textbf{The system} shows to a \textbf{user} the description page of a tournament.
+		\item MSP9) \textbf{The system} shows to a \textbf{student} the interface to subscribe to a tournament.
+		\item MSP10) \textbf{The system} shows to a \textbf{user} the list of battles within a tournament.
+		\item MSP11) \textbf{The system} shows to a \textbf{user} the description page of a battle.
+		\item MSP12) \textbf{The system} shows to a \textbf{student} the interface to invite other students to join him/her in a battle as a team.
+		\item MSP13) \textbf{The system} shows to a \textbf{student} the interface to join a battle.
+		\item MSP14) \textbf{The system} shows to a \textbf{user} his personal profile.
+		\item MSP15) \textbf{The system} shows to a \textbf{user} the personal profile of another user on the platform.
+		\item MSP16) \textbf{The system} shows to a \textbf{user} the list of badges owned by a student on the platform.
+		\item MSP17) \textbf{The system} shows to a \textbf{user} the partial and final ranking of students in a tournament.
+		\item MSP18) \textbf{The system} shows to a \textbf{user} the partial and final ranking of teams in a battle.
+		\item MSP19) \textbf{The system} notifies all \textbf{students} subscribed to the platform when a new tournament is created.
+		\item MSP20) \textbf{The system} notifies all \textbf{students} subscribed to a tournament when a new battle is created in the tournament.
+		\item MSP21) \textbf{The system} creates a new \textbf{GitHub} repository dedicated to a battle.
+		\item MSP22) \textbf{The system} sends the link of the GitHub repository to all the \textbf{students} subscribed to the battle.
+		\item MSP23) \textbf{The system} shows and keeps updated the scores assigned to the students' code solutions for a battle.
+		\item MSP24) \textbf{The system} notifies all \textbf{students} that participated in a battle when the final ranking of the battle is available.
+		\item MSP25) \textbf{The system} notifies all \textbf{students} subscribed to a tournament when the tournament is closed.
+		\item MSP26) \textbf{The system} assigns badges (rewards) to \textbf{students} when a tournament ends.
+	\end{itemize}

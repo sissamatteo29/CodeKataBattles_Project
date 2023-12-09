@@ -1,0 +1,81 @@
+\subsubsection{Scenarios}
+\textbf{SCENARIO 1 - Educator creates a new account} \\
+    Emanuele is a teacher of Computer Science at Politecnico di Milano and has just discovered a new app useful for enhancing software development skills, so he decides to download it. \\
+    Due to the fact he is an educator he decides to create a new account, and so to sign-in into the app as an educator. \\
+    After this, he starts to understand how the app works.\\
+    
+    \textbf{SCENARIO 2 - Student creates a new account} \\
+    Matteo is a student of Computer Engineering at Unimore in Modena and has just discovered a new app useful for developing software engineering skills, so he decides to download it. \\
+    He really wants to become a software engineer so he decides to create an account as a student \\
+    After this, he starts to play with the basics of the application.\\
+
+    \textbf{SCENARIO 3 - An educator or a student log-in in his account} \\
+    Sara wants to use the new application called ``CodeKata'' she downloaded yesterday, so she decides to open it. \\
+    As her first action, she logs in because she registered the day before. \\
+    After this, she successfully can see the home.\\
+
+    
+    \textbf{SCENARIO 4 - Educator creates a new tournament}
+    Mario, a software engineering teacher at Politecnico di Milano, knows about an app called CodeKata, which is useful to help students improve their software development skills. \\
+    Thus he opens the application and, after signin-up, he decide to create a new tournament. 
+    At the bottom there is a navbar with a central button called  ``New'', so he clicks on it. After this, the app shows a form to be filled with these fields: a text box asking the name of the tournament, some fields regarding the use of badges (elements in the form of rewards that represent the achievements of the individual students), namely the title of the badge, and one or more rules that must to be fulfilled to achieve the badge, all added selecting between a range of variables. 
+    After compiling all the form, he can now complete the creation of the new tournament, and as a result the application will show to him the tournament interface.\\
+
+
+    \textbf{SCENARIO 5 - Educator creates a new battle}\\
+    Mario, a software engineering teacher, wants to add a new battle in his tournament. He opens the application and from the homepage he selects the tournament he had already created. Then he clicks on ``Add new battle'' and fills the information requested by the platform:
+    a button ``Upload the code'' where he has to attach the code that needs to be completed by the students in a .zip format, another button with a text saying  ``Upload the tests'' where he has to attach the code that is needed to test the previous one, in a .zip format too, another button with a text saying  ``Upload the build automation scripts'' where he has to put the build automation scripts in a .zip format, a field asking the programming language used in the code, a field asking for a textual description of the software project, a field asking the maximum number of students per group, another one asking the minimum number of students per group, a field asking the registration deadline and a field asking the final submission deadline, and a checkbox asking if he wants to add additional configurations for scoring.
+    Mario want to add these features, so he click on the checkbox and now he is asked by the system in percentage how much his evalutation should impact the final score.\\
+
+
+    \textbf{SCENARIO 6 - Student subscribe to a tournament}\\
+    Alessandro is a data scientist who wants to improve his skills in software development, so he decide to sign-up to this new application he just downloaded, CodeKata. 
+    In order to reach his goals he starts searching among all the possible tournaments the app offers, in the Discovery section, and he found a new tournament in a programming language he doesn't know. So, he subscribe to this tournament. 
+    As soon as he does it, the tournament appears in his home page, and clicking on it all the incoming battles and the ranking are displayed.\\
+
+
+    \textbf{SCENARIO 7- Student joins a battle alone}\\
+    Lorenzo wants to test the new CodeKata application he downloaded the previous week, so he opens the application, logs in and then starts to look for tournaments he is interested in. He finds out a tournament called ``Java with Leotta'', and since he want to improve his Java skills he decides to view this tournament.
+    After opening it, he sees when the next battle will expire, and since the expiration date is the week after he decide to join the battle. 
+    After joining the battle, this will be showed in his homepage after clicking on the corresponding tournament, associated with all the ranks. \\
+
+
+    \textbf{SCENARIO 8 - Student joins a battle in a team}\\
+    Maura wants to test the new CodeKata application he downloaded the previous week, so he opens the application, logs in and then starts to look for tournaments he is interested in. He finds out a tournament called ``Python with Prof. Lembo'', and since he want to improve his Python skills he decides to view this tournament.
+    After opening it, he sees when the next battle will expire, and since the expiration date is the week after he decide to join the battle. Before joining the battle, he remembered he had few friends with his same aim, so he decides to tell to them about this application. 
+    They both download the application, create an account, and decide to participate in team with Maura, so they subscribe to the same tournament as Maura did. 
+    After this, Maura joins the battle as a team, inviting her friends. They accept the propose, and now their team is formed.
+    After joining the battle, this will be showed in Maura's and her friends homepage after clicking on the corresponding tournament, associated with all the ranks. \\
+
+
+    \textbf{SCENARIO 9 - Student pushes code on github repository}\\
+    Francesco has written a solution and he wants to test it, so he makes a push on the github repository. After doing so he opens his homepage and opens the battle and opens his battle overview page. He sees that he has passed two more test cases and he is happy and he looks at the test cases he is not passing to decide on what to focus next. He also notices that now is rank in the battle has been updated. \\
+
+
+    \textbf{SCENARIO 10 - Educator manually evaluates the battles}\\
+    Michele is a meticulous teacher, who knows CodeKata, but doesn't trust it very much, so he decides to evaluate the battles in percentage by himself. In order to do it, when creating a new battle for one of the tournaments he created, he put a check on the box saying he will do manual evaluates of the codes given by the students who joined his battles.
+    The correction is done after the expiration date for the submission of the solutions by the students. When finished, Michele fill a numerical field associated to each solution, and then the system calculate the new result based on the percentage chosen by the teacher when he created the battle. 
+    For example, Michele wants to manually evalute the solution of Caterina, a student of him, and gives her 3 points out of 5, while she received 4 out of 5. When creating the battle, Michele chooses that his evaluation would weight 50\% on the final mark, so the final score for Caterina will be 4.5 out of 5.
+    While Michele marks the solutions, a notification is sent to each component of the battle, updating rankings, badges and all the stats.\\
+
+    
+    \textbf{SCENARIO 11 - Educator invites another Educator in his tournament to create a battle }\\
+    Giorgio is a teacher and want his students to solve a problem in Python, therefore he asks his colleague Tommaso to create a battle for his tournament as he teaches a Python beginner course. So Giorgio opens the application, opens his tournament page, and clicks on ``invite a collaborator'', then he searches Tommaso's username and sends him the request. Tommaso later opens the application and notice that he has Giorgio's tournament in the homepage, and now he can create battles in it. \\
+
+    \textbf{SCENARIO 12 - A joining deadline of a battle expires}
+    Maurizio joined a battle the day before its expiration date: as a result, the day after he receives the link for the GitHub repository he has to fork in order to partecipate to the battle from the CodeKata application, namely in the Homepage, under the tournament he is subscribed to. Thus, Maurizio successfully fork the repository and start to code in order to obtain the best result in the ranks.\\
+
+    \textbf{SCENARIO 13 - Badges are assigned after the conclusion of a tournament}
+    Patrizia has just finished the last battle of a tournament she was really interested in, and she is happy for having learned so much about coding in the field of software development. Since the corrections are both manual and automatized, she has to wait some days to see the final rankings. 
+    For now she is sure she never had more than 2 test failed.
+    After the manual correction of the codes, she discovers she is the fourth in the rank! The reason of this result is with a certain probability the time for completing the battles: she always waited until the last minute to send her results. 
+    Notwithstanding with that, she receives a notification from the CodeKata applications saying she has earned a new badge with the following title: ``At most two fails'', regarding the total number of tests she passed. Happy for this, this new badge is now visible in her profile.\\
+
+    \textbf{SCENARIO 14 - User want to know the rankings of an ongoing tournament}\\
+    Mario, a student, has just signed up and wants to check the rankings an ongoing tournament as he wants to get an idea of how KataBattle works. Therefore he scrolls through the ongoings tournament, selects one, and starts looking at the rankings. He can see the personal score of all the students partecipating.\\
+
+    \textbf{SCENARIO 15 - Student checks ranking of a battle he is participating to}\\
+    Gianluca, a student, his competing in a battle, and he wants too see how the other teams are doing, to understand how is team is positioned compared to the others. Therefore he selects the tournament that contains the battle, than the battles, and then he scrolls though the rank.\\
+
+    \textbf{SCENARIO 16 - Student looks at the badges obtained by another user}\\
+    Filippo, a student, wants too see the badges obtained by his friend Luca, so he searches him using his username, then selects his profile. Now the application is displaying Luca's profile, which contains all the badges that Luca has obteined in all tournaments he has partecipated in.

@@ -3,6 +3,15 @@
 % \usepackage[english]{babel}
 % \usepackage[utf8x]{inputenc}
 
+\includeonly{
+    1Introduction/1Introduction_layout,
+    2Overall_Description/2Overall_Description_layout,
+    3Specific_Requirements/3Specific_Requirements_layout,
+    4Alloy/4Alloy_layout
+}
+
+\newcommand{\app}{CodeKataBattle }
+
 \usepackage{graphicx} % Required for inserting images.
 \usepackage[margin=2cm]{geometry}
 \parskip 4.2pt  % Sets spacing between paragraphs.
@@ -22,52 +31,29 @@
 \usepackage{verbatim}
 \usepackage{hyperref} % Required for inserting clickable links.
 \usepackage{natbib} % Required for APA-style citations.
+\usepackage{makeidx} % Required for creating the index
+\usepackage{enumitem}
 
 
-\title{Insert a page with logo, names, project, etc. etc.}
-\author{soccia}
+\title{CodeKataBattle\\ Requirements Analysis and Specification Documents}
+\author{Software Engeneering 2\\
+       Alessandro Saccone, Matteo Sissa, Sara Zappia}
+
+\renewcommand{\rmdefault}{ptm} % Times font
 
 \begin{document}
 \maketitle
 
 \newpage
 
-\input{requirements}
+\include{1Introduction/1Introduction_layout}
+\include{2Overall_Description/2Overall_Description_layout}
+\include{3Specific_Requirements/3Specific_Requirements_layout}
+\include{4Alloy/4Alloy_layout}
 
-\section{Introduction}\label{sec:intro}
-\subsection{Purpose}
-\subsection{Scope}
-\subsection{Definitions, Acronyms, Abbreviations}
-\subsection{Revision history}
-\subsection{Reference Documents}
-\subsection{Document Structure}
-\section{Overall Description}
-\subsection{Product perspective}
-\subsection{Product functions}
-\subsection{User characteristics}
-\subsection{Assumption, dependencies and constraints}
-\section{Specific Requirements}
-\subsection{External Interface Requirements}
-\subsubsection{User Interfaces}
-\subsubsection{Hardware Interfaces}
-\subsubsection{Software Interfaces}
-\subsubsection{Communication Interfaces}
-\subsection{Functional Requirements}
-\subsection{Performance Requirements}
-\subsection{Design Constraints}
-\subsubsection{Standards compliance}
-\subsubsection{Hardware limitations}
-\subsubsection{Any other constraint}
-\subsection{Software System Attributes}
-\subsubsection{Reliability}
-\subsubsection{Availability}
-\subsubsection{Security}
-\subsubsection{Maintainability}
-\subsubsection{Portability}
-\section{Formal Analysis with Alloy}
-\subsection{Signatures}
-\subsection{Predicates and facts}
-\subsection{Examples}
+
+
+
 \section{Effort spent}
 \begin{table}[h]
   \centering
@@ -75,11 +61,11 @@
     \hline
      Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
     \hline
-    Alessandro & 3 & Cell 2 & Cell 3 & Cell 4 \\
+    Alessandro & 0 & 9 & 3 & Cell 4 \\
     \hline
-    Matteo & 6 & Cell 2 & Cell 3 & Cell 4 \\
+    Matteo & 0 & 6 & 9 & Cell 4 \\
     \hline
-    Sara & 3 & Cell 2 & Cell 3 & Cell 4 \\
+    Sara & 0 & 7 & 5 & Cell 4 \\
     \hline
   \end{tabular}
   \caption{Time spent on every section of the RASD for each student}

@@ -1,0 +1,485 @@
+\subsubsection{UseCases}
+
+    \begin{table}[h]
+    \textbf{[UC1] - Educator sign-up}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Educator sign-up \\
+        \hline
+        Actors & Educator \\
+        \hline
+        Entry Condition & The user has selected the registration as an educator \\
+        \hline
+        Event flow &  1 - The user inserts his name, surname, a username, the email,
+        the password and a confirmation of it 
+        
+        2 - The user clicks on the ``Register'' button
+
+        3 - The system saves the data
+
+        4 - The system shows the login page
+        \\
+        \hline
+        Exit condition & The educator is successfully registered in the system \\
+        \hline
+        Exceptions & 1 - The email is already registered
+        
+        1 - The username is already registered 
+        
+        1 - The password confirmation field doesn't match with the password field\\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[h]
+    \textbf{[UC2] - Student sign-up}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Student sign-up \\
+        \hline
+        Actors & Student \\
+        \hline
+        Entry Condition & The user has selected the registration as a student \\
+        \hline
+        Event flow &  1 - The user inserts his name, surname, a username, the email,
+        the password and a confirmation of it 
+        
+        2 - The user clicks on the ``Register'' button
+
+        3 - The system saves the data
+
+        4 - The system shows the login page
+        \\
+        \hline
+        Exit condition & The student is successfully registered in the system \\
+        \hline
+        Exceptions & 1 - The email is already registered
+        
+        1 - The username is already registered 
+        
+        1 - The password confirmation field doesn't match with the password field\\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[]
+    \textbf{[UC3] - User log-in}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & User log-in \\
+        \hline
+        Actors & Students, Educators \\
+        \hline
+        Entry Condition & Clicked on the log-in button \\
+        \hline
+        Event flow &  1 - The user inserts his username and his password
+        
+        2 - The user clicks on the ``Login'' button
+
+        3 - The system checks the data
+
+        4 - The system shows the home page
+        \\
+        \hline
+        Exit condition & The student is successfully logged in the system \\
+        \hline
+        Exceptions & 3 - The username is not registered into the system
+        
+        3 - The username is registered but the password is not correct 
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[]
+    
+    \textbf{[UC4] - Educator creates a tournament}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Educator creates a tournament \\
+        \hline
+        Actors & Educators \\
+        \hline
+        Entry Condition & The educator clicks on the ``New'' button on the bottom navbar \\
+        \hline
+        Event flow &  1 - The user inserts the name of the tournament
+        
+        2 - The user chooses whether add badges or not
+
+        3 - If he decided to add badges, he can click on a plus button, and then he inserts the name of badge and sets the rules of it using a predefined set of variable and logical connective for each badge
+
+        4 - The user clicks on the ``Done'' button
+
+        5 - The system saves the new tournament
+        \\
+        \hline
+        Exit condition & The educator can see the tournament page and decide to add new battles to his new tournament \\
+        \hline
+        Exceptions &
+        3 - Incomplete rules are not accepted (tot\_attended\_battles = )
+        \\
+        \hline
+        
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[]
+    \textbf{[UC5] - Educator creates a battle}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & User Educator create a battle \\
+        \hline
+        Actors & Educator \\
+        \hline
+        Entry Condition & Educator clicks on new battle \\
+        \hline
+        Event flow &  1 - The educator attaches the project code, the test cases, build automation scripts, minimum and maximum number of people per group, registration deadline, final submission deadline  
+        
+        2 - If the educator decides to add additional information for scoring inserts a percentage indicating the weights it has on the final score
+        \\
+        \hline
+        Exit condition & New battle is now visible and accessible in the tournament \\
+        \hline
+        Exceptions & 1 - the project code, test cases and build automation scripts do not compile
+        
+        1 - the registration date is not admissible
+        
+        1 - the submission date in not admissible
+        
+        1 - not all required data is inserted by the educator
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[h]
+    
+      \textbf{[UC6] - Student subscribe to a tournament}
+      
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+        Name & Student subscribe to a tournament \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & The student is logged and is scrolling in the discovery section \\
+        \hline
+        Event flow &  1 - The user choose a tournament
+        
+        2 - The user click on it
+
+        3 - The user click the ``Subscribe'' button
+        \\
+        \hline
+        Exit condition & The system shows the new tournament in the corresponding on the homepage \\
+        \hline
+        Exceptions & 2 - The subscribing date of the tournament is expired  
+        \\
+        \hline
+
+        
+      \end{tabular}
+
+      
+    \end{table}
+
+    \begin{table}[h]
+
+    
+    \textbf{[UC7] - Student joins a new battle alone}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+
+      
+        \hline
+        Name & Student joins a new battle alone \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & The student is logged and clicks on a tournament in the discovery section \\
+        \hline
+        Event flow &  1 - The user choose a battle
+        
+        2 - The user click on the ``Join'' button
+
+        3 - The user chooses \textit{alone} as the modality of joining
+
+        4 - The system shows a confirmation message
+        \\
+        \hline
+        Exit condition & The system shows the new battle in the corresponding tournament on the homepage with the associated ranks \\
+        \hline
+        Exceptions & 2 - The joining date of the battle is expired  
+        \\
+        \hline
+      \end{tabular}
+    \end{table}
+
+    \begin{table}[htb]
+      \textbf{[UC8] - Student joins a new battle in team}
+      
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+        Name & Student joins a new battle in team \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & The student is logged and clicks on a tournament in the discovery section \\
+        \hline
+        Event flow &  1 - The user choose a battle
+        
+        2 - The user click on the ``Join'' button
+
+        3 - The user chooses \textit{in team} as the modality of joining
+
+        4 - The user chooses the name of subscribed people to address his invite to
+
+        5 - After they accept the invite, the team is formed
+        \\
+        \hline
+        Exit condition & The system shows the new battle in the corresponding tournament on the homepage of each team member with the associated ranks \\
+        \hline
+        Exceptions & 2 - The joining date of the battle is expired  
+
+        5 - If they don't accept the invite, after the deadline no member will be joined to the battle
+        \\
+        \hline
+      \end{tabular}
+    \end{table}
+
+
+    \begin{table}[h]
+    \textbf{[UC9] - Student pushes code }
+
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+        Name & Student pushes code \\
+        \hline
+        Actors & Student \\
+        \hline
+        Entry Condition &  Student is participating in a battle and the battle has started \\
+        \hline
+        Event flow &  1 - Student pushes the code in the repository
+        
+        2 - The system is notified
+
+        3 - The test cases, build automation scripts and the code uploaded by the student are run together
+
+        4 - The number of test passed is made visible to the student through the application
+
+        5 - The rank of the student is updated\\
+        \hline
+        Exit condition &  The score of the student in the battle is updated \\
+        \hline
+        Exceptions & 
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[h]
+    \textbf{[UC10] - Educator manually evaluates the battles }
+    \clearpage 
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+        Name & Educator manually evaluates the battles \\
+        \hline
+        Actors & Educator \\
+        \hline
+        Entry Condition &  Educator chooses to mark the checkbox saying he would manually evaluate the solutions when creating the battle he wants to manually review \\
+        \hline
+        Event flow &  1 - The educator see a solution
+        
+        2 - The educator evaluate the solution
+
+        3 - The educator fill a field requiring the mark
+
+        4 - The system calculates the new result for the student or the team who provided that solution
+        \\
+
+        \hline
+        Exit condition &  The rank and the badges of the student or of the students in a team are updated \\
+        \hline
+        Exceptions & 3 - The number required is expressed in term of x out of tot\_number\_of\_tests, if the assigned score overflow the maximum the system will block the insertion of the datum
+        \\
+        \hline
+      \end{tabular}
+      \clearpage
+    \end{table}
+
+    \begin{table}[h]
+    \textbf{[UC11] - Educator authorizes another educator}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Educator authorizes another educator \\
+        \hline
+        Actors & Educators \\
+        \hline
+        Entry Condition & Educator giving authorization has created a tournament \\
+        \hline
+        Event flow &  1 - The educator clicks on add collaborator
+        
+        2 - The educator searches the other educator by username and selects him
+
+        3 - The tournament is added to the collaborator homepage
+        \\
+        \hline
+        Exit condition & The educator who has become a collaborator can now see the tournament in his homepage and can add a new battle  \\
+        \hline
+        Exceptions & 
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[htb]
+    \textbf{[UC12] - A joining deadline of a battle expires}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & A joining deadline of a battle expires \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & The deadline for joining to a battle expires \\
+        \hline
+        Event flow &  1 - The system creates the GitHub repository for the battle
+        
+        2 - The system share the link of the repository through a notification sent in the tournament section of every participant
+        \\
+        \hline
+        Exit condition & The students joined in the battle can see the repository and decide to fork it in order to start programming \\
+        \hline
+        Exceptions & 1 - The repository isn't created successfully by GitHub
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[htb]
+    \textbf{[UC13] - Badges are assigned after the conclusion of a tournament}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Badges are assigned after the conclusion of a tournament \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & The tournament is finished \\
+        \hline
+        Event flow &  1 - The system checks for all the badges conditions defined by the educators when they created the tournament for all the students 
+        
+        2 - The system send assigns a badge to the students which have respected its rules
+        \\
+        \hline
+        Exit condition & The badge of the student becomes visible for everyone \\
+        \hline
+        Exceptions &
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[htb]
+    \textbf{[UC14] - User looks at the ranking of a tournament}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & User looks at the ranking of a tournament \\
+        \hline
+        Actors & Students and Educators  \\
+        \hline
+        Entry Condition & User logins and selects a tournament \\
+        \hline
+        Event flow &  1 - The system shows the personal score of each participant in a table
+        \\
+        \hline
+        Exit condition & The user can successfully see the rankings \\
+        \hline
+        Exceptions &
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[htb]
+    \textbf{[UC15] - Student checks ranking of a battle he is participating in}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Student checks ranking of a battle he is participating in \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & Student logins and selects the battle \\
+        \hline
+        Event flow &  1 - The system shows the current score of each team in a table
+        \\
+        \hline
+        Exit condition & The user can successfully see the ranking \\
+        \hline
+        Exceptions &
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
+
+    \begin{table}[htb]
+    \textbf{[UC16] - Student checks the badges obtained by another student}
+    
+      \centering
+      \begin{tabular}{|p{3cm}|p{14cm}|}
+        \hline
+         Name & Student checks the badges obtained by another student \\
+        \hline
+        Actors & Students \\
+        \hline
+        Entry Condition & Student logins \\
+        \hline
+        Event flow &  1 - The student selects searches the profile of another student
+
+        2 - The student selects the profile of the other student
+        
+        \\
+        \hline
+        Exit condition & The user can successfully see the badges of the other student in his profile \\
+        \hline
+        Exceptions &
+        \\
+        \hline
+      \end{tabular}
+      
+    \end{table}
