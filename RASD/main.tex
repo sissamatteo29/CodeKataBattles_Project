@@ -1,0 +1,93 @@
+
+\documentclass[12pt,a4paper]{article}
+% \usepackage[english]{babel}
+% \usepackage[utf8x]{inputenc}
+
+\usepackage{graphicx} % Required for inserting images.
+\usepackage[margin=2cm]{geometry}
+\parskip 4.2pt  % Sets spacing between paragraphs.
+% \renewcommand{\baselinestretch}{1.5}  % Uncomment for 1.5 spacing between lines.
+\parindent 8.4pt  % Sets leading space for paragraphs.
+\usepackage[font=sf]{caption} % Changes font of captions.
+\usepackage[margin=2cm]{geometry} % Sets the left and right margins to 2cm.
+
+\geometry{
+  top=2.5cm,    % Adjust the top margin here
+  bottom=2.5cm, % Adjust the bottom margin here
+}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{hyperref} % Required for inserting clickable links.
+\usepackage{natbib} % Required for APA-style citations.
+
+
+\title{Insert a page with logo, names, project, etc. etc.}
+\author{soccia}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\input{requirements}
+
+\section{Introduction}\label{sec:intro}
+\subsection{Purpose}
+\subsection{Scope}
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsection{Revision history}
+\subsection{Reference Documents}
+\subsection{Document Structure}
+\section{Overall Description}
+\subsection{Product perspective}
+\subsection{Product functions}
+\subsection{User characteristics}
+\subsection{Assumption, dependencies and constraints}
+\section{Specific Requirements}
+\subsection{External Interface Requirements}
+\subsubsection{User Interfaces}
+\subsubsection{Hardware Interfaces}
+\subsubsection{Software Interfaces}
+\subsubsection{Communication Interfaces}
+\subsection{Functional Requirements}
+\subsection{Performance Requirements}
+\subsection{Design Constraints}
+\subsubsection{Standards compliance}
+\subsubsection{Hardware limitations}
+\subsubsection{Any other constraint}
+\subsection{Software System Attributes}
+\subsubsection{Reliability}
+\subsubsection{Availability}
+\subsubsection{Security}
+\subsubsection{Maintainability}
+\subsubsection{Portability}
+\section{Formal Analysis with Alloy}
+\subsection{Signatures}
+\subsection{Predicates and facts}
+\subsection{Examples}
+\section{Effort spent}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+     Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
+    \hline
+    Alessandro & 3 & Cell 2 & Cell 3 & Cell 4 \\
+    \hline
+    Matteo & 6 & Cell 2 & Cell 3 & Cell 4 \\
+    \hline
+    Sara & 3 & Cell 2 & Cell 3 & Cell 4 \\
+    \hline
+  \end{tabular}
+  \caption{Time spent on every section of the RASD for each student}
+  \label{tab:effort}
+\end{table}
+
+\section{References}
+\bibliographystyle{apalike}
+\bibliography{example}
+
+\end{document}
