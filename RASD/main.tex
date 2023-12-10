@@ -19,7 +19,15 @@
 \parindent 8.4pt  % Sets leading space for paragraphs.
 \usepackage[font=sf]{caption} % Changes font of captions.
 \usepackage[margin=2cm]{geometry} % Sets the left and right margins to 2cm.
-
+\usepackage{listings}
+\lstdefinelanguage{alloy}{
+  keywords={sig,abstract,extends,check,pred,fact,assert,run},
+  keywordstyle=\color{blue}\bfseries,
+  sensitive=true,
+  comment=[l]{--},
+  commentstyle=\color{green}\ttfamily,
+  stringstyle=\color{red}\ttfamily
+}
 \geometry{
   top=2.5cm,    % Adjust the top margin here
   bottom=2.5cm, % Adjust the bottom margin here
@@ -61,11 +69,11 @@
     \hline
      Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
     \hline
-    Alessandro & 0 & 9 & 3 & Cell 4 \\
+    Alessandro & 0 & 9 & 3 & 3 \\
     \hline
-    Matteo & 0 & 6 & 9 & Cell 4 \\
+    Matteo & 0 & 6 & 9 & 0 \\
     \hline
-    Sara & 0 & 7 & 5 & Cell 4 \\
+    Sara & 0 & 7 & 5 & 0 \\
     \hline
   \end{tabular}
   \caption{Time spent on every section of the RASD for each student}
