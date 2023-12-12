@@ -19,7 +19,15 @@
 \parindent 8.4pt  % Sets leading space for paragraphs.
 \usepackage[font=sf]{caption} % Changes font of captions.
 \usepackage[margin=2cm]{geometry} % Sets the left and right margins to 2cm.
-
+\usepackage{listings}
+\lstdefinelanguage{alloy}{
+  keywords={sig,abstract,extends,check,pred,fact,assert,run},
+  keywordstyle=\color{blue}\bfseries,
+  sensitive=true,
+  comment=[l]{--},
+  commentstyle=\color{green}\ttfamily,
+  stringstyle=\color{red}\ttfamily
+}
 \geometry{
   top=2.5cm,    % Adjust the top margin here
   bottom=2.5cm, % Adjust the bottom margin here
@@ -30,7 +38,7 @@
 \usepackage{siunitx}
 \usepackage{verbatim}
 \usepackage{hyperref} % Required for inserting clickable links.
-\usepackage{natbib} % Required for APA-style citations.
+%\usepackage{natbib} % Required for APA-style citations.
 \usepackage{makeidx} % Required for creating the index
 \usepackage{enumitem}
 
@@ -61,11 +69,11 @@
     \hline
      Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
     \hline
-    Alessandro & 0 & 9 & 3 & Cell 4 \\
+    Alessandro & 0 & 9 & 3 & 8 \\
     \hline
     Matteo & 0 & 12 & 9 & Cell 4 \\
     \hline
-    Sara & 0 & 7 & 5 & Cell 4 \\
+    Sara & 0 & 7 & 5 & 0 \\
     \hline
   \end{tabular}
   \caption{Time spent on every section of the RASD for each student}
@@ -73,7 +81,7 @@
 \end{table}
 
 \section{References}
-\bibliographystyle{apalike}
-\bibliography{example}
+%\bibliographystyle{apalike}
+%\bibliography{example}
 
 \end{document}
