@@ -2,36 +2,76 @@
 
 \hspace{0.5cm}
 
-\begin{tabular}{|p{8cm}|p{8cm}|}
+\begin{longtable}{|p{8cm}|p{8cm}|}
 \hline
-\multicolumn{2}{|p{16cm}|}{\textbf{[G1] The system allows students to practice and improve their coding skills by developing solutions to code kata battles.}}\\
+\multicolumn{2}{|p{16cm}|}{\textbf{(G1) The system allows students to practice and improve their coding skills by developing solutions to code kata battles.}}\\
 \hline
- & [D1] The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
- & [D2] Student correctly forks the main branch of the GitHub repository in order to store the code solutions. \\
- & [D3] Student correctly writes the automated GitHub workflow to send notification from GitHub to the system every time a commit is performed on the forked branch. \\
- & [D4] Educator correctly writes the build automation scripts for the battles he/she creates on the platform. \\
+(R1.1) The system allows students that don't have an account to sign up for the first time on the platform. & (D1) The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
+(R1.2) The system allows students that already have an account to log in the platform. & (D2) Student correctly forks the main branch of the GitHub repository in order to store the code solutions. \\
+(R1.3) The system notifies all students that have an account on the platform every time a new tournament is created. & (D3) Student correctly writes the automated GitHub workflow to send notification from GitHub to the system every time a commit is performed on the forked branch. \\
+(R1.4) The system shows to a student the list of tournaments available on the platform, including closed tournament, the ones the student is already subscribed to and the ones s/he can subscribe to. & (D4) Educator correctly writes the build automation scripts for the battles he/she creates on the platform. \\
+(R1.5) The system allows students to join the tournaments they’re interested in, by the end of the registration deadlines set for the tournaments. & (D5) The network allows notifications sent by the application to successfully reach the users. \\
+(R1.6) The system notifies all students subscribed to a tournament every time a new battle within that tournament is published. & (D6) All users of the system have a personal GitHub account or are able to create a new one.\\
+ (R1.7) The system allows students subscribed to a tournament to join battle(s) within that tournament, by the end of the registration deadline set for the battle(s). & \\
+ (R1.8) The system allows students subscribed to a tournament to join a battle of the tournament either on their own or creating teams with other students. & \\
+ (R1.10) The system sends the link of the GitHub repository dedicated to a battle to all the students subscribed to that battle. & \\
+ (R1.11) The system notifies all students participating in a battle when the battle terminates and the final ranking of teams is available on the platform. & \\
+ (R1.12) The system notifies all students subscribed to a tournament when the tournament is closed by the educator who created it. & \\
+ (R1.13) The system creates a new GitHub repository dedicated to a battle when the registration deadline for that battle passes. & \\
+(R1.14) The system accepts notifications from GitHub in order to know when a new commit is performed by a student in any GitHub repository dedicated to an ongoing battle. & \\
+(R1.15) The system pulls from the GitHub repositories of ongoing battles the new students' code solutions, every time it receives a notification from GitHub of a new commit in those repositories. & \\
+(R1.16) The system recalculates and then publishes the new score of a team's solution every time it receives a notification from GitHub of a new commit performed by a member of the team. & \\
 \hline
-\end{tabular}
+\end{longtable}
 
 
 
 \vspace{1cm}
 
-\begin{tabular}{|p{8cm}|p{8cm}|}
+\begin{longtable}{|p{8cm}|p{8cm}|}
 \hline
-\multicolumn{2}{|p{16cm}|}{\textbf{[G2] The system provides to educators a platform to publish code kata battles and easily manage tournaments and battles for students.}}\\
+\multicolumn{2}{|p{16cm}|}{\textbf{(G2) The system provides to educators a platform to publish code kata battles and easily manage tournaments and battles for students.}}\\
 \hline
- & [D1] The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
- & [D4] Educator correctly writes the build automation scripts for the battles he/she creates on the platform. \\
+(R2.1) The system allows educators that don’t have an account to sign up for the first time on the platform. & (D1) The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
+(R2.2) The system allows educators that already have an account to log in the platform. & (D4) Educator correctly writes the build automation scripts for the battles he/she creates on the platform. \\
+(R2.3) The system allows educators to create new tournaments. & (D5) The network allows notifications sent by the application to successfully reach the users. \\
+(R2.4) The system allows educators to set a registration deadline for the tournament(s) they want to create & (D6) All users of the system have a personal GitHub account or are able to create a new one. \\
+(R2.6) The system allows the educator that created a tournament to grant the permission of publishing battles within his/her tournament to other educators on the platform. & \\
+(R2.7) The system allows educators to create new battle(s) in the tournaments they have the permissions to do so & \\
+(R2.8) The system allows educators to upload on the platform the textual description of a battle they want to create. & \\
+(R2.9) The system allows educators to set a minimum and maximum number of members for each team of students participating in the battle they want to create & \\
+(R2.10) The system allows educators to declare whether to require a consolidation stage or not at the end of the battle they want to create. & \\
+(R2.11) The system allows educators to specify what parameters of evaluation (reliability, security...) should be used by the system in order to compute the scores of the students' code solutions through static analysis external tools. & \\
+(R2.12) The system allows educators to set a registration deadline for the battle they want to create. & \\
+(R2.13) The system allows educators to set a submission deadline for the battle they want to create. & \\
+(R2.14) The system doesn't take into account any new code solution for a battle after the submission deadline of that battle. & \\
+(R2.15) After the submission deadline of a battle and only if a consolidation stage had been requested by the educator at battle creation time, the system sets a time frame for the educator that created the battle to allow him/her to assign personal scores to the students’ code solutions. & \\
+(R2.16) The system takes into account the personal scores assigned by the educator during the consolidation stage of a battle only if the educator assigned a score to all teams within the imposed time frame. & \\
+(R2.17) At the end of a battle and after the consolidation stage (if requested), the system automatically calculates and publishes the final rank of all teams that participated in that battle. & \\
+(R2.18) When a tournament is closed, the system automatically publishes the rank of all students that participated in the tournament. & \\
+(R1.13) The system creates a new GitHub repository dedicated to a battle when the registration deadline for that battle passes. & \\
+(R1.14) The system accepts notifications from GitHub in order to know when a new commit is performed by a student in any GitHub repository dedicated to an ongoing battle. & \\
+(R1.15) The system pulls from the GitHub repositories of ongoing battles the new students' code solutions, every time it receives a notification from GitHub of a new commit in those repositories. & \\
+(R1.16) The system recalculates and then publishes the new score of a team's solution every time it receives a notification from GitHub of a new commit performed by a member of the team. & \\
 \hline
-\end{tabular}
+\end{longtable}
 
 \vspace{1cm}
 
-\begin{tabular}{|p{8cm}|p{8cm}|}
+\begin{longtable}{|p{8cm}|p{8cm}|}
 \hline
-\multicolumn{2}{|p{16cm}|}{\textbf{[G3] The system makes the task of coding battles' solutions as fun as possible, introducing elements like competitiveness, rankings, teamwork and badges (or rewards).}}\\
+\multicolumn{2}{|p{16cm}|}{\textbf{(G3) The system makes the task of coding battles' solutions as fun as possible, introducing elements like competitiveness, rankings, teamwork and badges (or rewards).}}\\
 \hline
- & [D1] The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
+(R3.1) The system allows students subscribed to the same tournament to invite each other in order to join battles as a team, respecting the minimum and maximum number of students permitted for a team in the battle. & (D1) The GitHub platform is up and running and provides all the functionalities that are expected by the application to work correctly. \\
+(R3.2) The system calculates and then publishes the score assigned to a new code solution of a team in a battle, every time GitHub notifies the platform of a new commit performed by a member of such team. & (D6) All users of the system have a personal GitHub account or are able to create a new one. \\
+(R3.3) The system constantly keeps updated the total ranking of teams for a battle, which evolves based on the new code solutions that are uploaded by students on the GitHub repository. & \\
+(R3.4) The system calculates and publishes the final ranking of teams when a battle ends. & \\
+(R3.5) The system allows only the educators and students involved in a battle to see the partial or final ranking of teams for that battle. & \\
+(R3.6) The system automatically calculates and keeps updated the total ranking of students subscribed to a tournament, based on the scores each student received in the battles he participated in. & \\
+(R3.7) The system allows all users on the platform to see the partial or final rankings of tournaments. & \\
+(R3.8)  The system allows educators to define customary badges (rewards) for the students participating in their tournaments, at tournament creation time. & \\
+(R3.9) The system assigns badges (rewards) to students that participated in a tournament when the tournament is closed by the educator that created it. & \\
+(R3.10) The system allows all users on the platform to search for the personal profile of a student and see the corresponding page. & \\
+(R3.11) The system allows all users on the platform to see the list of badges owned by a student for the tournaments s/he participated in. & \\
 \hline
-\end{tabular}
+\end{longtable}
