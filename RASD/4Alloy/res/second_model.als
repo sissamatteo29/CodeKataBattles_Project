@@ -73,8 +73,7 @@ sig Score {
 sig SourceCode {}
 
 sig Student extends User {
-    partecipations: set Tournament,
-    team: some Team
+    team: some Team --the partecipation to a tournament is reached through team
 }
 
 sig Team {
@@ -88,7 +87,6 @@ sig Tournament {
     badges: set Badge,
     battles: some Battle,
     end: one DateTime, --the date when the tournament is ended
-    finished: one Boolean,
     ranks: some Score
 }
 
@@ -122,10 +120,24 @@ pred isBadgeEligible[s: Student, b: Badge, t: Tournament] {
 
 
 -- FACTS (lexicographically ordered)
+-- Fact: BadgeAssociatedWithTournament
+fact badgeAssociatedWithTournament {
+    all b: Badge | b.tournament in Tournament
+}
 
--- Fact: No username without users
-fact noUsernameWithoutUser {
-    some GitHubName implies some User
+-- Fact: BadgesAssociatedAlwaysWithTournament
+fact badgesAssociatedAlwaysWithTournament {
+    all t: Tournament, b: Badge | b in t.badges implies always (b.tournament = t)
+}
+
+-- Fact: BattleEndInTournament
+fact battleEndInTournament {
+    all b: Battle, t: Tournament | b in t.battles implies b.subDeadline.value < t.end.value
+}
+
+-- Fact: ConsolidationStageTimeOrder
+fact consolidationStageTimeOrder {
+    all cs: ConsolidationStage | cs.start.value <= cs.end.value
 }
 
 -- Fact: DifferentUsername
@@ -143,7 +155,12 @@ fact differentGitHubRepo {
     no disj b1, b2: Battle | some b1.repositoryLink & b2.repositoryLink
 }
 
--- Fact: The teams partecipate in the battles
+-- Fact: No username without users
+fact noUsernameWithoutUser {
+    some GitHubName implies some User
+} 
+
+-- Fact: The teams participate in the battles
 fact teamsParticipateInBattles {
     all t: Tournament, team: Team | team.tournament = t implies some b: Battle | b in t.battles && team.participationToBattle = b
 }
@@ -170,11 +187,6 @@ fact submissionAfterRegistration {
     all b: Battle | b.subDeadline.value < b.regDeadline.value
 }
 
--- Fact: BattleEndInTournament
-fact BattleEndInTournament {
-    all b: Battle, t: Tournament | b in t.battles implies b.subDeadline.value < t.end.value
-}
-
 -- Fact: TeamsHaveScoreAfterBattle
 fact teamsHaveScoreAfterBattle {
     all b: Battle | all t: b.teams | some s: Score | s in t.score
@@ -185,24 +197,14 @@ fact badgeAssociatedWithTournament {
     all b: Badge | b.tournament in Tournament
 }
 
--- Fact: BadgesAssociatedAlwaysWithTournament
-fact badgesAssociatedAlwaysWithTournament {
-    all t: Tournament, b: Badge | b in t.badges implies always (b.tournament = t)
-}
-
 -- Fact: ManualEvaluationRequiresConsolidationStage
 fact manualEvaluationRequiresConsolidationStage {
     all b: Battle | b.manualEvaluation.value = 1 implies b.consolidationStage.active.value = 1
     all b: Battle | b.manualEvaluation.value = 0 implies b.consolidationStage.active.value = 0
 }
 
--- Fact: ConsolidationStageTimeOrder
-fact consolidationStageTimeOrder {
-    all cs: ConsolidationStage | cs.start.value <= cs.end.value
-}
-
 -- Fact: NewTournamentScore
-fact NewTournamentScore {
+fact newTournamentScore {
     all t: Tournament | always t.ranks.value >= t'.ranks.value
 }
 
@@ -212,12 +214,12 @@ fact educatorCreatesBattleInOwnTournament {
 }
 
 -- Fact: StudentsBadge
-fact StudentsBadge {
-    no disj s: Student, b: Badge | s in b.students and b.tournament not in s.partecipations
+fact studentsBadge {
+    no disj s: Student, b: Badge | s in b.students and b.tournament not in s.team.participationToTournament
 }
 
 -- Fact: TeamStudent
-fact TeamStudent {
+fact teamStudent {
     all t: Team, s: Student | t in s.team implies s in t.members
 }
 
@@ -229,6 +231,7 @@ fact uniqueSourceCodeTestABS {
         c1.automationBuildScripts != c2.automationBuildScripts
     }
 }
+
 
 
 -- RUN
@@ -257,4 +260,4 @@ pred noManualEvaluation[] {
     #{b1, b2: Battle | b1.manualEvaluation.value = 0 && b2.manualEvaluation.value = 1} = 1
 }
 
-run general for 4
+run noManualEvaluation for 4
