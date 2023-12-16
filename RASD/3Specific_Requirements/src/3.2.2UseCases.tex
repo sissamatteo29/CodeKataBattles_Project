@@ -1,45 +1,47 @@
 \subsubsection{UseCases}
 
-	\textbf{[UC1] - EducatorLogIn}
+\renewcommand{\arraystretch}{1.9}
 
-    \begin{longtable}{p{3cm}p{14cm}}
-    
-        \hline\\
+	
+
+    \begin{longtable}{|p{3cm}p{14cm}|}
+    \multicolumn{2}{l}{\textbf{[UC1] - EducatorLogIn} }\\
+        \hline 
          Name & EducatorLogIn \\
-        \hline\\
+        \hline 
         Actors & Educator, GitHub. \\
-        \hline\\
+        \hline
         Entry Condition & Educator has opened \app on his/her laptop. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         	1 - \app shows the log in interface with the button to sign in with a GitHub account.
 
         	2 - Educator clicks on the button to sign in using his/her GitHub account.
 
         	3 - \app redirects the educator to the GitHub login page.
         	
-        	4 - Educator inserts his/her GitHub credentials and confirms.
-        \\
-        \hline\\
-        Exit condition & \app shows the initial (home) page of the application for an educator.  \\
-        \hline\\
+        	4 - Educator inserts his/her GitHub credentials and confirms.\\
+        \hline
+        Exit Condition & \app shows the initial (home) page of the application for an educator.  \\
+        \hline
         Exceptions & 
         	1 - Educator inserts wrong credentials to access his/her GitHub account: the GitHub authentication page will return an error to the educator, asking him/her to retry.\\
-        \hline\\
+        \hline
       
     \end{longtable}
       
-	\textbf{[UC2] - StudentLogIn}
 	
-	\begin{longtable}{p{3cm}p{14cm}}
-		\hline\\
+	
+	\begin{longtable}{|p{3cm}p{14cm}|}
+		\multicolumn{2}{l}{\textbf{[UC2] - StudentLogIn}}\\
+		\hline
 		Name & StudentLogIn \\
-		\hline\\
+		\hline
 		Actors & Student, GitHub. \\
-		\hline\\
+		\hline
 		Entry Condition & Student has opened \app on his/her laptop. \\
-		\hline\\
-		Event flow &  
+		\hline
+		Event Flow &  
 		
 		1 - \app shows the log in interface with the button to sign in with a GitHub account.
 		
@@ -49,26 +51,26 @@
 		
 		4 - Student inserts his/her GitHub credentials and confirms.
 		\\
-		\hline\\
-		Exit condition & \app shows the initial (home) page of the application for an student.  \\
-		\hline\\
+		\hline
+		Exit Condition & \app shows the initial (home) page of the application for an student.  \\
+		\hline
 		Exceptions & 
 		1 - Student inserts wrong credentials to access his/her GitHub account: the GitHub authentication page will return an error to the student, asking him/her to retry.\\
-		\hline\\
-      
+		\hline
+    
     \end{longtable}
     
-    \textbf{[UC3] - CreateTournament}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC3] - CreateTournament}}\\
+        \hline
          Name & CreateTournament \\
-        \hline\\
+        \hline
         Actors & Educator, Student. \\
-        \hline\\
+        \hline
         Entry Condition & Educator is logged in the \app platform.  \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         	1 - Educator clicks on the button to create a new tournament.
         	 
         	2 - \app shows the form to fill with the information for the tournament to be created.
@@ -85,33 +87,34 @@
         	
         	8 - \app shows the initial page of the tournament to the educator.
         	
-        	8 - \app sends a notification to all the students on the platform to inform them of the new tournament available.
+        	8 - \app sends a notification to all the students on the platform to inform them of the new tournament available.\\
       
-        \\
-        \hline\\
-        Exit condition & The new tournament is added to the list of tournaments created by the educator and all users on the platform can see the new tournament. \\
-        \hline\\
+        
+        \hline
+        Exit Condition & The new tournament is added to the list of tournaments created by the educator and all users on the platform can see the new tournament. \\
+        \hline
         Exceptions &
         1 - The registration deadline set by the educator is on the same day or before the day in which the educator is trying to create the new tournament: the system does not allow the educator to confirm the creation of the tournament and reports an error message.
+        
         2 - Educator confirms the form to create the new tournament leaving some mandatory information unspecified: in this case \app will return an error message to the educator stating that some information is missing and the tournament cannot be created.\\
-        \hline\\
+        \hline
         Special Requirements & Mandatory data in the tournament creation form is composed of name and registration deadline of the tournament.
         \\
-        \hline\\
+        \hline
       
     \end{longtable}
 
-    \textbf{[UC4] - CreateBattle}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{ \textbf{[UC4] - CreateBattle}}\\
+        \hline
          Name & CreateBattle \\
-        \hline\\
+        \hline
         Actors & Educator, Student. \\
-        \hline\\
+        \hline
         Entry Condition & Educator is logged in the \app platform and has the permissions to publish a battle in the tournament which the battle will reside in. S/he has already written the build automation scripts and test cases for the battle to be created. \\
-        \hline\\
-        Event flow & 
+        \hline
+        Event Flow & 
         	1 - Educator clicks on the button to create a new battle from the home page of \app.
         	
         	2 - \app displays the entire list of tournaments in which the educator has permissions to publish battles.
@@ -144,9 +147,9 @@
         	
         	16 - \app sends a notification to all the students subscribed to the tournament in which the battle has been created, informing them of the new battle available.
         \\
-        \hline\\
-        Exit condition & The new battle is added on the list of battles created by the educator and students are able to see this new battle in the tournament in which it resides. \\
-        \hline\\
+        \hline
+        Exit Condition & The new battle is added on the list of battles created by the educator and students are able to see this new battle in the tournament in which it resides. \\
+        \hline
         Exceptions & 
         
         1 - The registration deadline set by the educator is on the same day or before the day in which the educator is trying to create the new battle: the system does not allow the educator to confirm the creation of the battle and reports an error message.
@@ -155,26 +158,23 @@
         
         3 - Educator confirms the creation of the battle without uploading either the build automation scripts or the test cases for the battle: the system doesn't create any new battle and reports an error message to the educator stating the reason why the battle cannot be instantiated.
         
-        4 - Educator confirms the creation of the battle without specifying some mandatory information for the battle: the system doesn't create any new battle and reports an error message to the educator stating the reason why the battle cannot be instantiated.
-       
-        \\
-        \hline\\
+        4 - Educator confirms the creation of the battle without specifying some mandatory information for the battle: the system doesn't create any new battle and reports an error message to the educator stating the reason why the battle cannot be instantiated.\\
+        \hline
         Special Requirements & Mandatory data in the battle form include the battle's name, the textual description of the problem to be solved, the registration and submission deadlines, the minimum and maximum number of students per team.\\
-         \hline\\
+         \hline
       
     \end{longtable}
-
-      \textbf{[UC5] - GrantPermissions}
       
-     \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+     \begin{longtable}{|p{3cm}p{14cm}|}
+     	\multicolumn{2}{l}{\textbf{[UC5] - GrantPermissions}}\\
+        \hline
         Name & GrantPermissions \\
-        \hline\\
+        \hline
         Actors & Educator. \\
-        \hline\\
+        \hline
         Entry Condition & Educator A is logged in the system. Educator A created a tournament on the platform. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - Educator A selects from the home page of \app the button to visualize the list the tournaments that s/he created.
         
         2 - \app displays the list of tournaments created by educator A.
@@ -193,29 +193,29 @@
         
         9 - Educator B accepts the request.
         \\
-        \hline\\
-        Exit condition & The system adds the tournament to the list of tournaments in which educator B has permissions to publish battles.\\
-        \hline\\
+        \hline
+        Exit Condition & The system adds the tournament to the list of tournaments in which educator B has permissions to publish battles.\\
+        \hline
         Exceptions & 
         1 - Educator A tries to grant publishing permissions to educator B who already had permissions on that tournament: \app doesn't modify anything on B's account and reports to A that B already had publishing permissions on that tournament.
+        
         2 - Educator A tries to grant publishing permissions to educator B on a closed tournament: \app doesn't modify anything on B's account and reports to A the tournament is already terminated.
         \\
-        \hline\\
+        \hline
       
     \end{longtable}
 
-   
-    \textbf{[UC6] - SubscribeToTournament}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC6] - SubscribeToTournament}}\\
+        \hline
         Name & SubscribeToTournament \\
-        \hline\\
+        \hline
         Actors & Student. \\
-        \hline\\
+        \hline
         Entry Condition & The student is logged in the system.\\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - \app displays the list of available tournaments on the platform in the home page.
         
         2 - Student browses the list of available tournaments and reads some of their descriptions to get an idea on them.
@@ -226,27 +226,28 @@
         
         5 - Student clicks on the button to subscribe to the tournament and confirms his choice.
         \\
-        \hline\\
-        Exit condition & The system adds the tournament to the list of tournaments the student is subscribed to. \\
-        \hline\\
+        \hline
+        Exit Condition & The system adds the tournament to the list of tournaments the student is subscribed to. \\
+        \hline
         Exceptions & 
         1 - Student tries to subscribe to a tournament whose registration deadline has already passed: \app reports an error message to the student stating that it is not possible to carry out the operation.
         \\
-        \hline\\
+        \hline
     \end{longtable}
 
    
-      \textbf{[UC7] - JoinBattleAlone}
+
       
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+     \begin{longtable}{|p{3cm}p{14cm}|}
+     	\multicolumn{2}{l}{\textbf{[UC7] - JoinBattleAlone}}\\
+        \hline
         Name & JoinBattleAlone \\
-        \hline\\
+        \hline
         Actors & Student. \\
-        \hline\\
+        \hline
         Entry Condition & The student is logged in the platform and is subscribed to the tournament in which the battle s/he wants to join resides.\\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - Student opens the list of tournaments s/he's subscribed to from the home page of \app.
         
         2 - \app displays the list of tournaments the student is subscribed to.
@@ -266,28 +267,28 @@
         8 - Students opts for participating on his/her own and confirms the choice.
         
         \\
-        \hline\\
-        Exit condition & \app adds the battle to the list of battles the student is taking part to. \\
-        \hline\\
+        \hline
+        Exit Condition & \app adds the battle to the list of battles the student is taking part to. \\
+        \hline
         Exceptions & 
         1 - Student tries to join a battle whose registration deadline has passed: \app shows an error message stating that it is not possible to carry out that operation and doesn't allow the student to join the battle.
         
         2 - Student tries to join a battle in a tournament s/he is not subscribed to: \app doesn't allow this operation and reports a warning message stating that it is necessary to first subscribe to the tournament in order to participate in its battles.
         \\
-        \hline    \\
+        \hline    
     \end{longtable}
 
    
-	\textbf{[UC8] - JoinBattleAsTeam}
 	
-	\begin{longtable}{p{3cm}p{14cm}}
-		\hline\\
+	\begin{longtable}{|p{3cm}p{14cm}|}
+		\multicolumn{2}{l}{\textbf{[UC8] - JoinBattleAsTeam}}\\
+		\hline
 		Name & JoinBattleAsTeam \\
-		\hline\\
+		\hline
 		Actors & Student. \\
-		\hline\\
+		\hline
 		Entry Condition & Students A, B, C are logged in the platform and are all subscribed to the tournament in which the battle they want to join resides.\\
-		\hline\\
+		\hline
 		Event flow &  
 		1 - Student A opens the list of tournaments s/he's subscribed to from the home page of \app.
 		
@@ -316,9 +317,9 @@
 		12 - Students B and C accept the request from their accounts.
 		
 		\\
-		\hline\\
+		\hline
 		Exit condition & \app adds the battle to the list of battles in which A participates, as well as to the list of battles in which B participates and C participates. \app also creates a new team grouping A, B and C together.\\
-		\hline\\
+		\hline
 		Exceptions & 
 		1 - Student A tries to join a battle whose registration deadline has passed: \app shows an error message stating that it is not possible to carry out that operation and doesn't allow the student to join the battle.
 		
@@ -329,73 +330,110 @@
 		4 - Students B or C do not accept the request to join the team before the registration deadline of the battle: \app excludes them from the battle. The request is no longer valid.
 		
 		\\
-		\hline\\
+		\hline
 
 \end{longtable}
 
-	\textbf{[UC9] - PushCodeGitHub }
 
-    \begin{longtable}{p{4cm}p{13cm}}
-    	
-        \hline\\
-        Name & PushCodeGitHub \\\\
-        \hline\\
-        Actors & Student, GitHub, Static Analysis Tool \\\\
-      \hline \\
-        Entry Condition &  Student is logged in \app and has already joined a tournament and a battle inside that tournament during the registration deadline. \\ \\
-       \hline \\
-        Event flow & 
+    \begin{longtable}{|p{3cm}p{14cm}|}
+    	\multicolumn{2}{l}{\textbf{[UC9] - CreateGitHubRepository }}\\
+    
+        \hline
+        Name & CreateGitHubRepository \\
+        \hline
+        Actors & GitHub, Student. \\
+      \hline 
+        Entry Condition &  There is a battle on \app whose registration deadline has just passed.  \\ 
+       \hline 
+        Event Flow & 
         
-        1 - \app creates the GitHub repository dedicated to the battle as soon as the registration deadline of the battle passes. 
+        1 - \app sends a request to GitHub to generate a new repository dedicated to the battle whose registration deadline has just passed. 
         
-        2 - \app sends a notification to the student to inform him/her that the battle s/he's subscribed to is now open and it is possible to submit code solutions through GitHub. The system also includes the link to the remote GitHub repository in the notification message.
+        2 - GitHub creates the new repository.
         
-        3 -Student opens the link and is redirected to the GitHub repository.
+        3 - GitHub sends back a confirmation message to \app.
         
-        4 - Student forks the remote GitHub repository and creates a personal GitHub repository to store his/her code solutions to the battle.
-        
-        5 - Student writes down and then uploads on his forked repository the GitHub Actions workflow to make GitHub send a notification to \app every time a new commit is performed on his/her forked repository. 
-        
-        6 - Student writes a program to solve the battle.
-        
-        7 - Student pushes the code solution to his/her forked repository on GitHub.
-        
-        8 - GitHub sends a notification to \app of the new commit performed by the student.
-        
-        9 - \app downloads the student's code solutions from GitHub.
-        
-        10 - \app builds the code solution using the build automation scripts supplied by the educator.
-        
-        11 - \app uses the test cases, the time passed from the beginning of the battle and the static analysis tool to automatically compute the score for the student's solution.
-
-        12 - \app updates the score of the student's team in the battle, if the new score is higher than the one assigned to previous solutions.
-        
-        13 - \app recomputes the partial ranking of the battle.\\
-        \hline\\
-        Exit condition &  \app makes the new partial ranking of the battle visible and available to all the students and educators involved in the battle. \\
-        \hline\\
+        4 - \app sends a notification to all the students who joined the battle to inform them that the battle they're subscribed to is now open and it is possible to submit code solutions through GitHub. The system also includes the link to the remote GitHub repository in the notification message.\\
+        \hline
+        Exit Condition &  All students subscribed to the battle receive the notification and are able to start pushing code solutions for the ongoing battle. \\
+        \hline
         Exceptions & 
-        1 - Student makes mistakes in the process of writing the GitHub Actions workflow and the notification doesn't arrive at the \app platform, or it arrives with wrong data: \app will simply not consider the solution of the student and won't update any score or ranking.
-        
-        2 - \app fails in building the student's solution with the educator's build automation scripts: \app sends a notification to the student reporting the error that is generated during the building procedure of the code.
+        1 - GitHub doesn't respond to the request and doesn't create the new repository: \app sends again the request after waiting for a fixed time interval.
         \\
-        \hline\\
+        \hline
 
       
     \end{longtable}
 
     
-    \textbf{[UC10] - EvaluateSolutions }
+   \begin{longtable}{|p{3cm}p{14cm}|}
+   	\multicolumn{2}{l}{\textbf{[UC10] - PushSolutionGitHub} }\\
+   	\hline 
+   	Name & PushSolutionGitHub \\
+   	\hline 
+   	Actors & Student, GitHub. \\
+   	\hline
+   	Entry Condition & Student is logged in the system and has already joined a battle that is ongoing (the registration deadline is passed, while the submission deadline hasn't). \\
+   	\hline
+   	Event Flow &  
+   	1 - Student pushes a new code solution on the GitHub repository that s/he forked from the main GitHub repository dedicated to the battle.
+   	
+   	2 - GitHub sends a notification to \app with the information relative to the new commit performed by the student.
+   	
+   	3 - \app downloads the new code solution from GitHub.
+   	
+   	4 - \app computes the score to assign to the new code solution (see UC11).
+   	
+   	5 - \app shows on the platform the score assigned to the new solution.
+   	
+   	6 - \app updates the ranking of teams in the battle accordingly to the student's new score.\\
+   	\hline
+   	Exit Condition & The student is able to see on \app the score of his/her solution and the new ranking of the battle.  \\
+   	\hline
+   	Exceptions & -\\
+   	
+   	\hline
+   	
+   \end{longtable}
+   
+   \begin{longtable}{|p{3cm}p{14cm}|}
+   	\multicolumn{2}{l}{\textbf{[UC11] - CalculateScore} }\\
+   	\hline 
+   	Name & CalculateScore \\
+   	\hline 
+   	Actors & StaticAnalysisTool. \\
+   	\hline
+   	Entry Condition & A student has just pushed a new code solution on his/her GitHub repository linked to a battle, \app has received the notification from GitHub and downloaded the code of the student to be evaluated. \\
+   	\hline
+   	Event Flow &  
+   	1 - \app uses the build automation scripts to build the student's code solution.
+   	
+   	2 - \app runs the test cases on the student's solution and counts how many of them are passed.
+   	
+   	3 - \app calculates the time went by from the beginning of the battle to the moment in which the solution was submitted and stores the information.
+   	
+   	4 - \app leverages the StaticAnalysisTool to evaluate the student's solution based on some criteria (such as maintainability, security...) defined by the educator that created the battle at battle creation time.
+   	
+   	5 - \app calculates the total score (between 0 and 100) to assign to the student's solution based on the information gathered at points 2, 3, 4.\\
+   	\hline
+   	Exit Condition & \app saves the total score computed for the student's solution  \\
+   	\hline
+   	Exceptions & 
+   	1 - The building process of the code solution fails: \app terminates the computation and assigns a score of 0 to the solution. \\
+   	\hline
+   	
+   \end{longtable}
     
-     \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+     \begin{longtable}{|p{3cm}p{14cm}|}
+     	\multicolumn{2}{l}{\textbf{[UC10] - EvaluateSolutions }}\\
+        \hline
         Name & EvaluateSolutions \\
-        \hline\\
+        \hline
         Actors & Educator. \\
-        \hline\\
+        \hline
         Entry Condition &  Educator is logged in \app. Educator has already created a battle and required a consolidation stage at the end of the battle. The submission deadline of the battle has just passed. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - Educator navigates on the system to the battle for which the consolidation stage has to be carried out and clicks on the button to assess the teams' solutions.
         
         2 - \app shows an interface in which for each team participating in the battle it is possible to specify a score to assign to it. On the interface there is also a timer illustrating the maximum amount of time to complete the task.
@@ -405,33 +443,33 @@
         4 - After having assessed all the solutions, the educator confirms his/her choices. 
         \\
 
-        \hline\\
-        Exit condition &  \app saves the scores assigned by the educator in order to calculate the final ranking for the battle.
+        \hline
+        Exit Condition &  \app saves the scores assigned by the educator in order to calculate the final ranking for the battle.
         
         \\
-        \hline\\
+        \hline
         Exceptions & 
         1 - Educator closes the consolidation stage interface before having assessed all teams' solutions: \app won't publish any final ranking yet and will save the scores assigned so far by the educator.
         
         2 - Educator doesn't complete the task of assigning personal scores before the timer goes off: \app will discard all the scores assigned by the educator and will base the final ranking only on the automatic evaluations performed during the battle.
         \\
-        \hline\\
+        \hline
      
     \end{longtable}
     
     
    
-    \textbf{[UC11] - TerminateBattle}
     
-     \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+     \begin{longtable}{|p{3cm}p{14cm}|}
+     	\multicolumn{2}{l}{\textbf{[UC11] - TerminateBattle}}\\
+        \hline
          Name & TerminateBattle \\
-        \hline\\
-        Actors & Educators \\
-        \hline\\
+        \hline
+        Actors & Educator, Student. \\
+        \hline
         Entry Condition & There is a battle created on \app whose submission deadline has just passed. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - \app detects that the submission deadline of a battle is passed.
         
         2 - If a consolidation stage was required by the educator who created the battle, \app initiates the process to carry out the personal evaluation of the teams' solutions by the educator (see UC10).
@@ -442,26 +480,29 @@
 
         5 - \app sends a notification to all the students participating in the battle, informing them of the availability of the final ranking for the battle.
         \\
-        \hline\\
-        Exit condition & All students involved in the battle and the educator that created the battle are able to visualize the final ranking of the battle. 
+        \hline
+        Exit Condition & All students involved in the battle and the educator that created the battle are able to visualize the final ranking of the battle. 
         \\
-        \hline\\
+        \hline
       
       
     \end{longtable}
 
-   
-    \textbf{[UC12] - CloseTournament}
+
+		
+
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+  
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC12] - CloseTournament} }\\
+        \hline
          Name & CloseTournament \\
-        \hline\\
+        \hline
         Actors & Educator, Student. \\
-        \hline\\
+        \hline
         Entry Condition & Educator is logged in \app. Educator created a tournament on the platform. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - Educator retrieves from the home page of the \app platform the list of tournaments that s/he created.
         
         2 - \app displays the list of tournaments the educator created.
@@ -475,31 +516,30 @@
         6 - \app sends a notification to all the students subscribed to the tournament informing them that the tournaments has been closed.
         
         \\
-        \hline\\
-        Exit condition & \app removes the tournament from the list of available tournaments on the platform, so that it will no longer be displayed to the users of the application. \\
-        \hline\\
+        \hline
+        Exit Condition & \app removes the tournament from the list of available tournaments on the platform, so that it will no longer be displayed to the users of the application. \\
+        \hline
         Exceptions & 
         1 - Educator tries to close a tournament before the registration deadline of the tournament passes: \app won't allow the action and reports an error message stating that it is not possible to close a tournament that hasn't even started yet.
         
         2 - Educator tries to close a tournament when some battles are still going on inside the tournament: \app won't allow the educator to close the tournament yet, until all battles are over. At the same time though, \app will no longer let any educator publish battles in that tournament. As soon as all the battles that are still going on are concluded, also the tournament will close automatically.
         \\
-        \hline\\
+        \hline
      
       
     \end{longtable}
-
    
-    \textbf{[UC13] - OpenTournamentRanking}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC13] - OpenTournamentRanking}}\\
+        \hline
          Name & OpenTournamentRanking \\
-        \hline\\
+        \hline
         Actors & User (Student or Educator). \\
-        \hline\\
+        \hline
         Entry Condition & User is logged in the platform and there is an ongoing tournament on \app whose registration deadline is passed. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - User browses the home page of \app to search for a tournament. S/he clicks on the tournament s/he wants to see the ranking of.
         
         2 - \app displays the home page of the selected tournament.
@@ -508,29 +548,29 @@
         
         4 - \app displays the tournament's ranking.
         \\
-        \hline\\
-        Exit condition & User is able to see the tournament's ranking on his/her screen.\\
-        \hline\\
+        \hline
+        Exit Condition & User is able to see the tournament's ranking on his/her screen.\\
+        \hline
         Exceptions &
         1 - User attempts to see the ranking of a tournament whose registration deadline hasn't passed yet: \app doesn't allow this action simply by not providing any button on the interface to access the ranking.
         \\
-        \hline\\
+        \hline
      
       
     \end{longtable}
 
    
-    \textbf{[UC14] - OpenBattleRanking}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC14] - OpenBattleRanking}}\\
+        \hline
          Name & OpenBattleRanking \\
-        \hline\\
+        \hline
         Actors & User (Student or Educator).  \\
-        \hline\\
+        \hline
         Entry Condition & User is logged in the platform. There is at least one tournament on \app in which at least a battle has been published. The battle's registration deadline has already passed. \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - User selects from the home page a tournament s/he is involved in (if the user is a student, then a tournament s/he's subscribed to, if the user is an educator, a tournament in which s/he has permissions to publish battles).
         
         2 - \app shows the selected tournament's home page.
@@ -545,29 +585,29 @@
         
         7 - \app shows the battle's ranking if the user requesting it is involved in the battle.
         \\
-        \hline\\
-        Exit condition & User sees the ranking on his screen. \\
-        \hline\\
+        \hline
+        Exit Condition & User sees the ranking on his screen. \\
+        \hline
         Exceptions &
         1 - User tries to access a battle's ranking without being involved in it: \app will detect the fact that the user is not involved in the battle (with the checks performed on point 6) and won't show any ranking to him/her. Instead, an error message is reported to the user stating that s/he doesn't have the permissions to access the ranking.
         \\
-        \hline\\
+        \hline
 
       
     \end{longtable}
 
   
-    \textbf{[UC15] - ShowProfileAndBadges}
     
-      \begin{longtable}{p{3cm}p{14cm}}
-        \hline\\
+      \begin{longtable}{|p{3cm}p{14cm}|}
+      	\multicolumn{2}{l}{\textbf{[UC15] - ShowProfileAndBadges}}\\
+        \hline
          Name & ShowProfileAndBadges \\
-        \hline\\
+        \hline
         Actors & User (Student or Educator). \\
-        \hline\\
+        \hline
         Entry Condition & User A is logged in the platform. User B has logged in the platform at least once (to have a profile on the \app system). \\
-        \hline\\
-        Event flow &  
+        \hline
+        Event Flow &  
         1 - From the home page of \app, user A clicks on the button to search for user B by username.
         
         2 - \app shows the interface for searching users on the platform.
@@ -580,13 +620,13 @@
         
         6 - \app displays B's personal profile.
         \\
-        \hline\\
-        Exit condition & User A sees B's profile on the screen and is also able to inspect the badges that B earned. \\
-        \hline\\
+        \hline
+        Exit Condition & User A sees B's profile on the screen and is also able to inspect the badges that B earned. \\
+        \hline
         Exceptions &
         1 - User A searches for a username that doesn't exist on the system: \app will return no results from the search, so A is forced to change the username s/he's looking for.
         \\
-        \hline\\
+        \hline
       
       
     \end{longtable}

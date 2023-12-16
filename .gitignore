@@ -6,3 +6,5 @@
 *.bbl
 *.out
 *.gz
+UML_diagrams/
+*.ini
