@@ -5,7 +5,7 @@
 	
 
     \begin{longtable}{|p{3cm}p{14cm}|}
-    \multicolumn{2}{l}{\textbf{[UC1] - EducatorLogIn} }\\
+    \multicolumn{2}{l}{\textbf{[UC1] - EducatorLogsIn} }\\
         \hline 
          Name & EducatorLogIn \\
         \hline 
@@ -33,7 +33,7 @@
 	
 	
 	\begin{longtable}{|p{3cm}p{14cm}|}
-		\multicolumn{2}{l}{\textbf{[UC2] - StudentLogIn}}\\
+		\multicolumn{2}{l}{\textbf{[UC2] - StudentLogsIn}}\\
 		\hline
 		Name & StudentLogIn \\
 		\hline
@@ -87,7 +87,7 @@
         	
         	8 - \app shows the initial page of the tournament to the educator.
         	
-        	8 - \app sends a notification to all the students on the platform to inform them of the new tournament available.\\
+        	9 - \app sends a notification to all the students on the platform to inform them of the new tournament available.\\
       
         
         \hline
@@ -216,15 +216,17 @@
         Entry Condition & The student is logged in the system.\\
         \hline
         Event Flow &  
-        1 - \app displays the list of available tournaments on the platform in the home page.
+        1 - Student selects the option to add a new tournament from the home page of \app.
         
-        2 - Student browses the list of available tournaments and reads some of their descriptions to get an idea on them.
+        2 - \app displays the list of available tournaments on the platform in the home page.
         
-        3 - Student clicks on the tournament wants to subscribe to.
+        3 - Student browses the list of available tournaments and reads some of their descriptions to get an idea on them.
         
-        4 - \app shows the home page of the selected tournament.
+        4 - Student clicks on the tournament s/he wants to subscribe to.
         
-        5 - Student clicks on the button to subscribe to the tournament and confirms his choice.
+        5 - \app shows the home page of the selected tournament.
+        
+        6 - Student clicks on the button to subscribe to the tournament and confirms his choice.
         \\
         \hline
         Exit Condition & The system adds the tournament to the list of tournaments the student is subscribed to. \\
@@ -262,9 +264,9 @@
         
         6 - Student clicks the button to join the battle.
         
-        7 - \app shows the interface for joining a battle, in which it is possible to decide whether to participate as a single player or with other students as a team.
+        7 - \app shows the interface to join a battle.
         
-        8 - Students opts for participating on his/her own and confirms the choice.
+        8 - Student selects the option to participate as a single player and confirms.
         
         \\
         \hline
@@ -273,7 +275,7 @@
         Exceptions & 
         1 - Student tries to join a battle whose registration deadline has passed: \app shows an error message stating that it is not possible to carry out that operation and doesn't allow the student to join the battle.
         
-        2 - Student tries to join a battle in a tournament s/he is not subscribed to: \app doesn't allow this operation and reports a warning message stating that it is necessary to first subscribe to the tournament in order to participate in its battles.
+        2 - Student tries to join a battle in a tournament s/he is not subscribed to: \app doesn't allow this operation and reports a warning message stating that it is necessary to first subscribe to the tournament in order to participate to its battles.
         \\
         \hline    
     \end{longtable}
@@ -292,29 +294,31 @@
 		Event flow &  
 		1 - Student A opens the list of tournaments s/he's subscribed to from the home page of \app.
 		
-		2 - \app displays the list of tournaments the student is subscribed to.
+		2 - \app displays the list of tournaments the student A is subscribed to.
 		
-		3 - Student clicks on the tournament in which the battle s/he wants to join resides.
+		3 - Student A clicks on the tournament in which the battle s/he wants to join resides.
 		
 		4 - \app shows the home page of the selected tournament.
 		
-		5 - Student selects the battle s/he wants to join and clicks on it.
+		5 - Student A selects the battle s/he wants to join and clicks on it.
 		
 		5 - \app shows the description page of the selected battle with the button to join it.
 		
-		6 - Student clicks the button to join the battle.
+		6 - Student A clicks the button to join the battle.
 		
-		7 - \app shows the interface for joining a battle, in which it is possible to decide whether to participate as a single player or with other students as a team.
+		7 - \app shows the interface for joining a battle.
 		
-		8 - Students opts for participating to the battle as a team.
+		8 - Students A opts for participating to the battle as a team.
 		
-		9 - \app shows an interface in which it is possible to search for other students by username to invite them in the team.
+		9 - \app shows an interface in which it is possible to type in the team's name and search for other students by username to invite them in the team.
 		
-		10 - Student A types in B and C's usernames and selects them on the interface.
+		10 - Student A types in the team's name.
 		
-		11 - \app sends a request to students B and C asking them to participate in the team created by A.
+		11 - Student A types in B and C's usernames and selects them on the interface.
 		
-		12 - Students B and C accept the request from their accounts.
+		12 - Student A confirms his/her choices.
+		
+		13 - \app sends a request to students B and C asking them to participate in the team created by A.
 		
 		\\
 		\hline
@@ -425,7 +429,7 @@
    \end{longtable}
     
      \begin{longtable}{|p{3cm}p{14cm}|}
-     	\multicolumn{2}{l}{\textbf{[UC10] - EvaluateSolutions }}\\
+     	\multicolumn{2}{l}{\textbf{[UC12] - EvaluateSolutions }}\\
         \hline
         Name & EvaluateSolutions \\
         \hline
@@ -445,7 +449,6 @@
 
         \hline
         Exit Condition &  \app saves the scores assigned by the educator in order to calculate the final ranking for the battle.
-        
         \\
         \hline
         Exceptions & 
@@ -461,7 +464,7 @@
    
     
      \begin{longtable}{|p{3cm}p{14cm}|}
-     	\multicolumn{2}{l}{\textbf{[UC11] - TerminateBattle}}\\
+     	\multicolumn{2}{l}{\textbf{[UC13] - TerminateBattle}}\\
         \hline
          Name & TerminateBattle \\
         \hline
@@ -494,7 +497,7 @@
     
   
       \begin{longtable}{|p{3cm}p{14cm}|}
-      	\multicolumn{2}{l}{\textbf{[UC12] - CloseTournament} }\\
+      	\multicolumn{2}{l}{\textbf{[UC14] - CloseTournament} }\\
         \hline
          Name & CloseTournament \\
         \hline
@@ -514,7 +517,6 @@
         5 - Educator clicks on the button to close the tournament and confirms the choice.
         
         6 - \app sends a notification to all the students subscribed to the tournament informing them that the tournaments has been closed.
-        
         \\
         \hline
         Exit Condition & \app removes the tournament from the list of available tournaments on the platform, so that it will no longer be displayed to the users of the application. \\
@@ -531,7 +533,7 @@
    
     
       \begin{longtable}{|p{3cm}p{14cm}|}
-      	\multicolumn{2}{l}{\textbf{[UC13] - OpenTournamentRanking}}\\
+      	\multicolumn{2}{l}{\textbf{[UC15] - OpenTournamentRanking}}\\
         \hline
          Name & OpenTournamentRanking \\
         \hline
@@ -562,7 +564,7 @@
    
     
       \begin{longtable}{|p{3cm}p{14cm}|}
-      	\multicolumn{2}{l}{\textbf{[UC14] - OpenBattleRanking}}\\
+      	\multicolumn{2}{l}{\textbf{[UC16] - OpenBattleRanking}}\\
         \hline
          Name & OpenBattleRanking \\
         \hline
@@ -599,7 +601,7 @@
   
     
       \begin{longtable}{|p{3cm}p{14cm}|}
-      	\multicolumn{2}{l}{\textbf{[UC15] - ShowProfileAndBadges}}\\
+      	\multicolumn{2}{l}{\textbf{[UC17] - ShowProfileAndBadges}}\\
         \hline
          Name & ShowProfileAndBadges \\
         \hline
@@ -608,7 +610,7 @@
         Entry Condition & User A is logged in the platform. User B has logged in the platform at least once (to have a profile on the \app system). \\
         \hline
         Event Flow &  
-        1 - From the home page of \app, user A clicks on the button to search for user B by username.
+        1 - From the home page of CodeKataBattle, user A clicks on the button to search for user B by username.
         
         2 - \app shows the interface for searching users on the platform.
         
