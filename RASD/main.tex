@@ -3,14 +3,6 @@
 % \usepackage[english]{babel}
 % \usepackage[utf8x]{inputenc}
 
-\includeonly{
-    1Introduction/1Introduction_layout,
-    2Overall_Description/2Overall_Description_layout,
-    3Specific_Requirements/3Specific_Requirements_layout,
-    4Alloy/4Alloy_layout
-}
-
-\newcommand{\app}{CodeKataBattle }
 \usepackage{longtable}
 \usepackage{graphicx} % Required for inserting images.
 \usepackage[margin=2cm]{geometry}
@@ -20,7 +12,6 @@
 \usepackage[font=sf]{caption} % Changes font of captions.
 \usepackage[margin=2cm]{geometry} % Sets the left and right margins to 2cm.
 \usepackage{listings}
-\usepackage[]{longtable}
 \lstdefinelanguage{alloy}{
   keywords={sig,abstract,extends,check,pred,fact,assert,run},
   keywordstyle=\color{blue}\bfseries,
@@ -42,6 +33,23 @@
 %\usepackage{natbib} % Required for APA-style citations.
 \usepackage{makeidx} % Required for creating the index
 \usepackage{enumitem}
+
+\includeonly{
+	1Introduction/1Introduction_layout,
+	2Overall_Description/2Overall_Description_layout,
+	3Specific_Requirements/3Specific_Requirements_layout,
+	4Alloy/4Alloy_layout
+}
+\graphicspath{
+	{1Introduction/res/}
+	{2Overall_Description/res/}
+	{3Specific_Requirements/res/}
+	{3Specific_Requirements/res/SD/}
+	{4Alloy/res/}
+	}
+	
+\newcommand{\app}{CodeKataBattle }
+
 
 
 \title{CodeKataBattle\\ Requirements Analysis and Specification Documents}
