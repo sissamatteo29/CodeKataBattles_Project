@@ -482,9 +482,11 @@
         4 - \app publishes the final ranking of the battle on the platform.
 
         5 - \app sends a notification to all the students participating in the battle, informing them of the availability of the final ranking for the battle.
+        
+        6 - \app automatically updates the ranking of the tournament that contains the battle, adding to each student's previous points, the score obtained during the battle.
         \\
         \hline
-        Exit Condition & All students involved in the battle and the educator that created the battle are able to visualize the final ranking of the battle. 
+        Exit Condition & All students involved in the battle and the educator that created the battle are able to visualize the final ranking of the battle and all users can see the updated tournament ranking. 
         \\
         \hline
       
@@ -517,9 +519,11 @@
         5 - Educator clicks on the button to close the tournament and confirms the choice.
         
         6 - \app sends a notification to all the students subscribed to the tournament informing them that the tournaments has been closed.
+        
+        7 - \app assigns the badges (rewards) to all the students that completed some achievements in the tournament (defined by the educator that created the tournament at tournament creation time).
         \\
         \hline
-        Exit Condition & \app removes the tournament from the list of available tournaments on the platform, so that it will no longer be displayed to the users of the application. \\
+        Exit Condition & \app removes the tournament from the list of available tournaments on the platform, so that it will no longer be displayed to the users of the application. All personal profiles of students are updated if they received some badges at the end of the tournament. \\
         \hline
         Exceptions & 
         1 - Educator tries to close a tournament before the registration deadline of the tournament passes: \app won't allow the action and reports an error message stating that it is not possible to close a tournament that hasn't even started yet.

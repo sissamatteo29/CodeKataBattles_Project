@@ -14,7 +14,7 @@
 \hline
 (R1.4) When the student requires it, the system shows the list of tournaments the student is subscribed to.\\
 \hline
-(R1.5) The system allows students to join the tournaments they’re interested in, by the end of the registration deadlines set for the tournaments.  \\
+(R1.5) The system allows students to subscribe to tournaments, by the end of the registration deadlines set for the tournaments.  \\
 \hline
 (R1.6) The system notifies all students subscribed to a tournament every time a new battle within that tournament is published.  \\
 \hline
@@ -22,21 +22,23 @@
 \hline
 (R1.8) The system allows students subscribed to a tournament to join a battle of the tournament either on their own or creating teams with other students.  \\
 \hline
-(R1.9) The system allows students to set the name of their team when they join a battle with other students.\\
-\hline
-(R1.10) The system creates a new GitHub repository dedicated to a battle right after the registration deadline for that battle passes. \\
-\hline
-(R1.11) The system sends the link of the GitHub repository dedicated to a battle to all the students subscribed to that battle.\\
-\hline
-(R1.12) The system accepts notifications from GitHub in order to know when a new commit is performed by a student in any GitHub repository forked by the one created by the system itself.\\
+(R1.9) The system manages all the interactions with the GitHub platform in order to allow students to submit their code solutions through GitHub.
+	
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep]
+\item (R1.9.1) The system creates a new GitHub repository dedicated to a battle right after the registration deadline for that battle passes.
+\item (R1.9.2) The system sends the link of the GitHub repository dedicated to a battle to all the students subscribed to that battle.
+\item (R1.9.3) The system accepts notifications from GitHub in order to know when a new commit is performed by a student in any GitHub repository forked by the one created by the system itself.
+\item (R1.9.4) The system pulls from the GitHub repositories of ongoing battles the new students' code solutions, every time it receives a notification from GitHub of a new commit in those repositories.\\
+\end{itemize}
+\end{minipage} 
+\\
 \hline 
-(R1.13) The system pulls from the GitHub repositories of ongoing battles the new students' code solutions, every time it receives a notification from GitHub of a new commit in those repositories. \\
-\hline 
-(R1.14) The system calculates and then publishes the new score of a team's solution every time it receives a notification from GitHub of a new commit performed by a member of the team. \\
+(R1.10) The system calculates and then publishes the new score of a team's solution every time it receives a notification from GitHub of a new commit performed by a member of the team. \\
 \hline
-(R1.15) The system notifies all students participating in a battle when the final ranking of teams is available on the platform.  \\
+(R1.11) The system notifies all students participating in a battle when the final ranking of teams is available on the platform.  \\
 \hline
-(R1.16) The system notifies all students subscribed to a tournament when the tournament is closed by the educator who created it.\\
+(R1.12) The system notifies all students subscribed to a tournament when the tournament is closed by the educator who created it.\\
 \hline
 \end{longtable}
 
@@ -47,35 +49,43 @@
 
 (R2.1) The system allows educators to log in the platform using their GitHub account. \\
 \hline
-(R2.2) The system allows educators to create new tournaments.  \\
+(R2.2) The system allows educators to create new tournaments.  
+
+\begin{minipage}{\linewidth}
+	\begin{itemize}[nosep]		
+		\item (R2.2.1) The system allows educators to set the name of the tournament they want to create.
+		\item (R2.2.2) The system allows educators to set a registration deadline for the tournament they want to create.\\
+	\end{itemize}
+\end{minipage}
+\\
 \hline
-(R2.3) The system allows educators to set a registration deadline for the tournament(s) they want to create.  \\
+(R2.3) The system allows the educator that created a tournament to grant the permission of publishing battles within his/her tournament to other educators on the platform. \\
 \hline
-(R2.4) The system allows the educator that created a tournament to grant the permission of publishing battles within his/her tournament to other educators on the platform. \\
+(R2.4) The system allows educators to create new battle(s) in the tournaments they have the permissions to do so.
+
+\begin{minipage}{\linewidth}
+	\begin{itemize}[nosep]
+		\item (R2.4.1) The system allows educators to write on the platform the textual description of the battle they want to create.  
+		\item (R2.4.2) The system allows educators to upload the build automation scripts designed for the battle they want to create.
+		\item (R2.4.3) The system allows educators to upload the test cases designed for the battle they want to create.
+		\item (R2.4.4) The system allows educators to set the minimum and maximum number of members for each team of students participating in the battle they want to create. 
+		\item (R2.4.5) The system allows educators to decide whether to require a consolidation stage or not at the end of the battle they want to create. 
+		\item (R2.4.6) The system allows educators to specify what evaluation criteria (reliability, security...) should be used by the system in order to compute the partial scores of the students' code solutions through an external static analysis tools. 
+		\item (R2.4.7) The system allows educators to set a registration deadline for the battle they want to create.
+		\item (R2.4.8) The system allows educators to set a submission deadline for the battle they want to create.  \\
+	\end{itemize}
+\end{minipage}\\
 \hline
-(R2.5) The system allows educators to create new battle(s) in the tournaments they have the permissions to do so. \\
+
+(R2.5) The system doesn't take into account any new code solution for a battle after the submission deadline of that battle.  \\
 \hline
-(R2.6) The system allows educators to write on the platform the textual description of a battle they want to create.  \\
+(R2.6) After the submission deadline of a battle and only if a consolidation stage had been requested by the educator at battle creation time, the system sets a time frame for the educator that created the battle to allow him/her to assign personal scores to the students’ code solutions.  \\
 \hline
-(R2.7) The system allows educators to set the minimum and maximum number of members for each team of students participating in the battle they want to create.  \\
+(R2.7) The system takes into account the personal scores assigned by the educator during the consolidation stage of a battle only if the educator assigned a score to all teams within the imposed time frame. \\
 \hline
-(R2.8) The system allows educators to declare whether to require a consolidation stage or not at the end of the battle they want to create.  \\
+(R2.8) At the end of a battle and after the consolidation stage (if requested), the system automatically calculates and publishes the final rank of all teams that participated in that battle.  \\
 \hline
-(R2.9) The system allows educators to specify what evaluation criteria (reliability, security...) should be used by the system in order to compute the scores of the students' code solutions through an external static analysis tools.  \\
-\hline
-(R2.10) The system allows educators to set a registration deadline for the battle they want to create.  \\
-\hline
-(R2.11) The system allows educators to set a submission deadline for the battle they want to create.  \\
-\hline
-(R2.12) The system doesn't take into account any new code solution for a battle after the submission deadline of that battle.  \\
-\hline
-(R2.13) After the submission deadline of a battle and only if a consolidation stage had been requested by the educator at battle creation time, the system sets a time frame for the educator that created the battle to allow him/her to assign personal scores to the students’ code solutions.  \\
-\hline
-(R2.14) The system takes into account the personal scores assigned by the educator during the consolidation stage of a battle only if the educator assigned a score to all teams within the imposed time frame. \\
-\hline
-(R2.15) At the end of a battle and after the consolidation stage (if requested), the system automatically calculates and publishes the final rank of all teams that participated in that battle.  \\
-\hline
-(R2.16) When a tournament is closed, the system automatically publishes the rank of all students that participated in the tournament. \\
+(R2.9) When a tournament is closed, the system automatically publishes the rank of all students that participated in the tournament. \\
 \hline
 
 \end{longtable}
@@ -87,25 +97,29 @@
 
 (R3.1) The system allows students subscribed to the same tournament to invite each other in order to join battles together as a team, respecting the minimum and maximum number of students permitted for a team in the battle. \\
 \hline
-(R3.2) The system calculates and then publishes the score assigned to a new code solution of a team in a battle, every time GitHub notifies the platform of a new commit performed by a member of such team. \\
+(R3.2) The system allows students to accept or reject invitations from other student asking to join a battle together as a team.\\
 \hline
-(R3.3) The system constantly keeps updated the total ranking of teams for a battle, which evolves based on the new code solutions that are uploaded by students on the GitHub repository. \\
+(R3.3) The system allows students to set the name of their team when they join a battle with other students.\\
 \hline
-(R3.4) The system calculates and publishes the final ranking of teams when a battle ends. \\
+(R3.4) The system calculates and then publishes the score assigned to a new code solution of a team in a battle, every time GitHub notifies the platform of a new commit performed by a member of such team. \\
 \hline
-(R3.5) The system allows only the educators and students involved in a battle to see the partial or final ranking of teams for that battle. \\
+(R3.5) The system constantly keeps updated the total ranking of teams for a battle, which evolves based on the new code solutions that are uploaded by students on the GitHub repository. \\
 \hline
-(R3.6) The system automatically calculates and keeps updated the total ranking of students subscribed to a tournament, based on the scores each student received in the battles he participated in. \\
+(R3.6) The system calculates and publishes the final ranking of teams when a battle ends. \\
 \hline
-(R3.7) The system allows all users on the platform to see the partial or final rankings of tournaments. \\
+(R3.7) The system allows only the educators and students involved in a battle to see the partial or final ranking of teams for that battle. \\
 \hline
-(R3.8)  The system allows educators to define customary badges (rewards) for the students participating in their tournaments, at tournament creation time. \\
+(R3.8) The system automatically calculates and keeps updated the total ranking of students subscribed to a tournament, based on the scores each student received in the battles he participated in. \\
 \hline
-(R3.9) The system assigns badges (rewards) to students that participated in a tournament, when the tournament is closed by the educator that created it. \\
+(R3.9) The system allows all users on the platform to see the partial or final rankings of tournaments. \\
 \hline
-(R3.10) The system allows all users on the platform to search for the personal profile of a student and see the corresponding account. \\
+(R3.10)  The system allows educators to define customary badges (rewards) for the students participating in their tournaments, at tournament creation time. \\
 \hline
-(R3.11) The system allows all users on the platform to see the list of badges owned by a student for the tournaments s/he participated in. \\
+(R3.11) The system assigns badges (rewards) to students that participated in a tournament, when the tournament is closed by the educator that created it. \\
+\hline
+(R3.12) The system allows all users on the platform to search for the personal profile of a student and see the corresponding account. \\
+\hline
+(R3.13) The system allows all users on the platform to see the list of badges owned by a student for the tournaments s/he participated in. \\
 \hline
 
 \end{longtable}
