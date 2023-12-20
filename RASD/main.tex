@@ -2,6 +2,7 @@
 \documentclass[12pt,a4paper]{article}
 % \usepackage[english]{babel}
 % \usepackage[utf8x]{inputenc}
+\usepackage{tocbibind}
 
 \includeonly{
     1Introduction/1Introduction_layout,
@@ -27,7 +28,7 @@
   sensitive=true,
   comment=[l]{--},
   commentstyle=\color{green}\ttfamily,
-  stringstyle=\color{red}\ttfamily
+  %stringstyle=\color{red}\ttfamily
 }
 \geometry{
   top=2.5cm,    % Adjust the top margin here
@@ -38,7 +39,7 @@
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage{verbatim}
-\usepackage{hyperref} % Required for inserting clickable links.
+%\usepackage{hyperref} % Required for inserting clickable links.
 %\usepackage{natbib} % Required for APA-style citations.
 \usepackage{makeidx} % Required for creating the index
 \usepackage{enumitem}
@@ -54,6 +55,7 @@
 \maketitle
 
 \newpage
+\tableofcontents
 
 \include{1Introduction/1Introduction_layout}
 \include{2Overall_Description/2Overall_Description_layout}
