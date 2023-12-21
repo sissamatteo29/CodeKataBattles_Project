@@ -1,11 +1,11 @@
 
 \subsubsection{Domain Class Diagrams}
 
-The class diagram  provides a rappresentation of the essential classes within the CKB application and of the external entities that have interactions with CKB (User, Student, Educator, GithHubBattleRepository, ForkedRepository, GitHubUsers ).
-In the context of the domain, only GitHub users affiliated with CKB are considered, specifically those who are users of the platform. Furthermore GitHub repositories within domain is limited to those containing battle code and repositories that students have forked from the primary codebase.
+The following class diagram provides a high-level view of the domain of interest for the \app platform. It is possible to notice elements that are external to the system (GitHub repositories, Users, Students, Educators) as well as the most meaningful internal ones (Tournaments, Battles, Scores, Rankings, Badges...). 
+This diagram pursues the objective of showing the multiplicity relations between all of these components, along with the most relevant pieces of information (attributes) that characterize them.
+As a remark to understand some of the multiplicity relations stated in the class diagram, only GitHub users that have already accessed \app once are considered, thus the 1:1 relationship between GitHubUser and User. Besides, the set of external GitHub repositories is restricted to those associated to a battle and the ones forked by the students from there.
+\begin{center}
+\includegraphics[angle=90,width=0.6\linewidth, scale=1.5]{2Overall_Description/res/ClassDiagram}
+\end{center}
 
 
-\begin{figure}[]    
-    \includegraphics[width=1\textwidth]{2Overall_Description/res/FINALCD.png}
-\end{figure}
-\clearpage

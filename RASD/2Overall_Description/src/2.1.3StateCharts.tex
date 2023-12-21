@@ -1,41 +1,46 @@
 \subsubsection{State Charts}
-In this section are illustrated the state charts of classes Tournament and Battle, to show the different states of these classes, and all possible transitions.\\
+In this section, state charts are employed in order to provide support to the reader in understanding how the internal states of some domain components change over time. In particular, the focus is on the Tournament and Battle entities.\\[0.7cm]
 
-\textbf{Tournament State Chart:}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{2Overall_Description/res/st1.png}
-\end{figure}
+\textbf{Tournament State Chart}
 
-After an educator has created a tournament all the students can subscribe to it, this is the \textbf{Open for registration} state. After the registration deadline the tournament starts, student can't enroll anymore and edcucators can create battles, this is the \textbf{Started} state. When the educator that created the tournament decides it's time to close it, he can do so if there aren't ongoing battles, if he succeeds the tournament is closed (state \textbf{closed}).\\
-\\
-\clearpage
-\textbf{Battle State Chart:}
-\begin{figure}[h]
-    \centering
+   \begin{center}
+    \includegraphics[width=1\textwidth]{2Overall_Description/res/StateChartTournament}
+    \end{center}
+
+After an educator creates a new tournament, all students with an account on \app are notified and can subscribe to it. This is the \textbf{registrationPhase} state. When the registration deadline passes, the tournament starts and students can no longer sign up. The state is now \textbf{ongoing} and this is the phase in which battles are created inside the tournament by educators. When the educator that created the tournament decides to close it, the tournament moves to the \textbf{closed} state. At this point, no more battle can be published in the tournament and the final ranking of fstudents is released.\\
+
+\begin{minipage}{\linewidth}
+\textbf{Battle State Chart}
+
+\begin{center}
     \includegraphics[width=1\textwidth]{2Overall_Description/res/stateChartBattle.png}
-\end{figure}
+\end{center}
+\end{minipage}
 
-After a battle is created students can enroll (\textbf{Open for registration} state). After the registration deadline students can't enroll anymore and a link to the battle repository is sent to all the registered students, (\textbf{Started} state). After the submission deadline, if the educator who created the battle has included a manual evaluation the Battle goes in a \textbf{Consolidation Stage} state. During the consolidation stage the educator assigns a score to each team last updated solution. The Battle goes from the consolidation stage state to \textbf{Terminated} state when the educator has finished grading all solutions, or when too much time has passed since the consolidation stage has started (fixed at 30 days). If no manual evaluation is expected, when the submission deadline expires the battle goes from the state \textbf{Started} to state \textbf{Terminated}.
+When a battle is created by an educator, it is in the \textbf{registrationPhase} state, during which students can join the battle. When the registration deadline passes, the battle moves on to the \textbf{ongoing} state. In this state, students can no longer sign up for the battle and the students who decided to participate are able to submit their code solutions through GitHub. When the submission deadline is met, there are two possible cases. If the educator who created the battle didn't request the consolidation stage for the battle, then the battle can simply terminate (\textbf{terminated} state) and the final ranking is published. On the other hand, if the professor who created the battle requested the consolidation stage, then the state shifts to \textbf{consolidationStage}. In this state, \app initiates a timer to set a time frame for the educator to manually evaluate the students' code solutions. When the timer goes off, if all teams of the battle received an evaluation from the educator, then the scores assigned during the consolidation stage are taken into account to compute the final ranking, otherwise \app will ignore the consolidation stage and publish the ranking based on the scores obtained in the \textbf{ongoing} state.
 \clearpage
 
 \subsubsection{Activity Diagrams}
-Here are illustrated the activity diagrams of the important workflows of CKB we wanted to highlight.\\
-\\
-\textbf{Computing Score Activity Diagram}\\
-\begin{figure}[h]
-    \clearpage
-    \centering
-    \includegraphics[width=1\textwidth]{2Overall_Description/res/newestActDgPush.png}
-\end{figure}
+Activity diagrams are employed to give insights to the reader about specific sequences of operations occurring in some parts of the system being described.
+In this case, they illustrate the procedures actuated to calculate the score of a code solution submitted through GitHub and to terminate a battle.  \\
 
-The first activity diagram regards the process of anlayzing the correctnenss of a team's solution and the computation of it's score. The process is triggered by a push made by a student in the main branch of his ForkedRepository. Since the final score is obteined by merging results of three different analysis (static analysis, timeliness and number of test cases passed) we modeled the activities as three parallel activities.\\
-\\
+\begin{minipage}{\linewidth}
+\textbf{Computing Score}\\
+
+   
+    \begin{center}
+    \includegraphics[width=1\textwidth]{2Overall_Description/res/ActivityDiagramCalculateScore}
+    \end{center}
+\end{minipage}
+
+The first activity diagram regards the process for computing the score of a code solution to a battle submitted by a student through GitHub. The procedure is initiated when a new commit is pushed by a student in the main branch of his forked GitHub repository. GitHub sends a notification to \app, which causes the system to download the latest code solution. Since the final score is obtained by combining results of three different analyses (static analysis, timeliness and number of test cases passed) the diagram shows how these three computations are carried out in parallel.
+
 \newpage
-\textbf{End of Battle Activity Diagram}\\
+
+\textbf{TerminateBattle}\\
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{2Overall_Description/res/ActivityDiagramEndBattle.png}
+    \includegraphics[width=1\textwidth]{2Overall_Description/res/ActivityDiagramTerminateBattle}
 \end{figure}
 
-The second activity diagram delineates the process of publishing the conclusive battle results, initiated upon the expiration of the battle submission deadline. The diagram is of interest because it highlights the workflow of when a battle expects a manual evaluation. The  \textbf{Manual Evaluation} activity is executed by an external actor, typically an educator. Should this activity not conclude before a predefined time, the system autonomously proceeds to publish the final results.
+This activity diagram delineates the process that leads to terminating a battle and publish the conclusive battle results. The procedure is initiated upon the expiration of the battle submission deadline. The diagram is of interest because it highlights the workflow of when a battle expects a manual evaluation. The  \textbf{manual evaluation} activity is executed by an educator. If this activity doesn't terminate before the time set by the timer, the system autonomously proceeds ignoring the consolidation stage scores and publishing the final ranking based on the scores assigned during the battle.
