@@ -105,11 +105,11 @@ sig User {
     username: one GitHubName
 }
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- FACTS (lexicographically ordered)
 
--- General considerations: in our world they can exist GitHubNames and GitHubRepoLinks, but it cannot exist a user without a proper GitHubName or a Battle without a proper GitHubRepoLink
+-- General considerations: in our world GitHubNames and GitHubRepoLinks can exist, but it cannot exist a user without a proper GitHubName or a Battle without a proper GitHubRepoLink
 -- Fact: Badge and tournament are biunivocally related
 fact badgesAlwaysAssociatedWithTournament {
     all t: Tournament, b: Badge | b in t.badges implies b.tournament = t
@@ -203,11 +203,6 @@ fact submissionAfterRegistration {
     all b: Battle | b.subDeadline.value < b.regDeadline.value
 }
 
--- Fact: Every tournament can be created only by one educator
-fact tournamentsCreatedByOneEducator {
-    no disj e1, e2: Educator, t: Tournament | t in e1.tournamentsCreated and t in e2.tournamentsCreated
-}
-
 -- Fact: After a battle all teams receive a score
 fact teamsHaveScoreAfterBattle {
     all b: Battle | all t: b.teams | some s: Score | s in t.score
@@ -222,6 +217,11 @@ fact teamStudent {
 -- Fact: All teams partecipating to a battle are teams of that battle
 fact teamBattle {
     all t: Team, b: Battle | t in b.teams implies b in t.participationToBattle
+}
+
+-- Fact: Every tournament can be created only by one educator
+fact tournamentsCreatedByOneEducator {
+    no disj e1, e2: Educator, t: Tournament | t in e1.tournamentsCreated and t in e2.tournamentsCreated
 }
 
 -- Fact: All creators' tournaments are tournaments created by him
@@ -253,7 +253,7 @@ fact uniqueSourceCodeTestABS {
     }
 }
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- PREDICATES useful for asserts
 pred addBattleToATournament[t: Tournament, b: Battle] {
@@ -282,7 +282,7 @@ pred tournamentScoreRefresh[t: Tournament, b: Battle] {
 -- The reader should be careful that these predicates are correctly generating expected world only when used in the following assertion: 
 -- In fact, it is up to the assertion to avoid the situations where an union wants to add an object already part of the set or where a subtraction wants to delete an object not belonging to the set
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- ASSERTIONS
 -- Assertion: when adding a battle not previously belonging to a tournament, the total number of the battles of the tournament is increased by one
@@ -291,7 +291,7 @@ assert addBattle {
 }
 --check addBattle for 5
 
--- Not considering the case of adding a battle not previously belonging to a tournament where the educator who created that tournament will have this battle in his created battles, because there could be a lot of educators with permissions, not granting he is the one who created that battle added
+-- Not considering the case of adding a battle not previously belonging to a tournament where the educator who created that tournament will have this battle in his created battles, because there could be a lot of educators with permissions, not granting he is the one who created the battle added
 
 -- Assertion: when deleting a battle previously belonging to a tournament, the total number of the battles of the toruanement is decreased by one
 assert deleteBattle {
@@ -333,45 +333,39 @@ assert consolidationStageOnlyIfManualEvaluation {
 }
 --check consolidationStageOnlyIfManualEvaluation for 5
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- RUN
--- A general world
+-- A general world. The objects represented are a few in other to make the generated image readable
 pred general[] {
     #GitHubName = 4
-    #Educator = 2
+    #Educator = 1
     #Student = 2
-    #Team = 2
-    #Tournament = 2
-    #Battle = 3
-    #EducatorMaterial = 2
+    #Team = 1
+    #Tournament = 1
+    #Battle = 2
     #GitHubRepoLink = 3
 }
 
 -- A world where there are two battle, one with the manual evalution, the other without it
 pred noManualEvaluation[] {
     #GitHubName = 4
-    #Educator = 2
-    #User = 3
+    #Educator = 1
+    #Student = 2
     #Team = 1
     #Badge = 2
-    #Battle = 2
-    #EducatorMaterial = 2
-    #Macrovariables = 2
     #GitHubRepoLink = 3
     #{b1, b2: Battle | b1.manualEvaluation.value = 0 && b2.manualEvaluation.value = 1} = 1
 }
 
 -- A world where there are educator creating tournaments, and other only with permission to a tournament created
 pred educatorsWithOnlyPermission[] {
-    #Team = 2
+    #Team = 1
     #Tournament = 3
-    #Badge = 2
-    #EducatorMaterial = 2
     #Battle = 3
     #{e1, e2: Educator | #e1.tournamentWithPermission = 1 && #e1.tournamentsCreated = 0 and #e2.tournamentsCreated = 1} = 1
 }
 
-run general for 4
+--run general for 4
 --run noManualEvaluation for 4
 --run educatorsWithOnlyPermission for 4

@@ -31,6 +31,7 @@
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage{verbatim}
+\usepackage{afterpage}
 %\usepackage{hyperref} % Required for inserting clickable links.
 %\usepackage{natbib} % Required for APA-style citations.
 \usepackage{makeidx} % Required for creating the index
@@ -54,14 +55,42 @@
 
 
 
-\title{CodeKataBattle\\ Requirements Analysis and Specification Documents}
-\author{Software Engeneering 2\\
-       Alessandro Saccone, Matteo Sissa, Sara Zappia}
-
 \renewcommand{\rmdefault}{ptm} % Times font
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+    \centering
+    \includegraphics[width=6.5cm]{Logo_Politecnico_Milano.png} \par
+    \vspace*{2.3cm}
+    {\LARGE Requirement Analysis and Specification Document}\par
+   
+   
+    \vspace*{0.8cm}
+    {\Large \textbf{CodeKataBattle}}\par
+    \vspace*{6.8cm}
+    
+    \setlength{\tabcolsep}{1.1cm}
+    \large Authors \par
+    \begin{table}[h]
+      \centering
+      
+      \renewcommand{\arraystretch}{2} 
+      \begin{tabular}{c c c }
+        \textbf{Name} & \textbf{Surname} & \textbf{ID} \\
+        \hline
+        Alessandro & Saccone & 11013852 \\
+        
+        Matteo & Sissa & 10972783  \\
+        
+        Sara & Zappia & 11016799\\
+        
+      \end{tabular}
+    \end{table}
+    \vspace*{1.3cm}
+    \small{ Version 1.0 - 22/12/2023}\par
+    \vspace*{0.3cm}
+    \small{ A.Y. 2023/2024}\par
+\end{titlepage}
 
 \clearpage
 \tableofcontents
@@ -82,13 +111,13 @@
 \section{Effort spent}
 \begin{table}[h]
   \centering
-  \begin{tabular}{|c|c|c|c|c|}
+  \begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
     \hline
      Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
     \hline
-    Alessandro & 2 & 9 & 5 & 12 \\
+    Alessandro & 5 & 12 & 15 & 30 \\
     \hline
-    Matteo & 0 & 12 & 9 & Cell 4 \\
+    Matteo & 17 & 12 & 9 & Cell 4 \\
     \hline
     Sara & 0 & 15 & 5 & 0 \\
     \hline
