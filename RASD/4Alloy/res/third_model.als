@@ -105,7 +105,7 @@ sig User {
     username: one GitHubName
 }
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- FACTS (lexicographically ordered)
 
@@ -253,7 +253,7 @@ fact uniqueSourceCodeTestABS {
     }
 }
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- PREDICATES useful for asserts
 pred addBattleToATournament[t: Tournament, b: Battle] {
@@ -282,7 +282,7 @@ pred tournamentScoreRefresh[t: Tournament, b: Battle] {
 -- The reader should be careful that these predicates are correctly generating expected world only when used in the following assertion: 
 -- In fact, it is up to the assertion to avoid the situations where an union wants to add an object already part of the set or where a subtraction wants to delete an object not belonging to the set
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- ASSERTIONS
 -- Assertion: when adding a battle not previously belonging to a tournament, the total number of the battles of the tournament is increased by one
@@ -333,7 +333,7 @@ assert consolidationStageOnlyIfManualEvaluation {
 }
 --check consolidationStageOnlyIfManualEvaluation for 5
 
---------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- RUN
 -- A general world. The objects represented are a few in other to make the generated image readable

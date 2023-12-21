@@ -31,6 +31,7 @@
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage{verbatim}
+\usepackage{afterpage}
 %\usepackage{hyperref} % Required for inserting clickable links.
 %\usepackage{natbib} % Required for APA-style citations.
 \usepackage{makeidx} % Required for creating the index
@@ -54,14 +55,45 @@
 
 
 
-\title{CodeKataBattle\\ Requirements Analysis and Specification Documents}
-\author{Software Engeneering 2\\
-       Alessandro Saccone, Matteo Sissa, Sara Zappia}
-
 \renewcommand{\rmdefault}{ptm} % Times font
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+    \centering
+    \includegraphics[width=6.5cm]{RASD/Logo_Politecnico_Milano.png} \par
+    \vspace*{1cm}
+    {\LARGE \textbf{RASD}}\par
+    \vspace*{0.5cm}
+    {\Large Requirement Analysis and Specification Document}\par
+    \vspace*{1cm}
+    \rule{\linewidth}{0.3mm}\par
+    \vspace*{2cm}
+    {\LARGE \textbf{CodeKataBattle}}\par
+    \vspace*{1.5cm}
+    \rule{\linewidth}{0.3mm}\par
+    \vspace*{1cm}
+    \large Team Members\par
+    \begin{table}[h]
+      \centering
+      \setlength{\arrayrulewidth}{1.3pt} 
+      \renewcommand{\arraystretch}{2} 
+      \begin{tabular}{|m{5cm}|m{5cm}|m{5cm}|}
+        \hline
+        \textbf{ID} & \textbf{SURNAME} & \textbf{NAME} \\
+        \hline
+        11013852 & Saccone & Alessandro \\
+        \hline
+        Cell 7 & Sissa & Matteo \\
+        \hline
+        Cell 10 & Zappia & Sara\\
+        \hline
+      \end{tabular}
+    \end{table}
+    \vspace*{0.5cm}
+    {\large Version 1.0 - 22/12/2023}\par
+    \vspace*{0.5cm}
+    {\large A.Y. 2023/2024}\par
+\end{titlepage}
 
 \newpage
 \tableofcontents
@@ -77,11 +109,11 @@
 \section{Effort spent}
 \begin{table}[h]
   \centering
-  \begin{tabular}{|c|c|c|c|c|}
+  \begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
     \hline
      Studente & Introduction & Overall Description & Specific Requirements & Alloy \\
     \hline
-    Alessandro & 4 & 9 & 12 & 27 \\
+    Alessandro & 5 & 12 & 15 & 30 \\
     \hline
     Matteo & 0 & 12 & 9 & Cell 4 \\
     \hline
