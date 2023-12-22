@@ -27,26 +27,25 @@
 \contentsline {section}{\numberline {3}Specific Requirements}{29}{}%
 \contentsline {subsection}{\numberline {3.1}External Interface Requirements}{29}{}%
 \contentsline {subsubsection}{\numberline {3.1.1}User Interface}{29}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Hardware Interfaces}{29}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}Software Interfaces}{30}{}%
-\contentsline {subsection}{\numberline {3.2}Functional Requirements}{31}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}Use Case Diagrams}{31}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}UseCases}{33}{}%
-\contentsline {subsubsection}{\numberline {3.2.3}Sequence Diagrams}{46}{}%
-\contentsline {subsubsection}{\numberline {3.2.4}Activity Diagrams}{55}{}%
-\contentsline {subsubsection}{\numberline {3.2.5}Requirements Mapping}{57}{}%
-\contentsline {subsection}{\numberline {3.3}Performance Requirements}{59}{}%
-\contentsline {subsection}{\numberline {3.4}Design Constraints}{60}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard Compliance}{60}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware Limitations}{60}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Other Constraints}{60}{}%
-\contentsline {subsection}{\numberline {3.5}Software System Attributes}{61}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{61}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{61}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{61}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{61}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{61}{}%
-\contentsline {section}{\numberline {4}Alloy}{62}{}%
-\contentsline {subsection}{\numberline {4.1}Generated World}{71}{}%
-\contentsline {section}{\numberline {5}Effort spent}{75}{}%
-\contentsline {section}{\numberline {6}References}{75}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Hardware Interfaces}{33}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Software Interfaces}{33}{}%
+\contentsline {subsection}{\numberline {3.2}Functional Requirements}{35}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Use Case Diagrams}{35}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}UseCases}{37}{}%
+\contentsline {subsubsection}{\numberline {3.2.3}Sequence Diagrams}{50}{}%
+\contentsline {subsubsection}{\numberline {3.2.4}Activity Diagrams}{59}{}%
+\contentsline {subsubsection}{\numberline {3.2.5}Requirements Mapping}{61}{}%
+\contentsline {subsection}{\numberline {3.3}Performance Requirements}{63}{}%
+\contentsline {subsection}{\numberline {3.4}Design Constraints}{64}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Standard Compliance}{64}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Hardware Limitations}{64}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}Other Constraints}{64}{}%
+\contentsline {subsection}{\numberline {3.5}Software System Attributes}{65}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{65}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Availability}{65}{}%
+\contentsline {subsubsection}{\numberline {3.5.3}Security}{65}{}%
+\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{65}{}%
+\contentsline {subsubsection}{\numberline {3.5.5}Portability}{65}{}%
+\contentsline {section}{\numberline {4}Alloy}{66}{}%
+\contentsline {subsection}{\numberline {4.1}Generated World}{75}{}%
+\contentsline {section}{\numberline {5}Effort spent}{79}{}%
