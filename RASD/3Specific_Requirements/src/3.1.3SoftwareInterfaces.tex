@@ -1,5 +1,9 @@
 \subsubsection{Software Interfaces}
-The system requires some software interfaces in order to provide its services. Below are reported the most significant:
+The system requires some software interfaces in order to provide its services. Below the most significant ones are reported:
 \begin{itemize}
-    \item GitHub API Integration : The system communicates with external APIs to allow the creation of GithHub repositories for each battle
+	\item GitHub OAuth interface: the authentication process is delegated to the GitHub platform by means of the OAuth standard.
+    \item GitHub API Integration: the system communicates with GitHub's API to allow the creation of GithHub repositories for each battle.
+    \item GitHub Actions workflows: \app exposes an API that allows a student of the application to setup the GitHub Actions workflow in such a way that GitHub will send notifications to \app when a new commit is pushed by the student to his/her forked repository.
+    \item Client-server interactions occur by means of a HTTPS protocol to exchange data and information.
+    \item Database interface: \app needs a database to store and manipulate user's data, therefore a software interface in between \app and the database has to be developed to allow the interaction.
 \end{itemize}
