@@ -15,7 +15,7 @@ sig Battle {
     tournament: one Tournament,
     maxTeamSize: one Int,
     minTeamSize: one Int,
-    ranking: some Score,
+    ranking: set Score,
     repositoryLink: one GitHubRepoLink,
     consolidationStage: one ConsolidationStage,
     manualEvaluation: one Boolean,
@@ -49,16 +49,16 @@ sig Description {}
 sig Educator extends User {
     battlesCreated: set Battle,
     tournamentsCreated: set Tournament,
-    tournamentWithPermission: set Tournament --they include the tournament he creates 
+    tournamentWithPermission: set Tournament --they include the tournaments he create
 }
 
 sig EducatorMaterial {
     automationBuildScripts: set ABS,
     textualDescription: one Description,
-    tests: one CodeTest
-} --in our world it can exist EducatorMaterial without a relation with a battle, as in the reality
+    tests: one CodeTest 
+} --it is unlikely but possible that two different battles have the same EducatorMaterial
 
-sig EvaluationCriteria {}
+sig EvaluationCriteria {} --to be specified in the implementation
 
 abstract sig Notification {}
 
@@ -68,13 +68,11 @@ sig GitHubRepoLink {
     identifier: one Int
 }{identifier >= 0}
 
-sig Macrovariables {} --it is an implementing choice to decide how to model macrovariables
+sig Macrovariables {} --to be specified in the implementation
 
 sig GitHubPassword {}
 
-sig Score {
-    var value: one Int
-}{value >= 0}
+sig Score {} --to be specified in the implementation
 
 sig Student extends User {
     team: set Team, --the partecipation to a tournament is reached through team
@@ -109,10 +107,12 @@ sig User {
 
 -- FACTS (lexicographically ordered)
 
--- General considerations: in our world GitHubNames and GitHubRepoLinks can exist, but it cannot exist a user without a proper GitHubName or a Battle without a proper GitHubRepoLink
+-- General considerations: in our world GitHubNames, GitHubRepoLinks and EducatorMaterial can exist, but it cannot exist a user without a proper GitHubName or a Battle without a proper GitHubRepoLink and a proper EducatorMaterial
+
 -- Fact: Badge and tournament are biunivocally related
 fact badgesAlwaysAssociatedWithTournament {
     all t: Tournament, b: Badge | b in t.badges implies b.tournament = t
+    all t: Tournament, b: Badge | t = b.tournament implies b in t.badges
 }
 
 -- Fact: Battles and tournament are biunivocally related
@@ -121,7 +121,7 @@ fact battleAlwaysAssociatedWithTournament {
     all t: Tournament, b: Battle | b.tournament = t implies b in t.battles 
 }
 
--- Fact: Every battle created by and educator belongs to the set of battle created by that educator
+-- Fact: Every battle created by and educator belongs to the set of battles created by that educator
 fact battleCreatedForEducators {
     all e: Educator, b: Battle | b.educator = e implies b in e.battlesCreated
 }
@@ -138,7 +138,7 @@ fact battleEndInTournament {
 
 -- Fact: We need to define the correct time order of the consolidation stage, when its value is different from the error state (when both the start and specifically the end values equal zero)
 fact consolidationStageTimeOrder {
-    all cs: ConsolidationStage | cs.end.value!=0 implies cs.start.value < cs.end.value
+    all cs: ConsolidationStage | cs.end.value!=0 implies cs.start.value < cs.end.value --it is enough to consider only the end value: in no case it could be zero
 }
 
 -- Fact: DifferentUsername, so different GitHubNames
@@ -158,7 +158,12 @@ fact differentGitHubRepo {
 
 -- Fact: Educator creates a battle in own tournament or in a tournament he has a permission for
 fact educatorCreatesBattleInOwnTournament {
-    all e: Educator, t: Tournament, b: Battle | b in e.battlesCreated or b in e.tournamentWithPermission.battles or b in e.tournamentsCreated.battles implies b in t.battles
+    all e: Educator, t: Tournament, b: Battle | b in e.battlesCreated and (t in e.tournamentWithPermission or t in e.tournamentsCreated) implies b in t.battles
+}
+
+-- Fact: Every team partecipating to a battle has a score
+fact everyTeamHasItsScore {
+    all t: Tournament, b1, b2: Battle | b1 in t.battles and b2 in t.battles and #b1.ranking != 0 and #b2.ranking != 0 implies #t.ranking = #b1.ranking + #b2.ranking
 }
 
 -- Fact: Every tournament that is created by an educator is in his tournamentWithPermission
@@ -175,6 +180,12 @@ fact manualEvaluationRequiresConsolidationStage {
 -- Fact: Every user must be a student or an educator
 fact noUserWithoutRole {
     Student + Educator = User
+}
+
+-- Fact: If a battle has no teams involved, it produces no scores
+fact noScoreWithoutATeam {
+    all b: Battle | #b.teams = 0 implies #b.ranking = 0 
+    all b: Battle | #b.teams != 0 implies #b.ranking != 0
 }
 
 -- Fact: The registration must be done before the ending of the tournament
@@ -198,9 +209,14 @@ fact studentsBadge {
     no disj s: Student, b: Badge | s in b.students and b.tournament not in s.team.participationToBattle.tournament
 }
 
--- Fact: The submission deadline of a battle must be always before the registration deadline
+-- Fact: A student can have a tournament belonging in his tournaments only if it partecipated to that tournament
+fact studentsTournamentIfInTeam {
+    all s: Student, t: Tournament | t in s.tournaments implies s in t.battles.teams.members
+}
+
+-- Fact: The registration deadline of a battle must be always before the submission deadline
 fact submissionAfterRegistration {
-    all b: Battle | b.subDeadline.value < b.regDeadline.value
+    all b: Battle | b.regDeadline.value < b.subDeadline.value
 }
 
 -- Fact: After a battle all teams receive a score
@@ -208,7 +224,7 @@ fact teamsHaveScoreAfterBattle {
     all b: Battle | all t: b.teams | some s: Score | s in t.score
 }
 
--- Fact: Students and team are biunivocally related
+-- Fact: Students and teams are biunivocally related
 fact teamStudent {
     all t: Team, s: Student | t in s.team implies s in t.members
     all t: Team, s: Student | s in t.members implies t in s.team
@@ -224,7 +240,7 @@ fact tournamentsCreatedByOneEducator {
     no disj e1, e2: Educator, t: Tournament | t in e1.tournamentsCreated and t in e2.tournamentsCreated
 }
 
--- Fact: All creators' tournaments are tournaments created by him
+-- Fact: All creator's tournaments are tournaments created by him
 fact tournamentCreatedForEducators {
     all t: Tournament, e: Educator | t.creator = e implies t in e.tournamentsCreated
 }
@@ -239,7 +255,7 @@ fact tournamentHaveDifferentBattles {
     no disj t1, t2: Tournament, b: Battle | b in t1.battles and b in t2.battles
 }
 
--- Fact: If an educator creates battles in a tournament, he has the permission for it
+-- Fact: If an educator creates battles in a tournament, he has the permission for it (different from creating a tournament)
 fact tournamentsWithPermissionsForEducatorsCreatingBattlesInThem {
     all e: Educator, b: Battle | b in e.battlesCreated implies b.tournament in e.tournamentWithPermission 
 }
@@ -271,15 +287,7 @@ pred addTournament[e: Educator, t: Tournament] {
 pred studentLeavesATeam[s: Student, t: Team] {
     s.team' = s.team - t
 }
-
-pred battleScoreRefresh[b: Battle, t: Team] {
-    (b.ranking.score.value)' = b.ranking.score.value + t.score.value
-}
-
-pred tournamentScoreRefresh[t: Tournament, b: Battle] {
-   (t.ranking.score.value)' = t.ranking.score.value + b.teams.score.value
-}
--- The reader should be careful that these predicates are correctly generating expected world only when used in the following assertion: 
+-- The reader should be careful that these predicates are correctly generating expected worlds only when used in the following assertion: 
 -- In fact, it is up to the assertion to avoid the situations where an union wants to add an object already part of the set or where a subtraction wants to delete an object not belonging to the set
 
 -------------------------------------------------------------
@@ -291,7 +299,7 @@ assert addBattle {
 }
 --check addBattle for 5
 
--- Not considering the case of adding a battle not previously belonging to a tournament where the educator who created that tournament will have this battle in his created battles, because there could be a lot of educators with permissions, not granting he is the one who created the battle added
+-- Not considering the case of adding a battle not previously belonging to a tournament where the educator who created that tournament will have this battle belonging to his created battles, because there could be a lot of educators with permissions, not granting he is the one who created the battle added
 
 -- Assertion: when deleting a battle previously belonging to a tournament, the total number of the battles of the toruanement is decreased by one
 assert deleteBattle {
@@ -317,13 +325,6 @@ assert studentLeavesHisTeam {
 }
 --check studentLeavesHisTeam for 5
 
--- Assertion: checking that the score is been well updated
-assert totalScoreRefresh {
-   all b: Battle, t: Team | always (battleScoreRefresh[b, t] and 
-      after tournamentScoreRefresh[b.tournament, b] implies (b.tournament.ranking.value)' = b.tournament.ranking.value + t.score.value )
-}
---check totalScoreRefresh for 5
-
 -- Assertion: checking that the start and end value of the consolidation stage are different from zero only when the educator asked for the manual evaluation
 assert consolidationStageOnlyIfManualEvaluation {
    all b: Battle | b.manualEvaluation.value = 0 implies 
@@ -340,8 +341,8 @@ assert consolidationStageOnlyIfManualEvaluation {
 pred general[] {
     #GitHubName = 4
     #Educator = 1
-    #Student = 2
-    #Team = 1
+    #Student = 3
+    #{t: Team | #t.members > 1} = 1
     #Tournament = 1
     #Battle = 2
     #GitHubRepoLink = 3
@@ -361,11 +362,11 @@ pred noManualEvaluation[] {
 -- A world where there are educator creating tournaments, and other only with permission to a tournament created
 pred educatorsWithOnlyPermission[] {
     #Team = 1
-    #Tournament = 3
+    #Tournament = 1
     #Battle = 3
     #{e1, e2: Educator | #e1.tournamentWithPermission = 1 && #e1.tournamentsCreated = 0 and #e2.tournamentsCreated = 1} = 1
 }
 
---run general for 4
+run general for 4
 --run noManualEvaluation for 4
 --run educatorsWithOnlyPermission for 4
