@@ -1,1 +1,20 @@
 \subsection{Component View}
+\textbf{Network Load Balancer}
+
+A load balancer is a networking device or software component that distributes incoming network traffic, with its primary goal being to optimize resource utilization, maximize throughput, minimize response time, and ensure high availability of applications or services. It acts as an intermediary between clients and a pool of web servers, intelligently directing traffic to achieve efficient and reliable system performance.
+
+The reasons why it is a necessary component to use in the CodeKata system are:
+
+\begin{itemize}
+    \item \textit{Preventing Bottlenecks}: By distributing incoming traffic across multiple servers, a load balancer prevents the creation of bottlenecks. This ensures that the overall system can handle a larger volume of requests and provides a scalable architecture.
+    
+    \item \textit{Enhancing System Reliability}: Load balancers enhance system reliability by spreading the load across multiple servers. In the event that one server fails, the load balancer redirects traffic to healthy servers.
+    
+    \item \textit{Supporting Horizontal Scaling}: Load balancers allow additional servers to be added to the server pool, supporting horizontal scaling and improving scalability.
+    
+    \item \textit{Handling SSL/TLS Encryption}: Load balancers can handle SSL/TLS encryption and decryption, relieving backend servers from the processing overhead associated with these cryptographic operations. This enhances the overall performance of the system.
+    
+    \item \textit{Granting Session Persistence}: Load balancers can manage session persistence by associating a user with a specific server for the duration of their session.
+    
+    \item \textit{Logging and Monitoring Capabilities}: Load balancers offer logging and monitoring capabilities, providing valuable information for troubleshooting, optimization, and capacity planning.
+\end{itemize}

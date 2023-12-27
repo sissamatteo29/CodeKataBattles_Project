@@ -1,1 +1,32 @@
 \subsubsection{High Level View}
+The CKB application is a distributed system that guarantees fault tolerance, availability, reliability, and performance, built on the concept of microservices. A microservices architecture is a type of application architecture where the application is developed as a collection of services, which are units of functionalities designed to support interoperable machine-to-machine interaction over a network. A representation of the system, as described, is available in Figure 1. \par
+
+The choice of this architectural style is due to many factors, including:
+
+\begin{itemize}
+    \item \textit{Scalability}: Microservices can be scaled independently, allowing for scaling out sub-services without scaling out the entire system. This leads to the versatility of the application.
+    
+    \item \textit{Fault Tolerance}: Unlike the monolithic approach, which has many inter-dependencies creating a single point of failure, in this approach, the application can remain mostly unaffected by the failure of a single module.
+    
+    \item \textit{Deployment and Productivity}: Microservices enable continuous integration and delivery, making it easy to test new ideas, suiting Agile and DevOps working methodologies. Furthermore, it makes it easier to split the work between team members: each team member is responsible for a particular service, resulting in a smart, productive, cross-functional team where the speed of development is largely improved.
+    
+    \item \textit{Continuous Delivery}: Microservices enable continuous delivery, meaning your software can be modified and delivered to your client base frequently and easily due to its automated nature.
+    
+    \item \textit{Maintainability}: Benefits of Microservices Architecture include less energy spent on understanding separate pieces of software or worrying about how a bug fix will affect other parts of the product.
+\end{itemize}
+
+In detail, there are six microservices in the CKB application, described as follows:
+
+\begin{itemize}
+    \item \textbf{User Management Microservice}: This is the microservice to which every first request by a Web Client is forwarded. In order to grant high availability, this module is duplicated over various servers handling the requests. Its role is to grant access to the application. In doing so, it communicates with the GitHub Integration Microservice. Moreover, the module is in charge of displaying the home page, and so it communicates with the Tournament Microservice to obtain useful data for the user who just logged in. Every notification is obtained from the Notification Microservice, both synchronously (requesting directly) and asynchronously. For this reason, it needs to communicate with this module too.
+    
+    \item \textbf{Tournament Microservice}: This microservice grants control over the tournaments, involving score computation mechanisms and badge management too. In order to show the battles it is related to, it must communicate with the Battle Microservice. To grant the correct management of notifications, it communicates with the Notification Microservice.
+    
+    \item \textbf{Battle Microservice}: This is the microservice responsible for managing the battles. It communicates with the Notification Microservice to handle notifications addressed to it and with the Tournament Microservice, sending rankings and other important data to share. To guarantee the correct aim of the application, it needs to contact the GitHub Integration Microservice (e.g., when creating a new battle or when pushing code). Finally, it is interesting its communication with the Score Computation Microservice: sending data from a specific battle, doing so it could obtain the rankings.
+    
+    \item \textbf{GitHub Integration Microservice}: This microservice is in charge of handling all the API requests involving GitHub. To do this, it communicates with the Battle Microservice when it needs to share important information regarding the battles.
+    
+    \item \textbf{Score Computation Microservice}: The scope of this microservice is to calculate the rankings of the battles, managing the manual evaluation and the automatic testing of the code pushed by the user participating in the battle.
+    
+    \item \textbf{Notification Microservice}: This microservice is useful for managing all the notifications involving tournaments and battles, sending them asynchronously (without an explicit request) to the users. This is the reason why it needs to communicate with the User Management Microservice.
+\end{itemize}
