@@ -1,0 +1,96 @@
+
+\documentclass[12pt,a4paper]{article}
+% \usepackage[english]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage{tocbibind}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{graphicx} % Required for inserting images.
+\usepackage[margin=2cm]{geometry}
+\parskip 4.2pt  % Sets spacing between paragraphs.
+% \renewcommand{\baselinestretch}{1.5}  % Uncomment for 1.5 spacing between lines.
+\parindent 8.4pt  % Sets leading space for paragraphs.
+\usepackage[font=sf]{caption} % Changes font of captions.
+\usepackage[margin=2cm]{geometry} % Sets the left and right margins to 2cm.
+\usepackage{listings}
+\lstdefinelanguage{alloy}{
+  keywords={sig,abstract,extends,check,pred,fact,assert,run},
+  keywordstyle=\color{blue}\bfseries,
+  sensitive=true,
+  comment=[l]{--},
+  commentstyle=\color{green}\ttfamily,
+  %stringstyle=\color{red}\ttfamily
+}
+\geometry{
+  top=2.5cm,    % Adjust the top margin here
+  bottom=2.5cm, % Adjust the bottom margin here
+}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{verbatim}
+%\usepackage{hyperref} % Required for inserting clickable links.
+%\usepackage{natbib} % Required for APA-style citations.
+\usepackage{makeidx} % Required for creating the index
+\usepackage{enumitem}
+
+\includeonly{
+	
+}
+\graphicspath{
+}
+	
+\newcommand{\app}{CodeKataBattle }
+
+
+
+\title{CodeKataBattle\\ Design Documents}
+\author{Software Engeneering 2\\
+       Alessandro Saccone, Matteo Sissa, Sara Zappia}
+
+\renewcommand{\rmdefault}{ptm} % Times font
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\include{DD/1Introduction/Introduction_layout}
+\include{DD/2.ArchitecturalDesign/ArchitecturalDesign_layout}
+\include{DD/3.UserInterfaceDesign/UserInterfaceDesign_layout}
+\include{DD/4.RequirementsTraceability/RequirementsTraceability_layout}
+\include{DD/5.ImplementationIntegrationTestPlan/ImplementationIntegration_layout}
+
+
+
+
+
+\section{Effort spent}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+      & Alessandro & Matteo & Sara \\
+    \hline
+    Introduction & 0 & 0 & 0 \\
+    \hline
+    Architectural Design & 0 & 0 & 0 \\
+    \hline
+    User Interface Design & 0 & 0 & 0 \\ 
+    \hline
+    Requirements Traceability & 0 & 0 & 0  \\
+    \hline
+    Implementation, Integration and Test Plan & 0 & 0 & 0 \\
+    
+  \end{tabular}
+  \caption{Time spent on every section of the DD for each student}
+  \label{tab:effort}
+\end{table}
+
+\section{References}
+%\bibliographystyle{apalike}
+%\bibliography{example}
+
+\end{document}
