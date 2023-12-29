@@ -1,0 +1,30 @@
+\contentsline {section}{Contents}{2}{}%
+\contentsline {section}{\numberline {1}Introduction}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Purpose}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Scope}{4}{}%
+\contentsline {subsection}{\numberline {1.3}Definitions, Acronyms, Abbreviations}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Definitions}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}Acronyms}{8}{}%
+\contentsline {subsection}{\numberline {1.4}Reference Documents}{10}{}%
+\contentsline {subsection}{\numberline {1.5}Document Structure}{10}{}%
+\contentsline {section}{\numberline {2}Architectural Design}{11}{}%
+\contentsline {subsection}{\numberline {2.1}Overview}{11}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}High Level View}{11}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}Distributed View}{14}{}%
+\contentsline {subsection}{\numberline {2.2}Component View}{14}{}%
+\contentsline {subsection}{\numberline {2.3}Deployment View}{14}{}%
+\contentsline {subsection}{\numberline {2.4}Run Time Views}{14}{}%
+\contentsline {subsection}{\numberline {2.5}Component Interfaces}{14}{}%
+\contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{14}{}%
+\contentsline {subsection}{\numberline {2.7}Other Design Decisions}{15}{}%
+\contentsline {section}{\numberline {3}User Interface Design}{16}{}%
+\contentsline {section}{\numberline {4}Requirements Traceability}{17}{}%
+\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{18}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{18}{}%
+\contentsline {subsection}{\numberline {5.2}Implementation Plan}{18}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{18}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{18}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{18}{}%
+\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{18}{}%
+\contentsline {section}{\numberline {6}Effort spent}{19}{}%
+\contentsline {section}{\numberline {7}References}{19}{}%
