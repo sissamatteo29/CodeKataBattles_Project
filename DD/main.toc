@@ -10,7 +10,6 @@
 \contentsline {section}{\numberline {2}Architectural Design}{11}{}%
 \contentsline {subsection}{\numberline {2.1}Overview}{11}{}%
 \contentsline {subsubsection}{\numberline {2.1.1}High Level View}{11}{}%
-\contentsline {subsubsection}{\numberline {2.1.2}Distributed View}{14}{}%
 \contentsline {subsection}{\numberline {2.2}Component View}{14}{}%
 \contentsline {subsection}{\numberline {2.3}Deployment View}{14}{}%
 \contentsline {subsection}{\numberline {2.4}Run Time Views}{14}{}%
