@@ -1,1 +1,87 @@
 \subsection{Run Time Views}
+
+This section provides a detailed perspective on how the system works and interacts with components during its execution on runtime. It focuses on the dynamic aspects of the software, emphasizing the flow of control, data, and communication between different modules or components.
+
+
+\subsubsection*{Educator login}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{2.ArchitecturalDesign/res/EducatorLogin.jpg}
+    \caption{Runtime view of the login of an educator}
+    \label{fig:educator_login}
+\end{figure}
+
+The educator login process unfolds in the following manner: the Educator initiates the login by contacting the Gateway Manager and transmitting their credentials. Subsequently, the Gateway Manager interfaces with the GitHub API to verify and authorize access. Two possible scenarios may unfold: a successful authentication or an unsuccessful one. In the latter case, an error message is generated and displayed to the Educator. In the event of a successful authentication, the Gateway Manager communicates with the Educator Manager, forwarding all relevant data to be stored in case it is the Educator's first sign-in. In both scenarios, the Educator Manager is responsible for returning the user profile to the Educator.
+
+This process ensures a seamless and secure login experience, with appropriate feedback provided to the Educator based on the outcome of the authentication process.
+\newpage
+
+\subsubsection*{Student login}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{2.ArchitecturalDesign/res/StudentLogin.jpg}
+    \caption{Runtime view of the login of a student}
+    \label{fig:student_login}
+\end{figure}
+
+The student login process mirrors that of the educator, with the primary distinction lying in the actor, now the student, and the involvement of different microservices. Here's how it unfolds: the Student initiates the login process by reaching out to the Gateway Manager and submitting their credentials. Subsequently, the Gateway Manager interfaces with the GitHub API to validate and authorize access.
+
+Similar to the educator's login process, two potential outcomes are possible: a successful authentication or an unsuccessful one. In the case of an unsuccessful authentication, an error message is generated and presented to the student. However, in the event of a successful authentication, the Gateway Manager now communicates directly with the Student Manager. The Student Manager is then responsible for handling the data, including storage in the case of the student's initial sign-in, and returning the user profile to the student.
+
+Despite the differences in actors and microservices, the student login process ensures a comparable and secure user experience, tailored to the specific needs of the student user role.
+
+\newpage
+
+\subsubsection*{Tournament creation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/TournamentCreation.jpg}
+    \caption{Runtime view of the creation of a tournament}
+    \label{fig:tournament_creation}
+\end{figure}
+
+In Figure \ref{fig:tournament_creation}, the diagram illustrates the interactions between components when an educator initiates the creation of a new tournament. Initially, the educator contacts the Gateway Manager, which then sends a request to the Tournament Manager in order to obtain the form necessary for the creation process. After receiving the form, the educator fills it out and sends it back to the Tournament Manager. The Tournament Manager stores the information in the DBMS and triggers a notification to signify the successful creation of the tournament. 
+
+While the specific details of this notification process will be discussed momentarily, it is worth noting that this sequence remains consistent across various runtime views and will be omitted in subsequent descriptions.
+
+Subsequently, the Tournament Publisher receives the data pertaining to the newly created tournament and communicates with the Event Bus to publish this information. Then, asynchronously, the Notification Consumer polls the Event Bus, retrieving the new event. Once obtained, the Notification Consumer generates a notification and forwards it to the Student Manager. The Student Manager then iterates through all the students, ensuring each receives the notification.
+
+\newpage
+
+\subsubsection*{Battle creation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/BattleCreation.jpg}
+    \caption{Runtime view of the creation of a battle}
+    \label{fig:battle_creation}
+\end{figure}
+
+The process for battle creation mirrors that of tournaments. The Educator initiates the process by sending a request to the Gateway Manager, which forwards the request to the Battle Manager. The Battle Manager responds by providing the necessary form for the Educator to complete. Subsequently, the Educator fills out the form and returns it to the Battle Manager. The Battle Manager then stores the information for the newly created battle in the DBMS. Similar to the tournament creation, a new event is generated.
+
+It's important to note that, in this context, all the students notified will only be those subscribed to the tournament in which the battle has been created.
+
+\newpage
+
+\subsubsection*{End of a tournament}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/EndOfATournament.jpg}
+    \caption{Runtime view when the end of a tournament is reached}
+    \label{fig:tournament_end}
+\end{figure}
+
+When a tournament concludes, the determination is made by the Educator, who initiates the process by sending a request to the Gateway Manager. The Gateway Manager then forwards this request to the Tournament Manager, which in turn updates the relevant data regarding the tournament in the DBMS. Following the update, a new event is generated and disseminated to all the students who have subscribed to that particular tournament, adhering to the previously outlined notification mechanism.
+
+\newpage
+
+\subsubsection*{End of a battle}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/EndOfABattle.jpg}
+    \caption{Runtime view when a battle ends}
+    \label{fig:battle_end}
+\end{figure}
+
+The conclusion of a battle occurs upon reaching its specified deadline, and the mechanism for monitoring this may involve a polling system, depending on the chosen development framework. Once the deadline is reached, the system checks whether a manual evaluation is required, as determined during the battle's creation. Subsequently, the parameters of the battle are updated by interacting with the DBMS. Following this update, an event is generated, mirroring the previously described process, and disseminated accordingly.
+
+\newpage
