@@ -1,15 +1,72 @@
 \subsection{Selected Architectural Styles and Patterns}
 
-The choice of this architectural style is due to many factors, including:
+This section delves into our architectural decisions, explaining the reasoning behind each choice. We aim for a system that not only meets current demands but also allows for flexibility and evolution. A comprehensive view empowers both developers and stakeholders with a clear understanding of how these choices contribute to the overall success of the software engineering endeavor.
+
+\subsubsection*{Microservices Architecture}
+
+The adoption of a microservices architecture is driven by several factors, contributing to the versatility and adaptability of our application:
 
 \begin{itemize}
-	\item \textit{Scalability}: Microservices can be scaled independently, allowing for scaling out sub-services without scaling out the entire system. This leads to the versatility of the application.
-	
-	\item \textit{Fault Tolerance}: Unlike the monolithic approach, which has many inter-dependencies creating a single point of failure, in this approach, the application can remain mostly unaffected by the failure of a single module.
-	
-	\item \textit{Deployment and Productivity}: Microservices enable continuous integration and delivery, making it easy to test new ideas, suiting Agile and DevOps working methodologies. Furthermore, it makes it easier to split the work between team members: each team member is responsible for a particular service, resulting in a smart, productive, cross-functional team where the speed of development is largely improved.
-	
-	\item \textit{Continuous Delivery}: Microservices enable continuous delivery, meaning your software can be modified and delivered to your client base frequently and easily due to its automated nature.
-	
-	\item \textit{Maintainability}: Benefits of Microservices Architecture include less energy spent on understanding separate pieces of software or worrying about how a bug fix will affect other parts of the product.
+    \item \textit{Scalability}: Microservices allow independent scaling, enabling the scalability of sub-services without scaling out the entire system, fostering a versatile and responsive application.
+  
+    \item \textit{Fault Tolerance}: Unlike monolithic approaches with inter-dependencies, microservices minimize the impact of a single module failure, ensuring the application remains largely unaffected.
+  
+    \item \textit{Deployment and Productivity}: Microservices facilitate continuous integration and delivery, promoting Agile and DevOps methodologies. The modular structure enhances team productivity, with each member responsible for a specific service.
+  
+    \item \textit{Continuous Delivery}: Microservices enable frequent and automated software modifications and deliveries, aligning with agile development practices.
+  
+    \item \textit{Maintainability}: Microservices reduce the effort spent on understanding separate pieces of software, enhancing overall system maintainability.
 \end{itemize}
+
+\subsubsection*{RESTful APIs}
+
+The adoption of the REST architectural style for designing and implementing our APIs offers a scalable, efficient, and interoperable communication model. This choice is motivated by several compelling advantages:
+
+\begin{itemize}
+    \item \textit{Simplicity and Intuitiveness}: RESTful APIs follow a straightforward design using standard HTTP methods, reducing the learning curve for developers and third-party consumers.
+  
+    \item \textit{Scalability}: The stateless nature of REST allows for easy scalability, promoting a loosely coupled and horizontally scalable architecture.
+  
+    \item \textit{Flexibility and Modularity}: RESTful APIs encourage a modular and resource-centric design, promoting clean separation of concerns.
+  
+    \item \textit{Interoperability}: Leveraging standard HTTP protocols makes REST platform-agnostic, facilitating interoperability across different technologies and devices.
+  
+    \item \textit{Statelessness}: RESTful APIs' statelessness simplifies server logic, improves reliability, and allows for easy recovery from failures, contributing to a more robust and fault-tolerant system.
+\end{itemize}
+
+\subsubsection*{Model-View-Controller (MVC)}
+
+The adoption of the Model-View-Controller architecture lays the foundation for a well-organized, maintainable, and scalable application. This choice is motivated by several factors:
+
+\begin{itemize}
+    \item \textit{Modular Organization}: MVC divides our application into three interconnected components: Model, View, and Controller. This enhances code readability, facilitates easier debugging, and allows for independent development of each component.
+  
+    \item \textit{Separation of Concerns}: MVC enforces a clear separation of concerns, simplifying development, making it easier to maintain, extend, and modify individual components without affecting the entire system.
+  
+    \item \textit{Reusability and Extensibility}: The modular structure of MVC promotes code reusability, allowing components to be reused in different parts of the application or in future projects.
+  
+    \item \textit{Testability}: MVC enhances the testability of our application, allowing for independent testing of each component, ensuring that each part of the application functions correctly.
+  
+    \item \textit{Improved Collaboration}: MVC's division of responsibilities facilitates collaboration among development teams, fostering efficiency and allowing specialists to contribute to the project in their areas of expertise.
+\end{itemize}
+
+\subsubsection*{Event-Driven Architecture (EDA)}
+
+Beside the fact that the adoption of Event-Driven Architecture (EDA) harnesses the power of dynamic interactions, real-time responsiveness, and scalable communication, its use is specifically driven by the desire to generate asynchronous notifications. Through the Notification Consumer, Tournament Publisher, and Battle Publisher, we effectively mitigate the overhead of requesting additional computation for each action involving Notification, Tournament, and Battle Managers. 
+Other advantages of the architecture are:
+
+\begin{itemize}
+    \item \textit{Decoupled Components}: EDA promotes decoupling of components by relying on events as the means of communication. This results in a more flexible architecture, allowing for independent development, testing, and deployment.
+  
+    \item \textit{Scalability}: EDA facilitates scalability by enabling the distribution of components and services. This asynchronous and distributed nature supports the scalability of our application, allowing it to handle increased loads and adapt to varying workloads.
+  
+    \item \textit{Real-Time Responsiveness}: Events in an Event-Driven Architecture are often handled in real-time, ensuring that our application can respond promptly to changes, updates, or user interactions.
+  
+    \item \textit{Loose Coupling and Flexibility}: The decoupled nature of event-driven systems results in a more flexible architecture. Components are not directly dependent on each other, allowing for independent development, testing, and deployment.
+\end{itemize}
+
+
+\subsubsection{Database Management}
+
+In our high-level view, managing the database involves a shared database partitioned to divide data among various microservices. Each partition is replicated to guarantee reliability and availability. Protocols such as multi-Paxos or Raft, which manage replicated state machines, will be considered implementation choices; 2PC could be used across partitions, assuming the reachability of the majority of nodes, to ensure the atomicity and consistency of transactions. Concurrency management will be an implementation choice.
+
