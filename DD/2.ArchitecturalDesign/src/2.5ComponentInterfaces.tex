@@ -1,1 +1,310 @@
 \subsection{Component Interfaces}
+This section illustrates a comprehensive list of interfaces offered by the various components of the \app system, along with the specifications for their internal methods. A description is provided for each method in order to understand what it is useful for.
+
+The following tables are divided by microservice.
+
+\renewcommand{\arraystretch}{2.3}
+\setlength{\tabcolsep}{0.7cm}
+
+\vspace{0.5cm}
+
+
+% GATEWAY MICROSERVICE -------------------------------------------------------
+\begin{large}\textbf{1 - Gateway Microservice}\end{large}\\
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+\caption*{DiscoveryServiceI}\\ 
+
+\hline
+\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+\hline \endhead
+
+URL & findService(String serviceName) & This method is offered to allow all microservices to locate each other and therefore collaborate.\\
+
+void & registerService(String serviceName, URL location) & This method allows a newly-created service to register itself on the list of available services, in order to be located by the other microservices if needed.\\
+
+ List\textless URL\textgreater & allServices() & This method returns a list of all the available services at the moment in the system.\\
+ \hline
+
+\end{longtable}
+
+
+\pagebreak
+
+
+
+% USER MANAGEMENT MICROSERVICE ---------------------------------------------
+\begin{large}{\textbf{2 - User Management Microservice}}\end{large}\\
+The following interfaces are RESTful APIs offered by the Manager components that handle Students and Educators' data.
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{StudentAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	List\textless Student\textgreater & getAllStudents() & This method is offered to retrieve a list of all the students with an account on CodeKataBattle.\\
+	
+	void & addStudent(username) & Adds a new student the first time it accesses CodeKataBattle. \\
+	
+	void & removeStudent(username) & Removes the student profile with the specified username from the system.\\
+	
+	List\textless String\textgreater & getStudentInfo(username) & Retrieves all the information related to a specific student, like list of badges, statistics...\\
+	
+	List\textless String\textgreater & getBadges(username) & Returns the list of badges won by the student with the specified username.\\
+	
+	List\textless File\textgreater & getStudentProfileUI(username) & This method builds and returns the files that are needed to offer the user interface for a student's profile.\\
+	\hline
+	
+\end{longtable}
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{EducatorAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	List\textless Educator\textgreater & getAllEducators() & This method is offered to retrieve a list of all the educators with an account on CodeKataBattle.\\
+	
+	void & addEducator(username) & Adds a new educator the first time it accesses CodeKataBattle. \\
+	
+	void & removeEducator(username) & Removes the educator profile with the specified username from the system.\\
+	
+	List\textless File\textgreater & getEducatorProfileUI(username) & This method builds and returns the files that are needed to offer the user interface for an educator's profile.\\
+	\hline
+	
+\end{longtable}
+
+\pagebreak
+
+% TOURNAMENT MICROSERVICE ------------------------------------------
+	\begin{large}{\textbf{3 - Tournament Microservice}}\end{large}\\
+	The following interface is a RESTful APIs offered by the Manager component that handles Tournaments' data.
+	
+	\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+		\caption*{TournamentAPI}\\ 
+		
+		\hline
+		\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+		\hline \endhead
+		
+		void & addTournament(tournamentName, tournamentInfo) & Adds a new tournament to the ones available on the \app platform. Notice that tournamentInfo is a complex entity that comprises a set of mandatory elements for the creation of a new tournament. Tournament names are the identifiers for battles and have to be unique in \app.\\
+		
+		void & closeTournament (tournamentName) & Closes the tournament with the tournamentName specified. The tournament ranking is published and badges assigned.\\
+		
+		List\textless Tournament\textgreater & getAllTournaments() & Retrieves a list of all the tournaments available on the \app system in the moment the method is called.\\
+		
+		void & grantPermissions (tournamentName, username) & This method allows to grant permissions to publish battles to an educator with the specified username in the tournament identified by the tournamentId.\\
+		
+		void & addStudent(tournamentName, username) & Adds the student with the specified username to the list of students that are subscribed to the tournament.\\
+		
+		List\textless Student\textgreater & getStudents(tournamentName) & Retrieves a list of all the students that are subscribed to the tournament with the tournamentName specified.\\
+		
+		List\textless Educator\textgreater & getEducators(tournamentName) & Retrieves a list of all the educators that have permissions to publish battles inside the tournament with the tournamentName specified.\\
+		
+		String & getCreator(tournamentName) & Returns the username of the Educator that created the tournament with the tournamentName specified.\\
+		
+		List\textless Badge\textgreater & getBadges(tournamentName) & Retrieves a list of all the badges that have been defined for the tournament with the tournamentName specified.\\
+		
+		List\textless Float\textgreater & getRanking(tournamentName) & Retrieves the ranking of all students subscribed to a specific tournament with the tournamentName specified.\\
+		
+		void & updateRanking(tournamentName) & Requires to update the ranking of a tournament with new data that is now available. \\
+		
+		List\textless Battle\textgreater & getBattles(tournamentName) & Retrieves a list of all the battles that have been published in the tournament with the tournamentName specified.\\
+		
+		List\textless File\textgreater & getTournamentCreationForm() & Returns all the necessary material to display to an educator the user interface to insert data for a new tournament to be created.\\
+			
+		List\textless File\textgreater & getTournamentHomePage(tournamentName) & Returns all the necessary material to display to an user of \app the home page of a tournament, with all the information related to it.\\
+		
+		\hline
+		
+	\end{longtable}
+
+
+	\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{Tournament - EventPublisherI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	void & publishEvent(Event)  & Publishes an event on the event bus.\\
+
+	\hline
+	
+\end{longtable}
+
+
+	\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{Tournament - EventConsumerI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	Event & consumeEvent()  & Reads an event from the event bus.\\
+	
+	List\textless Event\textgreater & consumeAllEvents() & Reads all the events published on the event bus.\\
+	
+	\hline
+	
+\end{longtable}
+
+\pagebreak
+
+
+
+%BATTLE MICROSERVICE ---------------------------------------------------
+\begin{large}{\textbf{4 - Battle Microservice}}\end{large}\\
+The following interface is a RESTful APIs offered by the Manager component that handles Battles' data.
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{BattleAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	void & addBattle(battleName, tournamentName, battleInfo) & Adds a new battle to the tournament specified with tournamentName. Notice that battleInfo is a complex entity that comprises a set of mandatory elements for the creation of a new battle. Battle names are the identifiers for battles and have to be unique in \app.\\
+	
+	void & terminateBattle(battleName) & Terminates the battle named battleName; the final ranking is drawn and published.\\
+	
+	void & addTeam(battleName, teamName, List\textless Student\textgreater) & Adds a new team to the battle called battleName, composed of the students specified in the second parameter of the function. In case of a single student, the teamName is the username of the solo player by default.\\
+	
+	String & getCreator(battleName) & Returns the username of the educator that created the battle named battleName.\\
+	
+	List\textless Team\textgreater & getAllTeams(battleName) & Retrieves a list of all the teams that participate in the battle named battleName.\\
+	
+	List\textless Student\textgreater & getAllStudents(battleName) & Retrieves a list of all the students participating in the battle named battleName.\\
+	
+	List\textless Student\textgreater & getStudentsInTeam(battleName, teamName) & Retrieves a list of usernames of the students that are part of a specific team named teamName inside the battle battleName.\\
+	
+	List\textless Float\textgreater & getRanking(battleName) & Retrieves the ranking of the battle named battleName.\\
+	
+	void & updateScore(battleName, teamName, newScore) & Updates the maximum score assigned to a specific team and the ranking is changed accordingly.\\
+	
+	Float & getTeamScore(battleName, teamName) & Retrieves the maximum score assigned to a team in a battle so far.\\
+	
+	Date & getCreationTime(battleName) & Returns the exact date and time when the battle called battleName was created (useful for computing scores).\\
+	
+	List\textless File\textgreater & getBattleCreationForm() & Returns all the necessary material to display to an educator the user interface to insert data for a new battle to be created.\\
+	
+	List\textless File\textgreater & getTournamentHomePage(battleName) & Returns all the necessary material to display to an user the home page of the battle named battleName.\\
+	
+	\hline
+	
+\end{longtable}
+
+
+
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+\caption*{Battle - EventPublisherI}\\ 
+
+\hline
+\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+\hline \endhead
+
+void & publishEvent(Event)  & Publishes an event on the event bus.\\
+
+\hline
+
+\end{longtable}
+
+\pagebreak
+
+
+% NOTIFICATION MICROSERVICE ----------------------------------------
+\begin{large}{\textbf{5 - Notification Microservice}}\end{large}\\
+The following interface is a RESTful APIs offered by the Manager component that handles Notification data.
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{NotificationAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	List\textless Notification\textgreater & getNotifications(username) & Retrieves all the notifications that are stored for the user with the specified username.\\
+	
+	List\textless File\textgreater & getNotificationUI() & Returns all the necessary material to display to a student the user interface to see the notifications that have arrived to him/her on CodeKataBattle.\\
+	
+	\hline
+	
+\end{longtable}
+
+
+
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{Notification - EventConsumerI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	Event & consumeEvent()  & Reads an event from the event bus.\\
+	
+	List\textless Event\textgreater & consumeAllEvents() & Reads all the events published on the event bus.\\
+	
+	\hline
+	
+\end{longtable}
+
+
+\pagebreak
+
+% GITHUB INTEGRATION MICROSERVICE ----------------------------------------
+\begin{large}{\textbf{6 - GitHub Integration Microservice}}\end{large}\\
+The following interface is a RESTful APIs offered by the Manager component that handles GitHub integration with CodeKataBattle.
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{GitHubIntegrationAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	URL & getRepositoryLink(battleName) & Retrieves the link to the remote GitHub repository created by \app for the battle named battleName.\\
+	
+	URL & createRepository(battleName) & Creates a new GitHub repository for the battle named battleName and returns its link.\\
+	
+	void & removeRepository(battleName) & Deletes the GitHub repository for the battle named battleName, when the battle is closed.\\
+	
+	void & newCommit(battleName, username) & This method is offered to receive notifications from GitHub when a new commit is performed by a student in a repository that stores solutions for a battle named battleName.\\
+	
+	List\textless File\textgreater & pullSources(battleName, username) &  Downloads the latest source code files for the user specified by username in the context of the battle named battleName.\\
+	
+	\hline
+	
+\end{longtable}
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{GitHub Integration - EventConsumerI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	Event & consumeEvent()  & Reads an event from the event bus.\\
+	
+	List\textless Event\textgreater & consumeAllEvents() & Reads all the events published on the event bus.\\
+	
+	\hline
+	
+\end{longtable}
+
+\vspace{1cm}
+
+\begin{large}{\textbf{7 - Score Computation Microservice}}\end{large}\\
+
+\begin{longtable}{|p{2.5cm} p{6.5cm} p{4.5cm}|}
+	\caption*{CalculatorAPI}\\ 
+	
+	\hline
+	\textbf{Return Type} & \textbf{Signature} & \textbf{Description}\\
+	\hline \endhead
+	
+	Float & calculateScore(sourceCode, buildScripts, testCases, timePassed, evaluationCriteria) & This method implements the main functionality of the microservice, which is computing the score of a specific solution submitted by a student and return it.\\
+	
+	\hline
+	
+\end{longtable}

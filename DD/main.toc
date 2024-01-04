@@ -12,23 +12,25 @@
 \contentsline {subsubsection}{\numberline {2.1.1}High Level View}{13}{}%
 \contentsline {subsection}{\numberline {2.2}Component View}{16}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}RESTful APIs component diagram}{16}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Service Discovery component diagram}{18}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}Event-driven pattern components}{19}{}%
-\contentsline {subsubsection}{\numberline {2.2.4}Data layer access component diagram}{21}{}%
-\contentsline {subsubsection}{\numberline {2.2.5}User interfaces component diagram}{22}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Service Discovery component diagram}{19}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}Event-driven pattern components}{20}{}%
+\contentsline {subsubsection}{\numberline {2.2.4}Data layer access component diagram}{22}{}%
+\contentsline {subsubsection}{\numberline {2.2.5}User interfaces component diagram}{23}{}%
 \contentsline {subsection}{\numberline {2.3}Deployment View}{24}{}%
-\contentsline {subsection}{\numberline {2.4}Run Time Views}{24}{}%
-\contentsline {subsection}{\numberline {2.5}Component Interfaces}{24}{}%
-\contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{24}{}%
-\contentsline {subsection}{\numberline {2.7}Other Design Decisions}{24}{}%
-\contentsline {section}{\numberline {3}User Interface Design}{25}{}%
-\contentsline {section}{\numberline {4}Requirements Traceability}{26}{}%
-\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{27}{}%
-\contentsline {subsection}{\numberline {5.1}Overview}{27}{}%
-\contentsline {subsection}{\numberline {5.2}Implementation Plan}{27}{}%
-\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{27}{}%
-\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{27}{}%
-\contentsline {subsection}{\numberline {5.3}System Testing}{27}{}%
-\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{27}{}%
-\contentsline {section}{\numberline {6}Effort spent}{28}{}%
-\contentsline {section}{\numberline {7}References}{28}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}High-level Deployment View}{24}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Detailed Deployment View}{25}{}%
+\contentsline {subsection}{\numberline {2.4}Run Time Views}{27}{}%
+\contentsline {subsection}{\numberline {2.5}Component Interfaces}{37}{}%
+\contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{50}{}%
+\contentsline {subsection}{\numberline {2.7}Other Design Decisions}{50}{}%
+\contentsline {section}{\numberline {3}User Interface Design}{51}{}%
+\contentsline {section}{\numberline {4}Requirements Traceability}{52}{}%
+\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{53}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{53}{}%
+\contentsline {subsection}{\numberline {5.2}Implementation Plan}{53}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{53}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{53}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{53}{}%
+\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{53}{}%
+\contentsline {section}{\numberline {6}Effort spent}{54}{}%
+\contentsline {section}{\numberline {7}References}{54}{}%

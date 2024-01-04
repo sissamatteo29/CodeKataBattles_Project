@@ -32,6 +32,28 @@ For instance:
 
 This diagram has to be read and interpreted also accounting for the event-driven paradigm that is adopted in the project. Some of the interactions and flows of events inside the system happen in an asynchronous manner with an event-driven approach that is further described in the following views. That's why some interactions, that might seem missing here are actually handled in an asynchronous way to increase the performance of the overall system.
 
+The last important point to make about this diagram is related to the "Manager" components inside the various microservices. These components internally implement a Model-View-Controller pattern to provide their services. The following representation shows a component diagram that only focuses on the internals of the "Manager" component for a generic microservice:
+
+\vspace{1cm}
+\begin{center}
+\includegraphics[width=0.6\linewidth]{1.1Component_MVC_Pattern}
+\end{center}
+
+The Model component is responsible for organizing and managing data. Each microservice in the \app system is specific for a portion of the data domain. For instance, the Tournament Microservice only focuses on managing and providing information on tournaments. Therefore, each Model component inside the Manager components take care of maintaining consistent data with the DBMS, accessing the DBMS when needed and so on.
+
+The View is the component offering the user interface. Since different microservices focus on different types of information in the \app ecosystem, the several user interfaces are spread across the microservices and managed through the View components.
+
+The Controller is the "bridge" between the Model and the View. This component is responsible for:
+\begin{itemize}
+	\item Receiving the requests from the View component when the user interacts with the user interface. 
+	\item Performing the correct computation based on those requests.
+	\item Manipulating data through the Model, propagating the users' requests to the data layer.
+	\item Updating the View if the computation resulted in some changes of the user interface.
+\end{itemize}
+
+In the following of the document, the Manager component will be used in a more general sense to capture the behavior and functionality of all this internal architecture.
+
+
 \subsubsection{Service Discovery component diagram}
 
 \begin{minipage}{\linewidth}
@@ -111,10 +133,11 @@ The Notification Microservice is the one always listening to upcoming events in 
 	
 	This diagram tries to illustrate the two points of the above list, by representing a View component inside each microservice that is responsible for building and offering specific user interfaces when required. 
 	The Gateway microservice intercepts the user's requests and when a new UI is needed, it contacts the correct microservice that will supply it.
+	It has to be mentioned the fact that this UML diagram is not a standard one, in the sense that the interfaces exposed by the components in this view are not sets of methods but UIs. Nevertheless it is intended as a beneficial illustration to show part of the MVC pattern (with the View components inside the microservices) and the distribution of UIs in the system.
 	
-	
-	\includegraphics[width=\linewidth]{5Component_ViewsUI}
-	
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{5Component_ViewsUI}
+	\end{center}
 	
 	
 \end{minipage}
