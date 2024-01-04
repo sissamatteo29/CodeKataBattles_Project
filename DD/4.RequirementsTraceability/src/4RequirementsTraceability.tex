@@ -1,0 +1,96 @@
+
+In the following, a traceability matrix is reported to facilitate the mapping between the requirements, as presented in the Requirements Analysis and Specification Document (RASD), and the components of the \app system that are involved in meeting those requirements. 
+
+The various components that are mentioned here can be found in section 2.2 Component View of this Design Document, with a more detailed explanation of their role.
+
+\renewcommand{\arraystretch}{2.3}
+\setlength{\tabcolsep}{0.6cm}
+
+\begin{longtable}{p{1cm} p{5.5cm} p{6cm}}
+	
+	\textbf{ReqID} & \textbf{Requirement Description} & \textbf{Components Involved} \\ 
+	\hline \endhead
+	
+	R1.1 & The system allows students to log in the platform using their GitHub account. & Gateway Microservice (Dispatcher). \newline User Management Microservice (Student Manager).\\
+	
+	R1.2 & The system notifies all students on the platform every time a new tournament is 
+	created. & 
+ 	Notification Microservice (Notification Manager, Notification Event Consumer). \newline  Tournament Microservice (Tournament Manager, Tournament Event Publisher).\\
+ 	
+ 	R1.3 & When the student requires it, the system shows the list of tournaments available on the	platform for subscription (whose registration deadline hasn’t passed yet). & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R1.4 & When the student requires it, the system shows the list of tournaments the student is subscribed to. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R1.5 & The system allows students to subscribe to tournaments, by the end of the registration
+ 	deadlines set for the tournaments. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R1.6 & The system notifies all students subscribed to a tournament every time a new battle within that tournament is published. & Notification Microservice (Notification Manager, Notification Event Consumer). \newline Battle Microservice (Battle Event Publisher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R1.7 & The system allows students subscribed to a tournament to join battle(s) within that tournament, by the end of the registration deadline set for the battle(s). & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R1.8 & The system allows students subscribed to a tournament to join a battle of the tournament either on their own or creating teams with other students. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R1.9.1 & The system creates a new GitHub repository dedicated to a battle right after the
+ 	registration deadline for that battle passes. & Battle Microservice (Battle Manager). \newline GitHub Integration Microservice (GitHub Manager).\\
+ 	
+ 	R1.9.2 & The system sends the link of the GitHub repository dedicated to a battle to all the students subscribed to that battle. & Notification Microservice (Notification Manager, Notification Event Consumer). \newline GitHub Integration Microservice (GitHub Manager). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R1.9.3 & The system accepts notifications from GitHub in order to know when a new commit
+ 	is performed by a student in any GitHub repository forked by the one created by the system
+ 	itself.& GitHub Integration Microservice (GitHub Manager).\\
+ 	
+ 	R1.9.4 & The system pulls from the GitHub repositories of ongoing battles the new students’
+ 	code solutions, every time it receives a notification from GitHub of a new commit in those
+ 	repositories. & GitHub Integration Microservice (GitHub Manager).\\
+ 	
+ 	R1.10 & The system calculates and then publishes the new score of a team’s solution every time it	receives a notification from GitHub of a new commit performed by a member of the team. & GitHub Integration Microservice (GitHub Manager). \newline Score Computation Microservice (Score Calculator). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R1.11 & The system notifies all students participating in a battle when the final ranking of teams is	available on the platform. & Battle Microservice (Battle Manager, Battle Event Publisher). \newline Notification Microservice (Notification Manager, Notification Event Consumer).\\
+ 	
+ 	R1.12 & The system notifies all students subscribed to a tournament when the tournament is closed by the educator who created it. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager, Tournament Event Publisher). \newline Notification Microservice (Notification Manager, Notification Event Consumer).\\
+ 	
+ 	R2.1 & The system allows educators to log in the platform using their GitHub account. & Gateway Microservice (Dispatcher). \newline User Management Microservice (Educator Manager).\\
+ 	
+ 	R2.2 & The system allows educators to create new tournaments. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager, Tournament Event Publisher).\\
+ 	
+ 	R2.3 & The system allows the educator that created a tournament to grant the permission of publishing battles within his/her tournament to other educators on the platform. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager, Tournament Event Publisher).\\
+ 	
+ 	R2.4 & The system allows educators to create new battle(s) in the tournaments they have the permissions to do so. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager, Battle Event Publisher).\\
+ 	
+ 	R2.5 & The system doesn’t take into account any new code solution for a battle after the submission deadline of that battle. & Battle Microservice (Battle Manager). \newline GitHub Integration Microservice (GitHub Manager).\\
+ 	
+ 	R2.6 & After the submission deadline of a battle and only if a consolidation stage had been requested	by the educator at battle creation time, the system sets a time frame for the educator that created the battle to allow him/her to assign personal scores to the students’ code solutions. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R2.7 & The system takes into account the personal scores assigned by the educator during the	consolidation stage of a battle only if the educator assigned a score to all teams within the imposed time frame. & Battle Microservice (Battle Manager).\\
+ 	
+ 	R2.8 & At the end of a battle and after the consolidation stage (if requested), the system automatically calculates and publishes the final rank of all teams that participated in that battle. & Battle Microservice (Battle Manager).\\
+ 	
+ 	R2.9 & When a tournament is closed, the system automatically publishes the rank of all students that participated in the tournament. & Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R3.1 & The system allows students subscribed to the same tournament to invite each other in order to join battles together as a team, respecting the minimum and maximum number of students permitted for a team in the battle. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager). \newline Battle Microservice (Battle Manager).\newline Notification Microservice (Notification Manager).\\
+ 	
+ 	R3.2 & The system allows students to accept or reject invitations from other student asking to join a battle together as a team. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\newline Notification Microservice (Notification Manager).\\
+ 	
+ 	R3.3 & The system allows students to set the name of their team when they join a battle with other students. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R3.4 & The system calculates and then publishes the score assigned to a new code solution of a team in a battle, every time GitHub notifies the platform of a new commit performed by a member	of such team. & GitHub Integration Microservice (GitHub Manager). \newline Score Computation Microservice (Score Calculator).\newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R3.5 & The system constantly keeps updated the total ranking of teams for a battle, which evolves	based on the new code solutions that are uploaded by students on the GitHub repository. & GitHub Integration Microservice (GitHub Manager). \newline Score Computation Microservice (Score Calculator).\newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R3.6 & The system calculates and publishes the final ranking of teams when a battle ends. & Battle Microservice (Battle Manager).\\
+ 	
+ 	R3.7 & The system allows only the educators and students involved in a battle to see the partial or 	final ranking of teams for that battle. & Gateway Microservice (Dispatcher). \newline Battle Microservice (Battle Manager).\\
+ 	
+ 	R3.8 & The system automatically calculates and keeps updated the total ranking of students subscribed to a tournament, based on the scores each student received in the battles he participated in. & Tournament Microservice (Tournament Manager, Tournament Event Consumer).\newline Battle Microservice (Battle Manager, Battle Event Publisher).\\
+ 	
+ 	R3.9 & The system allows all users on the platform to see the partial or final rankings of tournaments. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R3.10 & The system allows educators to define customary badges (rewards) for the students participating in their tournaments, at tournament creation time. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\\
+ 	
+ 	R3.11 & The system assigns badges (rewards) to students that participated in a tournament, when the tournament is closed by the educator that created it. & Gateway Microservice (Dispatcher). \newline Tournament Microservice (Tournament Manager).\newline User Management Microservice (Student Manager).\\
+
+	R3.12 & The system allows all users on the platform to search for the personal profile of a student and see the corresponding account. &  Gateway Microservice (Dispatcher). \newline  User Management Microservice (Student Manager).\\
+	
+	R3.13 & The system allows all users on the platform to see the list of badges owned by a student	for the tournaments s/he participated in. & Gateway Microservice (Dispatcher). \newline  User Management Microservice (Student Manager).\\
+ 	
+\end{longtable}

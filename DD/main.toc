@@ -23,15 +23,14 @@
 \contentsline {subsection}{\numberline {2.5}Component Interfaces}{37}{}%
 \contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{50}{}%
 \contentsline {subsubsection}{\numberline {2.6.1}Database Management}{51}{}%
-\contentsline {subsection}{\numberline {2.7}Other Design Decisions}{52}{}%
 \contentsline {section}{\numberline {3}User Interface Design}{53}{}%
 \contentsline {section}{\numberline {4}Requirements Traceability}{54}{}%
-\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{55}{}%
-\contentsline {subsection}{\numberline {5.1}Overview}{55}{}%
-\contentsline {subsection}{\numberline {5.2}Implementation Plan}{55}{}%
-\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{55}{}%
-\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{55}{}%
-\contentsline {subsection}{\numberline {5.3}System Testing}{55}{}%
-\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{55}{}%
-\contentsline {section}{\numberline {6}Effort spent}{56}{}%
-\contentsline {section}{\numberline {7}References}{56}{}%
+\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{60}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{60}{}%
+\contentsline {subsection}{\numberline {5.2}Implementation Plan}{60}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{60}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{60}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{60}{}%
+\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{60}{}%
+\contentsline {section}{\numberline {6}Effort spent}{61}{}%
+\contentsline {section}{\numberline {7}References}{61}{}%
