@@ -85,3 +85,47 @@ When a tournament concludes, the determination is made by the Educator, who init
 The conclusion of a battle occurs upon reaching its specified deadline, and the mechanism for monitoring this may involve a polling system, depending on the chosen development framework. Once the deadline is reached, the system checks whether a manual evaluation is required, as determined during the battle's creation. Subsequently, the parameters of the battle are updated by interacting with the DBMS. Following this update, an event is generated, mirroring the previously described process, and disseminated accordingly.
 
 \newpage
+
+\subsubsection*{Subscribe To Tournament}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{2.ArchitecturalDesign/res/subscribeToTournament.png}
+    \caption{Runtime view when a student subscribes to a tournament}
+    \label{fig:subsTournament}
+\end{figure}
+
+The client initiates a request for a list of tournaments. This request is transmitted to the gateway component, which acts as an intermediary.
+The gateway, upon receiving the request, forwards it to the Tournament Manager microservice. The Tournament Manager retrieves the relevant information from the database and subsequently transmits the data back to the gateway.
+The gateway, in turn, relays the tournament list to the client.\\
+Subsequently, the client initiates a request for specific information about a particular tournament. This request traverses the gateway before reaching the Tournament Manager microservice. The Tournament Manager retrieves the requisite details from the Database Management System (DBMS) and transmits the information back.\\
+Lastly, the client issues a subscription request. This request is routed through the gateway to the Tournament Manager. The Tournament Manager processes the request by writing the new subscription details to the DBMS, thereby completing the subscription process. After the processs is completed a confirmation message is trasmitted back.
+
+\newpage
+
+\subsubsection*{Subscribe To Battle}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/subscribeToBattle.png}
+    \caption{Runtime view when a student subscribes to a battle}
+    \label{fig:subsBattle}
+\end{figure}
+
+The sequence begins with the client initiating a request for the list of tournaments. This request is directed to the gateway component.
+The gateway, acting as an intermediary, forwards the tournament list request to the Tournament Manager microservice. The Tournament Manager retrieves the pertinent information from the Database Management System (DBMS) and transmits it back to the gateway.
+Subsequently, the gateway relays the tournament list to the client.\\
+Following this, the client makes a request for the list of battles within a specific tournament, specifically those currently open for subscription. This request is initially routed through the gateway before being further directed to the Battle Manager microservice.
+The Battle Manager, upon receiving the request, retrieves the relevant information from the database and sends the list of open battles back through the gateway to the client.\\
+Subsequently, the client sends a subscription request for a specific battle. The subscription request first traverses the gateway and then reaches the Battle Microservice.
+Within the Battle Microservice, the system checks the database to verify if the student is already subscribed to the specified battle. If the student is already subscribed, an error message is generated and transmitted back to the client.
+If the student is not already subscribed, the Battle Manager writes the new subscription details to the database and generates a confirmation of the subscription.
+The confirmation of the subscription is then sent back through the gateway to the client.
+
+
+
+
+
+
+
+
+\newpage
+
