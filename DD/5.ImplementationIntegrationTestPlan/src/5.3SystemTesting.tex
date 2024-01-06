@@ -1,2 +1,17 @@
+
 \subsection{System Testing}
+
+System testing is a critical phase where the complete integrated system is put to the test. The testing environment should closely mirror the actual production setup to ensure a complete evaluation of the software's final version. To increase the chances of a successful initial software release, we perform both functional testing and non-functional one (performance, load and stress testing). 
+
+Functional testing checks if the software meets the requirements outlined in the CKB's Requirements Analysis and Specification Document (RASD), as described, for example, in the use cases: after implementing the software, it's crucial to confirm that these requirements have been met.
+
+Performance testing includes non-functional tests like assessing response time, throughput, and identifying any architectural issues; the goal is to determine if adjustments are needed in the architecture of the Document Design (DD) to meet the software's requirements. 
+
+Load testing, a subset of performance testing, involves gradually increasing the workload or sustaining loading to ensure that the system can handle the expected number of users. 
+
+Stress testing focuses on the system capacity of recovery after a failure, emphasizing availability over complete reliability, as requested for the software.
+
+For test case generation in the CKB system, we use both manual and automatic methods. Manual testing helps identify specific situations, while automatic testing ensures a comprehensive assessment of various scenarios. To cover the entire system, automated testing employs either concolic execution, and fuzz testing, and search-based strategy.
+
+It's essential to note that simpler tests, like those outlined as asserts in the Alloy model of the CKB system in the RASD, serve as a starting point for system testing.\
 
