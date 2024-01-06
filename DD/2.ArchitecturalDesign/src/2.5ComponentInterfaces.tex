@@ -182,7 +182,9 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	List\textless Student\textgreater & getStudents(battleName) & Retrieves a list of all the students participating in the battle named battleName.\\
 	
 	List\textless Student\textgreater & getStudentsInTeam(battleName, teamName) & Retrieves a list of usernames of the students that are part of a specific team named teamName inside the battle battleName.\\
-	
+
+	void & createRepository(battleName) & Send the request to the GitHub Manager for creating a new repository
+ 	
 	List\textless Float\textgreater & getRanking(battleName) & Retrieves the ranking of the battle named battleName.\\
 	
 	void & updateScore(battleName, teamName, newScore) & Updates the maximum score assigned to a specific team and the ranking is changed accordingly.\\
