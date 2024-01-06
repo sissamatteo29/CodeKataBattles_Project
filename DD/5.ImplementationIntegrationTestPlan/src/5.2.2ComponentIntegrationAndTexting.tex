@@ -1,11 +1,13 @@
 \subsubsection{Components Integration and Testing}
 
+
 In the following section, the order in which the implementation and testing plan are described totally aligns with the order of features presented in the previous chapter.
-The aim of this implementation and test plan is to build the \app system in an incremental way, by adding a new feature in every cycle of development, and being able to show the improvements to stakeholders to seek validation.
-
-The main events occurring in the system and the interactions between the various microservices are reported here, classified based on the features presented in the previous section. The purpose of these descriptions is to highlight the particular functionalities that have to be implemented in each component of \app to provide the overall feature and test it, so to detail which parts of the application have to be improved or ignored in each stage of the development.
-
+The aim of this implementation and test plan is to build the \app system in an incremental way, by adding a new feature in every cycle of the development process, and being able to show the improvements to stakeholders to seek validation.\\
+As all the functionalities related to a specific feature have been implemented, integration testing will be performed on those specific components of the \app platform that collaborate to provide the new feature. In this way, no additional modification is introduced until the system is robust and fully tested on the already implemented services.\\
+In the following, the main events occurring in the system and the interactions between the various microservices are reported here, classified based on the features presented in the previous section. The purpose of these descriptions is to highlight the particular functionalities that have to be implemented in each component of \app to provide the overall feature and test it, so to detail which parts of the application have to be improved or ignored in each stage of the development.\\
 It is also important to mention the fact that since all communications from the users to the \app platform pass through the Gateway Microservice, this will almost always be involved in the implementation and integration testing of the below features.
+
+\vspace{0.7cm}
 
 \textbf{Login phase, implementation and testing}
 
@@ -23,6 +25,8 @@ Here's a schematic representation showing the components involved in this first 
 It has to be noted that inside the Gateway Microservice, only the essential logic to drive the login is going to be implemented, as well as the User Management Microservice will be provided with the logic to handle users' data and build the users' profile interfaces.
 Another important point is related to the Discovery Service offered by the Gatway Micrsoervice, which is included as a component to be implemented in this section because all the other features rely on it for the location of microservices.
 
+
+\vspace{0.7cm}
 
 \textbf{Creation of a new tournament, implementation and testing}
 
@@ -48,7 +52,9 @@ Here's an illustration of the involved components for this feature.
 \end{center}
 
 
-\textbf{3. Creation of a new battle, implementation and testing}
+\vspace{0.7cm}
+
+\textbf{Creation of a new battle, implementation and testing}
 
 In order to create a new battle, the Battle Microservice has to provide the battle creation form (user interface) through the Gateway. The educator can use the battle creation form to feed the system with all the mandatory data necessary to correctly generate a new battle.
 
@@ -75,6 +81,8 @@ Here is an illustration of the components involved in the development of this fe
 	\includegraphics[width=0.6\linewidth, page=1]{3ImplementationPlan_BattleCreation}
 \end{center}
 
+\vspace{0.7cm}
+
 \textbf{Pushing Code on GitHub, implementation and testing}
 
 When a student pushes a new code solution on GitHub, many components of the \app platform are involved in a cohesive response to this event.
@@ -88,6 +96,9 @@ Here's an illustration of the components involved in this specific feature:
 \begin{center}
 	\includegraphics[width=0.6\linewidth, page=1]{4ImplementationPlan_PushSolution}
 \end{center}
+
+
+\vspace{0.7cm}
 
 \textbf{End of a battle, implementation and testing}
 
@@ -103,6 +114,9 @@ Here's an illustration of the components involved and left out in this feature:
 \begin{center}
 	\includegraphics[width=0.6\linewidth, page=1]{5ImplementationPlan_EndBattle}
 \end{center}
+
+
+\vspace{0.7cm}
 
 \textbf{End of a tournament, implementation and testing}
 

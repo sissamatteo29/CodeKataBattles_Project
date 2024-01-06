@@ -51,7 +51,8 @@ Once the educator fills in all the form, s/he can confirm with the button in the
 \begin{minipage}{\linewidth}
 
 \subsection{Tournament home page}
-Whenever a student or an educator search for a tournament and clicks on it, the tournament home page pops up. This is how the page is designed in order to provide all the relevant information related to a tournament:
+Whenever a student or an educator searches for a tournament and clicks on it, the tournament home page pops up. 
+This is how the page is designed in order to provide all the relevant information related to a tournament:
 
 \begin{center}
 	\includegraphics[width=0.8\linewidth,page=6]{MockupUI}
@@ -59,10 +60,12 @@ Whenever a student or an educator search for a tournament and clicks on it, the 
 
 \end{minipage}
 
-In the top right corner of the page, there is a button that allows the user to join the tournament. As a student clicks on it, the request is dispatched to the Tournament Microservice that will take care of verifying if the registration deadline for the tournament hasn't passed yet and consequently add the student to the set of students subscribed to the tournament.
+It is important to mention the fact that this interface is flexible based on the type of user that is accessing the tournament. The view provided here is the most general one. In case an educator is accessing the tournament, the "Join Tournament" button wouldn't be there, as well as the "My Battles" section. In the same way, if a student already joined a tournament and wants to open the tournament home page, the "Join Tournament" button won't be present on the screen. These are details that will be handled by the components of \app in charge of building the correct user interface.
 
-On the left, a list of the battles published within the tournament are available for students to join them and for educators to see them. 
-On the right hand side, two panels appear. Going top to bottom, the first one is a list of battles that the student joined, the second one is the tournament ranking, which displays all the students participating in the tournament as a list of names.
+As a general description of this interface, it is possible to say that in the top right corner of the page, there is a button that allows a student to join the tournament. As the student clicks on it, the request is dispatched to the Tournament Microservice that will take care of verifying if the registration deadline for the tournament hasn't passed yet and consequently add the student to the set of students subscribed to the tournament.
+
+On the left, a list of the battles published within the tournament is available for students to join them and for educators to see them. 
+On the right hand side, two panels appear. Going top to bottom, the first one is a list of battles that the student joined, the second one is the tournament ranking, which displays all the students participating in the tournament as an ordered list of names.
 
 
 \begin{minipage}{\linewidth}

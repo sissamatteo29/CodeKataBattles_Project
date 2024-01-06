@@ -40,6 +40,5 @@
 \contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{72}{}%
 \contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{73}{}%
 \contentsline {subsection}{\numberline {5.3}System Testing}{78}{}%
-\contentsline {subsection}{\numberline {5.4}Additional Specifications on testing}{78}{}%
 \contentsline {section}{\numberline {6}Effort spent}{79}{}%
 \contentsline {section}{\numberline {7}References}{79}{}%
