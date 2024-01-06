@@ -7,13 +7,10 @@ As all the functionalities related to a specific feature have been implemented, 
 In the following, the main events occurring in the system and the interactions between the various microservices are reported here, classified based on the features presented in the previous section. The purpose of these descriptions is to highlight the particular functionalities that have to be implemented in each component of \app to provide the overall feature and test it, so to detail which parts of the application have to be improved or ignored in each stage of the development.\\
 It is also important to mention the fact that since all communications from the users to the \app platform pass through the Gateway Microservice, this will almost always be involved in the implementation and integration testing of the below features.
 
-<<<<<<< HEAD
+
 \vspace{0.7cm}
 
-\textbf{Login phase, implementation and testing}
-=======
 \subsubsection*{Login phase, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 The login phase is the entry point of the application. It is primarily handled by the Gateway Microservice, which receives all incoming requests of users and redirects them to the GitHub authentication page. When GitHub verifies the user's credentials, it will send back a message to the Gateway Microservice to inform it of the successful (or unsuccessful) authentication. At that point, the Gateway Microservice sends the username of the user to the User Management Microservice, which verifies whether the user is a new one on the platform of if s/he already has an account. 
 The User Management Microservice is also responsible for retrieving all the user's data from the DBMS (if the user already had an account) and building the user interface for showing the personal profile of the user based on that data. If the user is a new one, a new profile is created.
@@ -32,14 +29,8 @@ It has to be noted that inside the Gateway Microservice, only the essential logi
 Another important point is related to the Discovery Service offered by the Gatway Micrsoervice, which is included as a component to be implemented in this section because all the other features rely on it for the location of microservices.
 \newpage
 
-<<<<<<< HEAD
 
-\vspace{0.7cm}
-
-\textbf{Creation of a new tournament, implementation and testing}
-=======
 \subsubsection*{Creation of a new tournament, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 When creating a new tournament, the Gateway Microservice is involved, as it has to intercept the educator's requests and dispatch them to the right microservice, which is in this case the Tournament Microservice. So, part of the Dispatcher component inside the Gateway Microservice has to be implemented. 
 The request for the new tournament creation is sent to the Tournament Microservice, which returns the tournament creation form (a user interface), which the Gateway shows to the user.
@@ -64,15 +55,8 @@ Here's an illustration of the involved components for this feature.
         \caption{Schematic view of the development and testing of the creation of a new tournament}
 \end{figure}
 
-<<<<<<< HEAD
-
-\vspace{0.7cm}
-
-\textbf{Creation of a new battle, implementation and testing}
-=======
 \newpage
 \subsubsection*{Creation of a new battle, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 In order to create a new battle, the Battle Microservice has to provide the battle creation form (user interface) through the Gateway. The educator can use the battle creation form to feed the system with all the mandatory data necessary to correctly generate a new battle.
 
@@ -101,14 +85,8 @@ Here is an illustration of the components involved in the development of this fe
         \caption{Schematic view of the development and testing of the creation of a new battle}
 \end{figure}
 
-<<<<<<< HEAD
-\vspace{0.7cm}
-
-\textbf{Pushing Code on GitHub, implementation and testing}
-=======
 \newpage
 \subsubsection*{Pushing Code on GitHub, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 When a student pushes a new code solution on GitHub, many components of the \app platform are involved in a cohesive response to this event.
 
@@ -121,19 +99,10 @@ Here's an illustration of the components involved in this specific feature:
 \begin{figure}[h]
         \centering
 	\includegraphics[width=0.6\linewidth, page=1]{4ImplementationPlan_PushSolution}
-<<<<<<< HEAD
-\end{center}
-
-
-\vspace{0.7cm}
-
-\textbf{End of a battle, implementation and testing}
-=======
         \caption{Schematic view of the development and testing of the interactions with GitHub pushing the code}
 \end{figure}
 \newpage
 \subsubsection*{End of a battle, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 The end of a battle first requires the consolidation stage to be handled (if any). The logic for this stage can be integrated in the Battle Microservice.
 
@@ -150,15 +119,10 @@ Here's an illustration of the components involved and left out in this feature:
         \caption{Schematic view of the development and testing of the end of a battle}
 \end{figure}
 
-<<<<<<< HEAD
 
-\vspace{0.7cm}
 
-\textbf{End of a tournament, implementation and testing}
-=======
 \newpage
 \subsubsection*{End of a tournament, implementation and testing}
->>>>>>> 4b8dca8 (Last finishes all over the document)
 
 It is only the educator who originally created the tournament to be able to close it. This request is intercepted by the Gateway Microservice, which contacts the Tournament Microservice to close the tournament. 
 In turn, the Tournament Microservice will publish an event on the event bus, so that the Notification Microservice can read it, contact again the Tournament Microservice to obtain a list of all students subscribed to the tournament and fabricate a new notification for all of them.
@@ -172,3 +136,4 @@ Here's an illustration of the components involved in this feature and of the one
 \end{figure}
 
 \newpage
+
