@@ -45,7 +45,7 @@ The following interfaces are RESTful APIs offered by the Manager components that
 	
 	List\textless Student\textgreater & getAllStudents() & This method is offered to retrieve a list of all the students with an account on CodeKataBattle.\\
 	
-	void & addStudent(username) & Adds a new student the first time it accesses CodeKataBattle. \\
+	void & newAccess(username) & Checks whether the user accessing the system is a new student and if that's the case, a new student profile is added to the DBMS. \\
 	
 	void & removeStudent(username) & Removes the student profile with the specified username from the system.\\
 	
@@ -67,7 +67,7 @@ The following interfaces are RESTful APIs offered by the Manager components that
 	
 	List\textless Educator\textgreater & getAllEducators() & This method is offered to retrieve a list of all the educators with an account on CodeKataBattle.\\
 	
-	void & addEducator(username) & Adds a new educator the first time it accesses CodeKataBattle. \\
+	void & newAccess(username) & Checks whether the user accessing the system is a new educator and if that's the case, a new educator profile is added to the DBMS. \\
 	
 	void & removeEducator(username) & Removes the educator profile with the specified username from the system.\\
 	
@@ -104,6 +104,10 @@ The following interfaces are RESTful APIs offered by the Manager components that
 		List\textless Educator\textgreater & getEducators(tournamentName) & Retrieves a list of all the educators that have permissions to publish battles inside the tournament with the tournamentName specified.\\
 		
 		String & getCreator(tournamentName) & Returns the username of the Educator that created the tournament with the tournamentName specified.\\
+		
+		List\textless Tournament\textgreater & getAllTournaments() & Returns a list of all the tournaments available on CodeKataBattle.\\
+		
+		List\textless Tournament\textgreater & getTournaments(username) & Returns a list of all the tournaments the student with the specified username is subscribed to.\\
 		
 		List\textless Badge\textgreater & getBadges(tournamentName) & Retrieves a list of all the badges that have been defined for the tournament with the tournamentName specified.\\
 		
@@ -175,7 +179,7 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	
 	List\textless Team\textgreater & getAllTeams(battleName) & Retrieves a list of all the teams that participate in the battle named battleName.\\
 	
-	List\textless Student\textgreater & getAllStudents(battleName) & Retrieves a list of all the students participating in the battle named battleName.\\
+	List\textless Student\textgreater & getStudents(battleName) & Retrieves a list of all the students participating in the battle named battleName.\\
 	
 	List\textless Student\textgreater & getStudentsInTeam(battleName, teamName) & Retrieves a list of usernames of the students that are part of a specific team named teamName inside the battle battleName.\\
 	
@@ -189,7 +193,7 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	
 	List\textless File\textgreater & getBattleCreationForm() & Returns all the necessary material to display to an educator the user interface to insert data for a new battle to be created.\\
 	
-	List\textless File\textgreater & getTournamentHomePage(battleName) & Returns all the necessary material to display to an user the home page of the battle named battleName.\\
+	List\textless File\textgreater & getBattleHomePage(battleName) & Returns all the necessary material to display to an user the home page of the battle named battleName.\\
 	
 	\hline
 	
@@ -225,6 +229,16 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	\hline \endhead
 	
 	List\textless Notification\textgreater & getNotifications(username) & Retrieves all the notifications that are stored for the user with the specified username.\\
+	
+	void & newTournament(tournamentName) & This function is called every time a new tournament is created and all the notifications for all the students subscribed to \app have to be fabricated.\\
+	
+	void & endedTournament(tournamentName) & This function is called every time a tournament is closed and all the notifications for all the students subscribed to the tournament have to be fabricated.\\
+	
+	void & newBattle(battleName) & This function is called every time a new tournament is created and all the notifications for all the students subscribed to the tournament in which the battle resides have to be fabricated.\\
+	
+	void & endedBattle(battleName) & This function is called every time a  battle terminates and all the notifications for all the students subscribed to the battle have to be fabricated.\\
+	
+	void & notifyTeamOffer(offererUser, listTeammates, bName) & This function is leveraged in order to allow the creation of teams for joining battles. When a student wants to join a battle with other students as a team, s/he selects the students s/he wants to invite and they have to receive a personal notification.\\
 	
 	List\textless File\textgreater & getNotificationUI() & Returns all the necessary material to display to a student the user interface to see the notifications that have arrived to him/her on CodeKataBattle.\\
 	

@@ -1,26 +1,26 @@
-\contentsline {section}{Contents}{2}{}%
-\contentsline {section}{\numberline {1}Introduction}{4}{}%
-\contentsline {subsection}{\numberline {1.1}Purpose}{4}{}%
-\contentsline {subsection}{\numberline {1.2}Scope}{5}{}%
-\contentsline {subsection}{\numberline {1.3}Definitions, Acronyms, Abbreviations}{7}{}%
-\contentsline {subsubsection}{\numberline {1.3.1}Definitions}{7}{}%
-\contentsline {subsubsection}{\numberline {1.3.2}Acronyms}{9}{}%
-\contentsline {subsection}{\numberline {1.4}Reference Documents}{11}{}%
-\contentsline {subsection}{\numberline {1.5}Document Structure}{11}{}%
-\contentsline {section}{\numberline {2}Architectural Design}{13}{}%
-\contentsline {subsection}{\numberline {2.1}Overview}{13}{}%
-\contentsline {subsubsection}{\numberline {2.1.1}High Level View}{13}{}%
-\contentsline {subsection}{\numberline {2.2}Component View}{16}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}RESTful APIs component diagram}{16}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Service Discovery component diagram}{19}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}Event-driven pattern components}{20}{}%
-\contentsline {subsubsection}{\numberline {2.2.4}Data layer access component diagram}{22}{}%
-\contentsline {subsubsection}{\numberline {2.2.5}User interfaces component diagram}{23}{}%
-\contentsline {subsection}{\numberline {2.3}Deployment View}{24}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}High-level Deployment View}{24}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}Detailed Deployment View}{25}{}%
-\contentsline {subsection}{\numberline {2.4}Run Time Views}{27}{}%
-\contentsline {subsection}{\numberline {2.5}Component Interfaces}{40}{}%
+\contentsline {section}{Contents}{1}{}%
+\contentsline {section}{\numberline {1}Introduction}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Purpose}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Scope}{4}{}%
+\contentsline {subsection}{\numberline {1.3}Definitions, Acronyms, Abbreviations}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Definitions}{6}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}Acronyms}{8}{}%
+\contentsline {subsection}{\numberline {1.4}Reference Documents}{10}{}%
+\contentsline {subsection}{\numberline {1.5}Document Structure}{10}{}%
+\contentsline {section}{\numberline {2}Architectural Design}{12}{}%
+\contentsline {subsection}{\numberline {2.1}Overview}{12}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}High Level View}{12}{}%
+\contentsline {subsection}{\numberline {2.2}Component View}{15}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}RESTful APIs component diagram}{15}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Service Discovery component diagram}{18}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}Event-driven pattern components}{19}{}%
+\contentsline {subsubsection}{\numberline {2.2.4}Data layer access component diagram}{21}{}%
+\contentsline {subsubsection}{\numberline {2.2.5}User interfaces component diagram}{22}{}%
+\contentsline {subsection}{\numberline {2.3}Deployment View}{23}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}High-level Deployment View}{23}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Detailed Deployment View}{24}{}%
+\contentsline {subsection}{\numberline {2.4}Run Time View}{26}{}%
+\contentsline {subsection}{\numberline {2.5}Component Interfaces}{39}{}%
 \contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{53}{}%
 \contentsline {subsubsection}{\numberline {2.6.1}Database Management}{54}{}%
 \contentsline {section}{\numberline {3}User Interface Design}{56}{}%
@@ -39,6 +39,6 @@
 \contentsline {subsection}{\numberline {5.2}Implementation Plan}{72}{}%
 \contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{72}{}%
 \contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{73}{}%
-\contentsline {subsection}{\numberline {5.3}System Testing}{78}{}%
-\contentsline {section}{\numberline {6}Effort spent}{79}{}%
-\contentsline {section}{\numberline {7}References}{79}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{79}{}%
+\contentsline {section}{\numberline {6}Effort spent}{80}{}%
+\contentsline {section}{\numberline {7}References}{80}{}%
