@@ -38,7 +38,7 @@
 \contentsline {subsection}{\numberline {5.1}Overview}{71}{}%
 \contentsline {subsection}{\numberline {5.2}Implementation Plan}{72}{}%
 \contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{72}{}%
-\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{73}{}%
-\contentsline {subsection}{\numberline {5.3}System Testing}{79}{}%
-\contentsline {section}{\numberline {6}Effort spent}{80}{}%
-\contentsline {section}{\numberline {7}References}{80}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{74}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{81}{}%
+\contentsline {section}{\numberline {6}Effort spent}{82}{}%
+\contentsline {section}{\numberline {7}References}{82}{}%
