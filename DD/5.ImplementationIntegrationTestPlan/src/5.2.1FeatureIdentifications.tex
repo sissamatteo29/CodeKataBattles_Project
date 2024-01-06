@@ -1,1 +1,63 @@
 \subsubsection{Features Identification}
+Six major features have been identified for the development of the \app system. The order in which they are listed below is relevant, as it will be the exact same order in which they will be implemented and tested.
+
+All these feature are logical parts of the application that provide some user-visible functionality.
+
+\textbf{1. Login phase}
+
+The login phase is the entry point of the application. As soon as the user opens \app s/he has to login using his/her personal GitHub account in order to access the functionalities of the system.
+In this phase, the correct visualization of the login user interface and of the user personal profile are included. Indeed, when the login process is successfully completed, \app shows to the user his/her personal profile, from which further actions can be taken.
+
+\textbf{2. Creation of a new tournament}
+
+This feature is offered only to educators, who can create new tournaments for students on CodeKataBattle. This feature includes many functionalities that are related.
+
+First off, the creation of a new tournament requires the correct display of the tournament creation form, which is the user interface responsible for asking to the educator all the mandatory pieces of information to correctly generate the tournament. 
+
+Then, as soon as the tournament is created, all students on \app have to be notified. Thus, this notification process is incorporated in this second feature.
+
+The educator that created the tournament can also grant permissions to publish battles to other educators on the platform.
+
+Finally, students have to be able to sign up for the tournament before the registration deadline, which is also to be considered here.
+
+
+\textbf{3. Creation of a new battle}
+
+Educators can create new battles in the tournaments they have permissions to do so. This feature includes a series of sub-functionalities to be accounted for.
+
+First off, the creation of a battle requires the use of the battle creation form, which provides a way for the educator to input in the system all the mandatory data that is necessary to correctly create the battle. 
+
+As soon as the battle is created, all students subscribed to the tournament in which the battle resides have to be notified.
+
+Students must be able to join the battle as a solo player or with other students as a team (also this part is incorporated in this feature), before the registration deadline for the battle passes.
+
+Finally, when the registration deadline for the battle is over, the remote GitHub repository has to be created and all students who joined the battle must be notified with a message containing the link to the remote GitHub repository.
+
+\textbf{4. Pushing code on GitHub}
+
+This feature is related to the correct collaboration between \app and GitHub when a new code solution for a battle is pushed by any student on their forked GitHub repository.
+
+This feature includes the correct receipt by the system of the GitHub notifications (to alert \app of the new commit), the download process of the source code from the forked GitHub repository of the student, the analysis of the code solution in order to assign a score to it, the update of the battle ranking accordingly.
+
+\textbf{5. End of a battle}
+
+When a battle ends, some actions have to be taken. 
+
+First of all, if a consolidation stage was requested by the educator at battle creation time, the manual evaluations of the educator who created the battle are required. The \app system will initiate a timer that sets a time frame for the educator to assess the students' code solutions.
+
+After the consolidation stage (if any) the battle can end and the final ranking of teams has to be drawn and published on the platform.
+
+All students subscribed to the battle have to be notified of the battle terminating.
+
+For the tournament that contains the battle, the tournament ranking must be updated with the new results of the battle that just ended.
+
+\textbf{6. End of a tournament}
+
+First off, the end of a tournament is established by the educator that created the tournament. When a tournament ends, the final ranking of students has to be published and all students subscribed to the tournament must be notified.
+
+
+
+
+
+
+

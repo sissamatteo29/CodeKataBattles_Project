@@ -1,5 +1,17 @@
 \subsection{Overview}
-In the development of CodeKataBattle the choice of a suitable testing strategy is crucial. Given the inherent complexities and distributed nature of microservices, traditional hierarchical testing approaches may prove less effective.
+This section illustrates the implementation, integration and test plan for the \app platform. 
 
-In recognition of these challenges, the testing strategy employed for CKB aligns with the thread strategy. Unlike hierarchical methods, the thread strategy focuses on testing specific threads or pathways through the system, allowing for more granular and targeted assessments. This approach is particularly well-suited for microservices, where a clear hierarchy may be challenging to establish, and interactions between services play a fundamental role in overall system behavior.
+The implementation plan is concerned with the order or schedule to follow to build the various components that make up the system. The integration plan shows how these components have to be assembled together in order to inter-operate and achieve a common result. Finally, the test plan is concerned with the way the various components are going to be tested when incorporated into the overall system.
+
+The test plan that has been chosen for this application aligns with a thread strategy. The main reason for this choice is the fact that there is no real hierarchy that can be designed or recognized among the components of CodeKataBattle. Indeed, the design of the application as a set of microservices collaborating and communicating with each other, makes \app look more like a cluster of components, without a real natural ordering.
+Thus, the test plan will focus on identifying a series of incremental user-visible features that can be offered and seen by the stakeholders as the development process goes on.
+This way of handling the testing procedure is also beneficial to the stakeholders in the sense that the thread strategy fosters and enhances collaboration between developers and committers, as it allows developers to show incremental results of the implementation process.
+
+As for the implementation plan, this has to match and align completely with the test plan, and this comes from the previous choice of handling the testing process with a thread strategy. 
+Indeed, since the thread strategy requires to incrementally build user-visible portions of the software and then test them, the order in which components will be implemented follows the order in which components are integrated and then tested.
+
+In the following sections of the document, a list of the major features that are going to be sequentially built and tested is provided, as well as a more detailed explanation of the build and test plan for each one of them.
+
+In order to make the description as clear as possible, illustrations will be used to show the components involved and their "use" relationships. More specifically, all the microservices making up \app will be displayed in every graphical representation but only the ones involved in the functionality being implemented will be highlighted with some colors. This to show every time the parts of the system that will be touched and modified and the ones that will be completely ignored in that development phase. The "use" relationships are shown with dashed lines.
+
 

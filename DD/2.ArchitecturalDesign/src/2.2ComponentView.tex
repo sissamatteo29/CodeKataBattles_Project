@@ -28,6 +28,7 @@ For instance:
 	\item The GitHub manager component uses the CalculatorAPI in order to pass the downloaded source code of a new student solution to the Score Calculator component that will in turn automatically compute the score to assign to it.
 	\item The Score Calculator must exploit the BattleAPI in order to request an update on the battle ranking every time a new score is available.
 	\item The Tournament Manager requires access to the Student Manager data in order to assign badges when the tournament is closed.
+	\item The Battle Manager leverages the NotificationAPI in order to produce individual notifications when a student invites another student to join a battle together as a team.
 \end{itemize}
 
 This diagram has to be read and interpreted also accounting for the event-driven paradigm that is adopted in the project. Some of the interactions and flows of events inside the system happen in an asynchronous manner with an event-driven approach that is further described in the following views. That's why some interactions, that might seem missing here are actually handled in an asynchronous way to increase the performance of the overall system.
@@ -97,7 +98,9 @@ Inside these microservices, there is an Event Publisher component if the microse
 
 The Tournament Microservice, for instance, has both the Event Publisher component and the Event Consumer component. Indeed, the Tournament Microservice has to publish an event every time a new tournament is created or closed. At the same time, the tournament has to be able to read from the bus when a battle is finished, to take actions accordingly. 
 
-The Battle microservice only publishes events when the battle is created and terminates.
+The Battle Microservice only publishes events when the battle is created and terminates.
+
+The GitHub Integration Microservice publishes a new event every time the GitHub repository for a battle is created, since a notification to all the students subscribed to that battle has to be fabricated.
 
 The Notification Microservice is the one always listening to upcoming events in order to fabricate the correct notifications for the users of the \app platform.
 
