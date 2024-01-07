@@ -121,6 +121,7 @@ Within the Battle Microservice, the system checks the database to verify if the 
 If the student is not already subscribed, the Battle Manager writes the new subscription details to the database and generates a confirmation of the subscription.
 The confirmation of the subscription is then sent back through the gateway to the client.
 
+\newpage
 
 \subsubsection*{Educator Gives Permission}
 \begin{figure}[h!]
@@ -134,6 +135,7 @@ The sequence starts with the Educator engaging with the Gateway Manager to reque
 The Gateway Manager then redirects the request to the appropriate component, the Tournament Manager, which saves the new information in the Database by interacting with the DBMS, receiving then an affirmative response.
 After completing this step, the Tournament Manager must generate a new Notification. As mentioned earlier, the Publisher publishes the new Event to the Event Bus, and the Notification Event Consumer, in collaboration with the Notification Manager, creates the new Notification, saving it into the Database with the assistance of the DBMS component.
 
+\newpage
 
 \subsubsection*{Badge Assignment}
 \begin{figure}[h!]
@@ -144,6 +146,8 @@ After completing this step, the Tournament Manager must generate a new Notificat
 \end{figure}
 
 The sequence starts with the closure of a tournament (see Figure \ref{fig:tournament_end}). Following the closure, the Tournament Manager calculates all the badges to be assigned to the respective teams and, consequently, to the individual students. The loop in the diagram illustrates the process of sending these badges and saving the corresponding data in the DBMS by the Student Manager.
+
+\newpage
 
 \subsubsection*{Code Push}
 \begin{figure}[h!]
@@ -157,6 +161,8 @@ The process begins with the action of pushing code, initiated by receiving a not
 Subsequently, the GitHub Integration Manager requests the GitHub API to pull the source code, resulting in a list of code documents that are essential for calculating scores. Following this, the GitHub Integration Manager asks the Score Computation Manager to compute scores, considering various factors such as source code quality, build scripts, test cases, elapsed time, and evaluation criteria.
 After calculating the scores, the Score Computation Manager sends the results to the Battle Manager, which updates the local scores accordingly.
 
+\newpage
+
 \subsubsection*{Repository creation}
 \begin{figure}[h!]
     \centering
@@ -169,4 +175,5 @@ The process begins when the Battle Manager detects that the registration deadlin
 Upon receiving this information, the GitHub Manager publishes a new Event for the Notification Consumer. Subsequently, the Notification Consumer sends notifications to all the students participating in that battle, creating them as described before.
 
 \newpage
+
 
