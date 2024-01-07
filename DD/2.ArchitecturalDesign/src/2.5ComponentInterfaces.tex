@@ -182,8 +182,6 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	List\textless Student\textgreater & getStudents(battleName) & Retrieves a list of all the students participating in the battle named battleName.\\
 	
 	List\textless Student\textgreater & getStudentsInTeam(battleName, teamName) & Retrieves a list of usernames of the students that are part of a specific team named teamName inside the battle battleName.\\
-
-	void & createRepository(battleName) & Send the request to the GitHub Manager for creating a new repository
  	
 	List\textless Float\textgreater & getRanking(battleName) & Retrieves the ranking of the battle named battleName.\\
 	
@@ -241,6 +239,8 @@ The following interface is a RESTful APIs offered by the Manager component that 
 	void & endedBattle(battleName) & This function is called every time a  battle terminates and all the notifications for all the students subscribed to the battle have to be fabricated.\\
 	
 	void & notifyTeamOffer(offererUser, listTeammates, bName) & This function is leveraged in order to allow the creation of teams for joining battles. When a student wants to join a battle with other students as a team, s/he selects the students s/he wants to invite and they have to receive a personal notification.\\
+	
+	void & permissionsGranted(grantingEd, allowedEd, tournamentName) & This function is called every time a notification has to be created for an educator that received permissions from another educator to publish battles in a tournament (tournamentName).\\ 
 	
 	List\textless File\textgreater & getNotificationUI() & Returns all the necessary material to display to a student the user interface to see the notifications that have arrived to him/her on CodeKataBattle.\\
 	
