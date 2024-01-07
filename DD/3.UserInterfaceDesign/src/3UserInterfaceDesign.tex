@@ -159,3 +159,14 @@ The following image gives a representation of the battle home page:
 
 In the top right corner, the button to join the battle is displayed if the battle's registration deadline hasn't passed yet. 
 In the left hand side, the battle description is provided, to make the student understand what kind of coding challenge the battle focuses on. On the right hand side, there is a list of scores associated to the student's code solutions for that battle (initially empty) and the battle ranking (ranking of teams).
+
+\begin{minipage}{\linewidth}
+	\subsection{Adding badges to a tournament}
+	After creating a tournament, it is possible to add Badges for it by clicking on the "Define Badges" button in the New Tournament view. Doing this, in fact, it will be displayed a new view asking for some fields to be filled out.
+	From left to right and top to down, these fields are: the Title of the badge, the Icon of the badge (selectable between some predefined ones), the rules, a plus button to add new rules, the final button to confirm the creation in the bottom right corner.
+	All the badges have the same form, and they are expressed as constraints or boolean equations. The first macrovariable is a choice between a set of predefined macrovariables, including \textit{num_1st_places, num_2nd_places, num_3rd_places, min_tests_passed, max_tests_wrong, num_tests_consecutively_passed, num_test_consecutively_wrong, ...}; the second one is a boolean operator chosen from \textit{==, !=, <, >, <=, >=}; and the third one is a macrovariable as before, but with the possibility of using a natural number.
+	\begin{center}
+		\includegraphics[width=0.8\linewidth,page=11]{MockupUI}
+	\end{center}
+	
+\end{minipage}
