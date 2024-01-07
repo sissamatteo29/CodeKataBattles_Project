@@ -90,7 +90,7 @@ The conclusion of a battle occurs upon reaching its specified deadline, and the 
 \subsubsection*{Subscribe To Tournament}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\linewidth]{2.ArchitecturalDesign/res/subscribeToTournament.png}
+    \includegraphics[width=1\linewidth]{2.ArchitecturalDesign/res/subscribeToTournament.jpg}
     \caption{Runtime view when a student subscribes to a tournament}
     \label{fig:subsTournament}
 \end{figure}
@@ -122,11 +122,51 @@ If the student is not already subscribed, the Battle Manager writes the new subs
 The confirmation of the subscription is then sent back through the gateway to the client.
 
 
+\subsubsection*{Educator Gives Permission}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/EducatorGivesPermission.jpg}
+    \caption{Runtime view of the educator giving permission to another one for a tournament he owns}
+    \label{fig:permission}
+\end{figure}
+
+The sequence starts with the Educator engaging with the Gateway Manager to request the possibility of grant permission for a tournament they own. To do this, the Educator sends a request that includes the tournament name and their username for identification.
+The Gateway Manager then redirects the request to the appropriate component, the Tournament Manager, which saves the new information in the Database by interacting with the DBMS, receiving then an affirmative response.
+After completing this step, the Tournament Manager must generate a new Notification. As mentioned earlier, the Publisher publishes the new Event to the Event Bus, and the Notification Event Consumer, in collaboration with the Notification Manager, creates the new Notification, saving it into the Database with the assistance of the DBMS component.
 
 
+\subsubsection*{Badge Assignment}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/BadgeAssignment.jpg}
+    \caption{Runtime view of the assignment of badges}
+    \label{fig:badge}
+\end{figure}
 
+The sequence starts with the closure of a tournament (see Figure \ref{fig:tournament_end}). Following the closure, the Tournament Manager calculates all the badges to be assigned to the respective teams and, consequently, to the individual students. The loop in the diagram illustrates the process of sending these badges and saving the corresponding data in the DBMS by the Student Manager.
 
+\subsubsection*{Code Push}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/CodePush.jpg}
+    \caption{Runtime view when a student pushes the code}
+    \label{fig:push}
+\end{figure}
 
+The process begins with the action of pushing code, initiated by receiving a notification from the GitHub API indicating that code has been pushed. This notification is received by the Gateway Manager, which then contacts the GitHub Integration Manager to request a pull of the code. The method parameters include the repository URL, the battle name, and the student's username who pushed the code.
+Subsequently, the GitHub Integration Manager requests the GitHub API to pull the source code, resulting in a list of code documents that are essential for calculating scores. Following this, the GitHub Integration Manager asks the Score Computation Manager to compute scores, considering various factors such as source code quality, build scripts, test cases, elapsed time, and evaluation criteria.
+After calculating the scores, the Score Computation Manager sends the results to the Battle Manager, which updates the local scores accordingly.
+
+\subsubsection*{Repository creation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/CreateRepository.jpg}
+    \caption{Runtime view for creating a repository}
+    \label{fig:create_repo}
+\end{figure}
+
+The process begins when the Battle Manager detects that the registration deadline for a battle has expired. Following this event, the Battle Manager sends a request to the GitHub Manager to create a new repository for that battle. The GitHub Manager forwards this request to the GitHubAPI, which responds by providing the URL of the newly created repository.
+Upon receiving this information, the GitHub Manager publishes a new Event for the Notification Consumer. Subsequently, the Notification Consumer sends notifications to all the students participating in that battle, creating them as described before.
 
 \newpage
 
