@@ -163,7 +163,7 @@ After calculating the scores, the Score Computation Manager sends the results to
 
 \newpage
 
-\subsubsection*{Repository creation}
+\subsubsection*{Repository Creation}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/CreateRepository.jpg}
@@ -173,6 +173,18 @@ After calculating the scores, the Score Computation Manager sends the results to
 
 The process begins when the Battle Manager detects that the registration deadline for a battle has expired. Following this event, the Battle Manager sends a request to the GitHub Manager to create a new repository for that battle. The GitHub Manager forwards this request to the GitHubAPI, which responds by providing the URL of the newly created repository.
 Upon receiving this information, the GitHub Manager publishes a new Event for the Notification Consumer. Subsequently, the Notification Consumer sends notifications to all the students participating in that battle, creating them as described before.
+
+\newpage
+\subsubsection*{Score Computation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\linewidth, angle=90]{2.ArchitecturalDesign/res/ScoreComputation.jpg}
+    \caption{Runtime view for computing the codes pushed}
+    \label{fig:create_repo}
+\end{figure}
+
+The process involves two main components, supplemented by an actor: the Score Computation Manager, the Database Management System (DBMS), and the Static Analysis Tool, respectively. To begin the procedure, the Score Computation Manager requests the DBMS to retrieve test cases and generate automation scripts for a specific battle, identified by the bName, within a tournament identified by the tName. Subsequently, it calculates the scores upon constructing the solutions. After that, it queries the DBMS in order to retrieve the evaluation criteria of the same battle. Following this, the Score Computation Manager engages the Static Analysis Tool to analyze the code based on the specified criteria, yielding a conclusive result.
+
 
 \newpage
 
