@@ -9,3 +9,8 @@ spring:
             clientId: 2a9b4bae124a78a27fad
             clientSecret: 590165785fa75de10d5fd14f3d3b69069a40e079
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ckb_db
+    username: alessandro
+    password: ubuntu2023
+    driver-class-name: org.postgresql.Driver
