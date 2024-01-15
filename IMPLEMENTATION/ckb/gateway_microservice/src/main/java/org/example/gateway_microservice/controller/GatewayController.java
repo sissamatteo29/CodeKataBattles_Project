@@ -1,5 +1,8 @@
 package org.example.gateway_microservice.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +13,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-@RestController
+
+@Controller
 public class GatewayController extends WebSecurityConfigurerAdapter {
 
     private final RestTemplate restTemplate;
@@ -23,22 +25,39 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
     public GatewayController() {
         this.restTemplate = new RestTemplate();
     }
-    @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        System.out.println("Principal: " + principal);
-        String username = (String) principal.getAttribute("name");
 
-        ResponseEntity<Boolean> responseEntity = restTemplate.getForEntity("http://localhost:8086/userExists?username=" + username, Boolean.class);
-        boolean userExists = Boolean.TRUE.equals(responseEntity.getBody());
+    @GetMapping("/user")
+    public ResponseEntity<Map<String, Object>> user(@AuthenticationPrincipal OAuth2User principal) {
+        String username = (String) principal.getAttribute("login");
+        ResponseEntity<Boolean> responseEntity = restTemplate.getForEntity("http://localhost:8086/checkUser?username=" + username, Boolean.class);
+        Boolean userCheckResult = responseEntity.getBody();
 
         Map<String, Object> response = new HashMap<>();
-        response.put("username", username);
+        response.put("name", username);
+        response.put("userCheckResult", userCheckResult);
 
-        if (!userExists) {
-            response.put("showRoleSelection", true);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/selectRole")
+    public String saveRole(@AuthenticationPrincipal OAuth2User principal, @RequestParam int role) {
+        String username = (String) principal.getAttribute("login");
+        System.out.println(username);
+        System.out.println(role);
+        ResponseEntity<Boolean> responseEntity2 = restTemplate.getForEntity("http://localhost:8086/checkUser?username=" + username, Boolean.class);
+        if (Boolean.FALSE.equals(responseEntity2.getBody())) {
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(
+                    "http://localhost:8086/saveUser?username=" + username + "&role=" + role,
+                    null,
+                    String.class
+            );
+            System.out.println("User saved");
         }
+        return "index";
+    }
 
-        return response;
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
     }
 
     @Override

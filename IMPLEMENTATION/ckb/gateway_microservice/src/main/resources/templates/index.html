@@ -18,19 +18,38 @@
     With GitHub: <a href="/oauth2/authorization/github">click here</a>
 </div>
 <div class="container authenticated" style="display:none">
-    Logged in as: <span id="user"></span>
+    Logged in as: <span id="username"></span>
     <button onClick="logout()" class="btn btn-primary">Logout</button>
+</div>
+<div class="container role_sel" style="display:none">
+    <form th:action="@{/selectRole}" method="post">
+        <label for="role">Select your role:</label>
+        <select name="role" id="role" class="form-control">
+            <option value="0">Student</option>
+            <option value="1">Educator</option>
+        </select>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+<div class="container authenticated" style="display:none">
+    <a href="/profile">click here to see your profile</a>
 </div>
 
 <script type="text/javascript">
     $.get("/user", function(data) {
-        $("#user").html(data.name);
+        $("#username").html(data.name);
         $(".unauthenticated").hide()
-        $(".authenticated").show()
+        if (data.userCheckResult === true) {
+            $(".authenticated").show()
+            $(".role_sel").hide();
+        } else {
+            $(".authenticated").hide()
+            $(".role_sel").show();
+        }
     });
     var logout = function() {
         $.post("/logout", function() {
-            $("#user").html('');
+            $("#username").html('');
             $(".unauthenticated").show();
             $(".authenticated").hide();
         })

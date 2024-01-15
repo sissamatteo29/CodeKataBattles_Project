@@ -14,3 +14,12 @@ spring:
     username: alessandro
     password: ubuntu2023
     driver-class-name: org.postgresql.Driver
+  thymeleaf:
+    enabled: true
+    prefix:  classpath:/templates/
+    suffix: .html
+    cache: false  # Disable caching for development, you can set it to true in production
+#logging:
+ # level:
+  #  org.thymeleaf: DEBUG
+
