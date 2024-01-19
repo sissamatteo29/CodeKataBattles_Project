@@ -14,8 +14,6 @@ public class UserModel {
 
     public UserModel() {
     }
-
-
     public UserModel(String username, int role) {
         this.username = username;
         this.role = role;
