@@ -10,6 +10,7 @@ public class TournamentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     @Temporal(TemporalType.DATE)
     private Date subscription_deadline;
@@ -23,6 +24,12 @@ public class TournamentModel {
 
     public TournamentModel(String name) {
         this.name = name;
+    }
+
+    public TournamentModel(String name, Date subscriptionDate, String creator) {
+        this.name = name;
+        this.subscription_deadline = subscriptionDate;
+        this.creator = creator;
     }
 
     public String getName() {

@@ -4,8 +4,20 @@ import org.example.tournament_microservice.model.TournamentModel;
 import org.example.tournament_microservice.repository.TournamentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
 public class TournamentService {
+    private final TournamentRepository tournamentRepository;
+
+    public TournamentService(TournamentRepository userRepository) {
+        this.tournamentRepository = userRepository;
+    }
+
+    public void saveTournament(TournamentModel tournament) {
+        System.out.println("Saving the tournament");
+        tournamentRepository.save(tournament);
+    }
+
 }

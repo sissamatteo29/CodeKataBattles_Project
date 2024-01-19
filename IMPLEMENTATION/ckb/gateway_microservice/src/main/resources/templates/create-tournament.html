@@ -2,31 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Profile</title>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Demo</title>
-        <meta name="description" content=""/>
-        <meta name="viewport" content="width=device-width"/>
-        <base href="/"/>
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <title>Create Tournament</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
 </head>
 <body>
-<h2>Profile</h2>
+
+<h2>Create Tournament</h2>
+
 <div class="container authenticated" style="display:none">
     Logged in as: <span id="username"></span>
     <button onClick="logout()" class="btn btn-primary">Logout</button>
 </div>
 
-<div>
-    <a href="/create-tournament" class="btn btn-success">Create a new tournament</a>
-</div>
+<form th:action="@{/createTournament}" method="post" id="createTournamentForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <br>
+
+    <label for="subscriptionDate">Subscription Deadline:</label>
+    <input type="date" id="subscriptionDate" name="subscriptionDate" required>
+
+    <br>
+
+    <input type="hidden" id="creator" name="creator">
+
+    <br>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
 <script type="text/javascript">
     $.get("/user", function (data) {
         $("#username").html(data.name);
+        $("#creator").val(data.name);
         $(".unauthenticated").hide()
         if (data.userCheckResult === true) {
             $(".authenticated").show()

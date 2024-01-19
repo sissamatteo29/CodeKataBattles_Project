@@ -1,7 +1,9 @@
 package org.example.gateway_microservice.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,9 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +64,31 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
     public String profile() {
         return "profile";
     }
+
+    @GetMapping("/create-tournament")
+    public String tournamentForm() {
+        return "create-tournament";
+    }
+
+    @PostMapping("/createTournament")
+    public String createTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator) {
+        System.out.println("Received form data - Name: " + name + ", Submission Date: " + subscriptionDate + ", Name: " + creator);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(subscriptionDate);
+        System.out.println("Received form data - Name: " + name + ", Submission Date: " + formattedDate + ", Name: " + creator);
+        String createNewTournamentUrl = "http://localhost:8085/createNewTournament?"
+                + "name=" + name
+                + "&subscriptionDate=" + formattedDate
+                + "&creator=" + creator;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewTournamentUrl, null, String.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Tournament created successfully");
+        } else {
+            System.out.println("Error in creating tournament")  ;
+        }
+        return "profile";
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
