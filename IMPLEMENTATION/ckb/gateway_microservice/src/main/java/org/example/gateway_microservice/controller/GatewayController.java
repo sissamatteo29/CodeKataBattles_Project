@@ -73,6 +73,11 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "create-tournament";
     }
 
+    @GetMapping("/create-battle")
+    public String battleForm(@RequestParam(required = false) String tournamentName, Model model) {
+        model.addAttribute("tournamentName", tournamentName);
+        return "create-battle"; }
+
     @PostMapping("/createTournament")
     public String createTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator) {
         System.out.println("Received form data - Name: " + name + ", Submission Date: " + subscriptionDate + ", Name: " + creator);
@@ -88,6 +93,21 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
             System.out.println("Tournament created successfully");
         } else {
             System.out.println("Error in creating tournament")  ;
+        }
+        return "profile";
+    }
+
+    @PostMapping("/createBattle")
+    public String createBattle(@RequestParam String name, @RequestParam String tournament) {
+        System.out.println("Received form data - Name: " + name + ", Tournament: " + tournament);
+        String createNewBattleUrl = "http://localhost:8083/createNewBattle?"
+            + "name=" + name
+            + "&tournament=" + tournament;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewBattleUrl, null, String.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Battle created successfully");
+        } else {
+            System.out.println("Error in creating battle")  ;
         }
         return "profile";
     }
@@ -119,11 +139,27 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
 
     @GetMapping("/tournament-detail")
     public String showTournamentDetail(@RequestParam("name") String tournamentName, Model model) {
-        // Add redirect to battle in order to display all regarding battle details
-        String battles = "battles";
-        model.addAttribute("battles", battles);
-        model.addAttribute("tournamentName", tournamentName);
-        return "tournament-detail";
+        String createUrl = "http://localhost:8083/getAllBattles?tournamentName=" + tournamentName;
+        System.out.println("Tournament name: " + tournamentName);
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        System.out.println(responseEntity.getBody());
+
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> battleNames = responseEntity.getBody();
+            model.addAttribute("tournamentName", tournamentName);
+            model.addAttribute("battleNames", battleNames);
+            System.out.println("getAllBattles status OK");
+            return "tournament-detail";
+        } else {
+            System.out.println("getAllTournaments status KO");
+            return null;
+        }
     }
 
     @Override
