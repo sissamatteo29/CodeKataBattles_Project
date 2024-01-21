@@ -51,8 +51,13 @@
 
         if (tournaments.length > 0) {
             for (var i = 0; i < tournaments.length; i++) {
-                var listItem = $("<p>", { text: (i + 1) + ". " + tournaments[i] });
-                tournamentListDiv.append(listItem);
+                var tournamentLink = $("<a>", {
+                    href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
+                    class: "tournament-link",
+                    text: (i + 1) + ". " + tournaments[i]
+                });
+                tournamentListDiv.append(tournamentLink);
+                tournamentListDiv.append("<br>");
             }
         } else {
             tournamentListDiv.text("No tournaments available.");

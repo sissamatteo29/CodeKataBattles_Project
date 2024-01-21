@@ -117,6 +117,14 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @GetMapping("/tournament-detail")
+    public String showTournamentDetail(@RequestParam("name") String tournamentName, Model model) {
+        // Add redirect to battle in order to display all regarding battle details
+        String battles = "battles";
+        model.addAttribute("battles", battles);
+        model.addAttribute("tournamentName", tournamentName);
+        return "tournament-detail";
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
