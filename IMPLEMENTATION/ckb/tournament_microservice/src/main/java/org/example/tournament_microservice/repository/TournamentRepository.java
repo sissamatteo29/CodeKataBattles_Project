@@ -2,9 +2,11 @@ package org.example.tournament_microservice.repository;
 
 import org.example.tournament_microservice.model.TournamentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -12,4 +14,8 @@ import java.util.Optional;
 public interface TournamentRepository extends JpaRepository<TournamentModel, Long> {
     Optional<TournamentModel> findByName(String name);
     boolean existsByName(@Param("name") String name);
+
+    @Query("SELECT t.name FROM TournamentModel t WHERE t.creator = :creator")
+    List<String> findNamesByCreator(String creator);
+
 }

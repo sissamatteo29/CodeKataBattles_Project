@@ -1,10 +1,13 @@
 package org.example.gateway_microservice.controller;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +20,9 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -87,6 +90,31 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
             System.out.println("Error in creating tournament")  ;
         }
         return "profile";
+    }
+
+
+    @GetMapping("/all-tournaments")
+    @ResponseBody
+    public List<String> getAllTournaments(@RequestParam String name, Model model) {
+        String createUrl = "http://localhost:8085/getAllTournaments?name=" + name;
+        System.out.println("Logged-in username: " + name);
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        System.out.println(responseEntity.getBody());
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> tournamentNames = responseEntity.getBody();
+            model.addAttribute("tournamentNames", tournamentNames);
+            System.out.println("getAllTournaments status OK");
+            return tournamentNames;
+        } else {
+            System.out.println("getAllTournaments status KO");
+            return null;
+        }
     }
 
 

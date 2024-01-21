@@ -7,15 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 @RestController
@@ -26,6 +22,17 @@ public class TournamentController {
     public ResponseEntity<String> createNewTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator, Model model) {
             tournamentService.saveTournament(new TournamentModel(name, subscriptionDate, creator));
             return ResponseEntity.ok("Tournament created successfully");
+    }
+    @GetMapping("/getAllTournaments")
+    public ResponseEntity<List<String>> getAllTournaments(@RequestParam String name) {
+        System.out.println("Getting the tournaments");
+        System.out.println(name);
+        List<String> tournamentNames = tournamentService.getTournamentNamesByCreator(name);
+        if (tournamentNames != null && !tournamentNames.isEmpty()) {
+            return ResponseEntity.ok(tournamentNames);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }

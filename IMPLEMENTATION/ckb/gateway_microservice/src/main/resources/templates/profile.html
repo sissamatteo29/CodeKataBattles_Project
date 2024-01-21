@@ -20,10 +20,45 @@
     Logged in as: <span id="username"></span>
     <button onClick="logout()" class="btn btn-primary">Logout</button>
 </div>
-
+<div id="tournamentList"></div>
 <div>
     <a href="/create-tournament" class="btn btn-success">Create a new tournament</a>
+    <a href="#" id="displayTournamentsLink" class="btn btn-success">Display your tournaments</a>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#displayTournamentsLink").on("click", function (event) {
+            event.preventDefault(); // Prevent the default behavior of the anchor element
+
+            var userNameFromFrontend = $("#username").text().trim();
+
+            $.get("/all-tournaments", { name: userNameFromFrontend }, function (data, textStatus, xhr) {
+                console.log("Success:", data);
+                console.log("Status Code:", xhr.status);
+                if (xhr.status === 200) {
+                    displayTournaments(data);
+                }
+            })
+                .fail(function (xhr, textStatus, error) {
+                    console.error("Error:", error);
+                    console.log("Status Code:", xhr.status);
+                });
+        });
+    });
+    function displayTournaments(tournaments) {
+        var tournamentListDiv = $("#tournamentList");
+        tournamentListDiv.empty();
+
+        if (tournaments.length > 0) {
+            for (var i = 0; i < tournaments.length; i++) {
+                var listItem = $("<p>", { text: (i + 1) + ". " + tournaments[i] });
+                tournamentListDiv.append(listItem);
+            }
+        } else {
+            tournamentListDiv.text("No tournaments available.");
+        }
+    }
+</script>
 <script type="text/javascript">
     $.get("/user", function (data) {
         $("#username").html(data.name);
