@@ -18,4 +18,6 @@ public interface TournamentRepository extends JpaRepository<TournamentModel, Lon
     @Query("SELECT t.name FROM TournamentModel t WHERE t.creator = :creator")
     List<String> findNamesByCreator(String creator);
 
+    List<TournamentModel> findAll();
+
 }

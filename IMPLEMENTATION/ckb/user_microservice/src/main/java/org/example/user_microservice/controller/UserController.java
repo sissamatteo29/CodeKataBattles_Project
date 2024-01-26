@@ -10,12 +10,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/getAllSubscription")
+    public ResponseEntity<List<String>> getAllSubscription(@RequestParam String name) {
+        System.out.println("Getting the subscriptions");
+        System.out.println(name);
+        List<String> tournamentNames = userService.getTournamentNamesBySubscription(name);
+        if (tournamentNames != null && !tournamentNames.isEmpty()) {
+            return ResponseEntity.ok(tournamentNames);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+    @GetMapping("/getUserRole")
+    public ResponseEntity<Integer> getUserRole(@RequestParam String username) {
+        Integer userRole = userService.getUserRole(username);
+        return ResponseEntity.ok(userRole);
+    }
 
     @GetMapping("/userExists")
     public ResponseEntity<Boolean> checkUserExists(@RequestParam String username) {

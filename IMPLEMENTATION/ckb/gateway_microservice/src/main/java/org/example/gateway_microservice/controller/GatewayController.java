@@ -38,13 +38,16 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
     @GetMapping("/user")
     public ResponseEntity<Map<String, Object>> user(@AuthenticationPrincipal OAuth2User principal) {
         String username = (String) principal.getAttribute("login");
+        ResponseEntity<Integer> roleResponseEntity = restTemplate.getForEntity("http://localhost:8086/getUserRole?username=" + username, Integer.class);
+        Integer userRole = roleResponseEntity.getBody();
+
         ResponseEntity<Boolean> responseEntity = restTemplate.getForEntity("http://localhost:8086/checkUser?username=" + username, Boolean.class);
         Boolean userCheckResult = responseEntity.getBody();
 
         Map<String, Object> response = new HashMap<>();
         response.put("name", username);
         response.put("userCheckResult", userCheckResult);
-
+        response.put("role", userRole);
         return ResponseEntity.ok(response);
     }
     @PostMapping("/selectRole")
@@ -156,9 +159,53 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "profile";
     }
 
+    @GetMapping("/all-tournaments-abs")
+    @ResponseBody
+    public List<String> getAllTournamentsAbs(Model model) {
+        String createUrl = "http://localhost:8085/getAllTournamentsAbs?";
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        System.out.println(responseEntity.getBody());
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> tournamentNames = responseEntity.getBody();
+            model.addAttribute("tournamentNames", tournamentNames);
+            System.out.println("getAllTournamentsAbs status OK");
+            return tournamentNames;
+        } else {
+            System.out.println("getAllTournamentsAbs status KO");
+            return null;
+        }
+    }
 
+    @GetMapping("/all-tournaments-subscribed")
+    @ResponseBody
+    public List<String> getAllTournamentSubscribed(@RequestParam String name, Model model) {
+        String createUrl = "http://localhost:8086/getAllSubscription?name=" + name;
+        System.out.println("Logged-in username: " + name);
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        System.out.println(responseEntity.getBody());
 
-        @GetMapping("/all-tournaments")
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> tournamentNames = responseEntity.getBody();
+            model.addAttribute("tournamentNames", tournamentNames);
+            System.out.println("getAllTournamentsSubscriptions status OK");
+            return tournamentNames;
+        } else {
+            System.out.println("getAllTournamentsSubscriptions status KO");
+            return null;
+        }
+    }
+
+    @GetMapping("/all-tournaments")
     @ResponseBody
     public List<String> getAllTournaments(@RequestParam String name, Model model) {
         String createUrl = "http://localhost:8085/getAllTournaments?name=" + name;

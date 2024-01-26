@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TournamentService {
@@ -20,6 +21,13 @@ public class TournamentService {
     public void saveTournament(TournamentModel tournament) {
         System.out.println("Saving the tournament");
         tournamentRepository.save(tournament);
+    }
+
+    public List<String> getTournaments() {
+        return tournamentRepository.findAll()
+                .stream()
+                .map(TournamentModel::getName)
+                .collect(Collectors.toList());
     }
 
     public List<String> getTournamentNamesByCreator(String creator) {
