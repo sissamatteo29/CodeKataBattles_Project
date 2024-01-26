@@ -17,13 +17,26 @@
     Logged in as: <span id="username"></span>
     <button onClick="logout()" class="btn btn-primary">Logout</button>
 </div>
-<p>Nome del Torneo: <span th:text="${tournamentName}"></span></p>
-<p>Battles:</p>
-<ul>
-    <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
-</ul>
-<a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
-<button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+<p>Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
+<div class="container role-1" style="display:none">
+    <p>User with Role 1! (Educator)</p>
+    <p>Battles:</p>
+    <ul>
+        <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
+    </ul>
+    <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
+    <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+</div>
+<div class="container role-0" style="display:none">
+    <p>User with Role 0! (Student) </p>
+    <div class="container battles_display" style="display:none">
+    <p>Battles:</p>
+    <ul>
+        <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
+    </ul>
+    </div>
+    <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Tournament</a>
+</div>
 </body>
 
 <script type="text/javascript">
@@ -37,6 +50,12 @@
         if (data.userCheckResult === true) {
             $(".authenticated").show()
             $(".role_sel").hide();
+            if (data.role === 1) {
+                $(".role-1").show();
+            }
+            else {
+                $(".role-0").show();
+            }
         } else {
             $(".authenticated").hide()
             $(".role_sel").show();
@@ -47,6 +66,28 @@
             window.location.href = '/';
         })
         return true;
+    }
+
+    function subscribe() {
+        var tournamentName = $("#tournamentName").text();
+        var username = $("#username").text().trim();
+
+        // Make a POST request
+        $.ajax({
+            type: 'POST',
+            url: '/subscribe',
+            data: {
+                tournamentName: tournamentName,
+                username: username
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle error
+                console.error(error);
+            }
+        });
     }
 
     $.ajaxSetup({

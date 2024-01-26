@@ -35,4 +35,15 @@ public class TournamentController {
         }
     }
 
+    @GetMapping("/getAllTournamentsAbs")
+    public ResponseEntity<List<String>> getAllTournamentsAbs() {
+        System.out.println("Getting all the tournaments for students");
+        List<String> tournamentNames = tournamentService.getTournaments();
+        if (tournamentNames != null && !tournamentNames.isEmpty()) {
+            return ResponseEntity.ok(tournamentNames);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 }
