@@ -111,7 +111,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
                                @RequestParam int max_team_size,
                                @RequestParam int min_team_size,
                                @RequestParam String repository_link,
-                               @RequestParam boolean manual_evaluation,
+                               @RequestParam Boolean manual_evaluation,
                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date reg_deadline,
                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date sub_deadline,
                                @RequestParam String creator,
@@ -125,11 +125,6 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
             byte[] automationBuildScriptBytes = automationBuildScript.getBytes();
             byte[] codeTestBytes = code_test.getBytes();
             byte[] codeBytes = code.getBytes();
-
-           /* String encodedABS = encodeToBase64(automationBuildScriptBytes);
-            String encodedCT = encodeToBase64(codeTestBytes);
-            String encodedC = encodeToBase64(codeBytes);
-            */
 
             String encodedABS = Base64.getUrlEncoder().encodeToString(automationBuildScriptBytes);
             String encodedCT = Base64.getUrlEncoder().encodeToString(codeTestBytes);

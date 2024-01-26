@@ -13,8 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-logging:
-  level:
-    org.springframework: DEBUG
-    org.apache.coyote.http11: DEBUG
+#logging:
+ # level:
+  #  org.springframework: DEBUG
+   # org.apache.coyote.http11: DEBUG
 
