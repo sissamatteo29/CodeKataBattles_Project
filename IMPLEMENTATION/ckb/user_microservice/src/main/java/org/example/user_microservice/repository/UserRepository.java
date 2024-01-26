@@ -16,6 +16,6 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     @Query("SELECT u.role FROM UserModel u WHERE u.username = :username")
     Integer getUserRole(@Param("username") String username);
 
-    @Query("SELECT u.subscription FROM UserModel u WHERE u.username = :creator")
-    List<String> findNamesBySubscription(String creator);
+    @Query("SELECT u.subscription FROM UserModel u WHERE u.username = :user")
+    List<String> findNamesBySubscription(String user);
 }

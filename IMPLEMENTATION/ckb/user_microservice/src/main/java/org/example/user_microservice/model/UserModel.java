@@ -20,6 +20,8 @@ public class UserModel {
         this.role = role;
     }
 
+    public void setTournament(String subscription) {this.subscription = subscription; }
+
     public String getUsername() {
         return this.username;
     }

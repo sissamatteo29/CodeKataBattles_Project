@@ -30,6 +30,7 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
     }
+
     @GetMapping("/getUserRole")
     public ResponseEntity<Integer> getUserRole(@RequestParam String username) {
         Integer userRole = userService.getUserRole(username);
@@ -52,6 +53,11 @@ public class UserController {
     public void saveUser(@RequestParam String username, @RequestParam int role) {
         System.out.println("Controller calling for saving the user");
         userService.saveUser(new UserModel(username, role));
+    }
+
+    @PostMapping("/addSubscription")
+    public void addSubscription(@RequestParam String tournament, @RequestParam String username) {
+        userService.addSubscription(tournament, username);
     }
 
 }

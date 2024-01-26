@@ -29,6 +29,18 @@ public class UserService {
         return userRepository.findNamesBySubscription(name);
     }
 
+    public void addSubscription(String tournament, String username) {
+        Optional<UserModel> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            UserModel user = optionalUser.get();
+            user.setTournament(tournament);
+
+            // Save the updated user back to the database
+            userRepository.save(user);
+        }
+    }
+
     public Integer getUserRole(String username) { return userRepository.getUserRole(username); }
 
     public boolean isUserExists(String username) {

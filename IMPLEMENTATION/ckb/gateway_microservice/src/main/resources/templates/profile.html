@@ -81,8 +81,6 @@
             event.preventDefault(); // Prevent the default behavior of the anchor element
 
 
-            var userNameFromFrontend = $("#username").text().trim();
-
             $.get("/all-tournaments-abs", function (data, textStatus, xhr) {
                 console.log("Success:", data);
                 console.log("Status Code:", xhr.status);
@@ -102,6 +100,7 @@
 
         if (tournaments.length > 0) {
             for (var i = 0; i < tournaments.length; i++) {
+                var userNameFromFrontend = $("#username").text().trim();
                 var tournamentLink = $("<a>", {
                     href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
                     class: "tournament-link",
@@ -146,7 +145,6 @@ function displayTournamentsSubscribed(tournaments) {
                     href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
                     class: "tournament-link",
                     text: (i + 1) + ". " + tournaments[i]
-
                 });
                 tournamentListDiv.append(tournamentLink);
                 tournamentListDiv.append("<br>");

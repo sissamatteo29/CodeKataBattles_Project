@@ -80,7 +80,8 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
     @GetMapping("/create-battle")
     public String battleForm(@RequestParam(required = false) String tournamentName, Model model) {
         model.addAttribute("tournamentName", tournamentName);
-        return "create-battle"; }
+        return "create-battle";
+    }
 
     @PostMapping("/createTournament")
     public String createTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator) {
@@ -103,6 +104,20 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
 
     private String encodeToBase64(byte[] file) throws IOException {
         return new String(Base64.getUrlEncoder().encode(file));
+    }
+
+    @PostMapping("/subscribe")
+    public String subscribe(@RequestParam String tournamentName, @RequestParam String username) {
+        System.out.println("Received form data - Tournament: " + tournamentName);
+        String createNewTournamentUrl = "http://localhost:8086/addSubscription?"
+                + "tournament=" + tournamentName + "&username=" + username;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewTournamentUrl, null, String.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Subscription successfully");
+        } else {
+            System.out.println("Subscription error")  ;
+        }
+        return "profile";
     }
 
     @PostMapping("/createBattle")
@@ -158,6 +173,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
         return "profile";
     }
+
 
     @GetMapping("/all-tournaments-abs")
     @ResponseBody
