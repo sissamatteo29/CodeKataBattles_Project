@@ -23,9 +23,14 @@
     <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
 </ul>
 <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
+<button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
 </body>
 
 <script type="text/javascript">
+    function goBack() {
+        window.history.back();
+    }
+
     $.get("/user", function (data) {
         $("#username").html(data.name);
         $(".unauthenticated").hide()

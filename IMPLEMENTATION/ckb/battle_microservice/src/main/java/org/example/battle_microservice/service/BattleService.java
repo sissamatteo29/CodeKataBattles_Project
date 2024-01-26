@@ -15,7 +15,7 @@ public class BattleService {
     }
 
     public void saveBattle(BattleModel battle) {
-        System.out.println("Saving the tournament");
+        System.out.println("Saving the battle");
         battleRepository.save(battle);
     }
     public List<String> getBattlesByTournament(String tournamentName) {

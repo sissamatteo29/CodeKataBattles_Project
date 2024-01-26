@@ -18,12 +18,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class GatewayController extends WebSecurityConfigurerAdapter {
@@ -97,23 +98,72 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "profile";
     }
 
+    private String encodeToBase64(byte[] file) throws IOException {
+        return new String(Base64.getUrlEncoder().encode(file));
+    }
+
     @PostMapping("/createBattle")
-    public String createBattle(@RequestParam String name, @RequestParam String tournament) {
-        System.out.println("Received form data - Name: " + name + ", Tournament: " + tournament);
-        String createNewBattleUrl = "http://localhost:8083/createNewBattle?"
-            + "name=" + name
-            + "&tournament=" + tournament;
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewBattleUrl, null, String.class);
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            System.out.println("Battle created successfully");
-        } else {
-            System.out.println("Error in creating battle")  ;
+    public String createBattle(@RequestParam String name,
+                               @RequestParam String tournament,
+                               @RequestParam("automation_build_script") MultipartFile automationBuildScript,
+                               @RequestParam("code_test") MultipartFile code_test,
+                               @RequestParam("code") MultipartFile code,
+                               @RequestParam int max_team_size,
+                               @RequestParam int min_team_size,
+                               @RequestParam String repository_link,
+                               @RequestParam boolean manual_evaluation,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date reg_deadline,
+                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date sub_deadline,
+                               @RequestParam String creator,
+                               Model model) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateReg = dateFormat.format(reg_deadline);
+        String formattedDateSub = dateFormat.format(sub_deadline);
+
+        try {
+            // Convert MultipartFile to byte array
+            byte[] automationBuildScriptBytes = automationBuildScript.getBytes();
+            byte[] codeTestBytes = code_test.getBytes();
+            byte[] codeBytes = code.getBytes();
+
+           /* String encodedABS = encodeToBase64(automationBuildScriptBytes);
+            String encodedCT = encodeToBase64(codeTestBytes);
+            String encodedC = encodeToBase64(codeBytes);
+            */
+
+            String encodedABS = Base64.getUrlEncoder().encodeToString(automationBuildScriptBytes);
+            String encodedCT = Base64.getUrlEncoder().encodeToString(codeTestBytes);
+            String encodedC = Base64.getUrlEncoder().encodeToString(codeBytes);
+
+            System.out.println("Received form data: name=" + name
+                    + "&tournament=" + tournament + "&automation_build_script=" + encodedABS.length() +
+                    "&code_test=" + encodedCT.length() + "&code=" + encodedC.length() + "&max_team_size=" + max_team_size + "&min_team_size=" +
+                    min_team_size + "&repository_link=" + repository_link + "&manual_evaluation=" + manual_evaluation +
+                    "&reg_deadline=" + formattedDateReg + "&sub_deadline=" + formattedDateSub + "creator: " + creator);
+            String createNewBattleUrl = "http://localhost:8083/createNewBattle?"
+                    + "name=" + name
+                    + "&tournament=" + tournament + "&automation_build_script=" +
+                    encodedABS +
+                    "&code_test=" + encodedCT +
+                    "&code=" + encodedC +
+                    "&max_team_size=" + max_team_size + "&min_team_size=" +
+                    min_team_size + "&repository_link=" + repository_link + "&manual_evaluation=" + manual_evaluation +
+                    "&reg_deadline=" + formattedDateReg + "&sub_deadline=" + formattedDateSub + "&creator=" + creator;
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewBattleUrl, null, String.class);
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                System.out.println("Battle created successfully");
+            } else {
+                System.out.println("Error in creating battle");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return "profile";
     }
 
 
-    @GetMapping("/all-tournaments")
+
+        @GetMapping("/all-tournaments")
     @ResponseBody
     public List<String> getAllTournaments(@RequestParam String name, Model model) {
         String createUrl = "http://localhost:8085/getAllTournaments?name=" + name;

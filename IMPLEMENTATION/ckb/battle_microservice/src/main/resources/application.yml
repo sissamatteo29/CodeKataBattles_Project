@@ -1,6 +1,7 @@
 server:
   port: 8083
   address: 0.0.0.0
+  max-http-header-size: 10000000
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ckb_db
@@ -12,4 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+logging:
+  level:
+    org.springframework: DEBUG
+    org.apache.coyote.http11: DEBUG
 

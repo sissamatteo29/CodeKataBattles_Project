@@ -24,7 +24,7 @@
     <button onClick="logout()" class="btn btn-primary">Logout</button>
 </div>
 
-<form th:action="@{/createBattle}" method="post" id="createBattleForm">
+<form th:action="@{/createBattle}" method="post" id="createBattleForm" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
 
@@ -34,10 +34,63 @@
 
     <br>
 
+    <label for="automation_build_script">Automation Build Script:</label>
+    <input type="file" id="automation_build_script" name="automation_build_script" accept=".zip">
+
+    <br>
+
+    <label for="code_test">Code Test:</label>
+    <input type="file" id="code_test" name="code_test" accept=".zip">
+
+    <br>
+
+    <label for="code">Code:</label>
+    <input type="file" id="code" name="code" accept=".zip">
+
+    <br>
+
+    <label for="max_team_size">Max Team Size:</label>
+    <input type="number" id="max_team_size" name="max_team_size" required>
+
+    <br>
+
+    <label for="min_team_size">Min Team Size:</label>
+    <input type="number" id="min_team_size" name="min_team_size" required>
+
+    <br>
+
+    <label for="repository_link">Repository Link:</label>
+    <input type="text" id="repository_link" name="repository_link" required>
+
+    <br>
+
+    <label for="manual_evaluation">Manual Evaluation:</label>
+    <input type="checkbox" id="manual_evaluation" name="manual_evaluation" required>
+
+    <br>
+
+    <label for="reg_deadline">Registration Deadline:</label>
+    <input type="date" id="reg_deadline" name="reg_deadline" required>
+
+    <br>
+
+    <label for="sub_deadline">Submission Deadline:</label>
+    <input type="date" id="sub_deadline" name="sub_deadline" required>
+
+    <input type="hidden" id="creator" name="creator">
+
+    <br>
+
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
+<button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
 
 <script type="text/javascript">
+    // JavaScript function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+
     $.get("/user", function (data) {
         $("#username").html(data.name);
         $("#creator").val(data.name);
