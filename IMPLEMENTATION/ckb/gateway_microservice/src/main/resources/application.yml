@@ -11,8 +11,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/ckb_db
-    username: alessandro
-    password: ubuntu2023
+    username: postgres
+    password: gattoVele
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     enabled: true

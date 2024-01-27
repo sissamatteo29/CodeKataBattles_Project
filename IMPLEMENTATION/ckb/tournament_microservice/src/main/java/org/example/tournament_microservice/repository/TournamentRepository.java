@@ -12,6 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface TournamentRepository extends JpaRepository<TournamentModel, Long> {
+
+    // those are method for which JPA automatically generates the query
     Optional<TournamentModel> findByName(String name);
     boolean existsByName(@Param("name") String name);
 

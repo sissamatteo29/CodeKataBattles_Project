@@ -3,12 +3,6 @@ package org.example.gateway_microservice.controller;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,12 +11,16 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -35,6 +33,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         this.restTemplate = new RestTemplate();
     }
 
+    // checks if user exists, returuns http response
     @GetMapping("/user")
     public ResponseEntity<Map<String, Object>> user(@AuthenticationPrincipal OAuth2User principal) {
         String username = (String) principal.getAttribute("login");
@@ -61,6 +60,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
             );
             System.out.println("User saved");
         }
+        // this is the name of the view that is returned
         return "index";
     }
 
@@ -74,6 +74,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "create-tournament";
     }
 
+    // the model here is a way to pass information from the controller to the view
     @GetMapping("/create-battle")
     public String battleForm(@RequestParam(required = false) String tournamentName, Model model) {
         model.addAttribute("tournamentName", tournamentName);
