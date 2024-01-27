@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -52,6 +49,12 @@ public class TournamentController {
     @PostMapping("/addStudent")
     public ResponseEntity<String> addStudent(@RequestParam String tourId, @RequestParam String studId) {
         return tournamentRankingService.addStudent(tourId, studId);
+    }
+
+    @GetMapping("/getAllSubscription")
+    public ResponseEntity<List<String>> getTourIdsByStudId(@RequestParam String name) {
+        List<String> tourIds = tournamentRankingService.findTourIdsByStudId(name);
+        return ResponseEntity.ok(tourIds);
     }
 
 }

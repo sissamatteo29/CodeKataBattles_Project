@@ -50,4 +50,7 @@ public class TournamentRankingService {
 
         return ResponseEntity.ok("Entry added successfully for tourId: " + tourId + " and studId: " + studId);
     }
+
+
+
 }

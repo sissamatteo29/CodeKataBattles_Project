@@ -206,9 +206,9 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
 
     @GetMapping("/all-tournaments-subscribed")
     @ResponseBody
-    public List<String> getAllTournamentSubscribed(@RequestParam String name, Model model) {
-        String createUrl = "http://localhost:8086/getAllSubscription?name=" + name;
-        System.out.println("Logged-in username: " + name);
+    public List<String> getAllTournamentSubscribed(@RequestParam String name) {
+        String createUrl = "http://localhost:8085/getAllSubscription?name=" + name;
+        System.out.println("Logged-in name: " + name);
         ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
                 createUrl,
                 HttpMethod.GET,
@@ -219,7 +219,6 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             List<String> tournamentNames = responseEntity.getBody();
-            model.addAttribute("tournamentNames", tournamentNames);
             System.out.println("getAllTournamentsSubscriptions status OK");
             return tournamentNames;
         } else {
@@ -228,7 +227,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
-    @GetMapping("/all-tournaments")
+        @GetMapping("/all-tournaments")
     @ResponseBody
     public List<String> getAllTournaments(@RequestParam String name, Model model) {
         String createUrl = "http://localhost:8085/getAllTournaments?name=" + name;
