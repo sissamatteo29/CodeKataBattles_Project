@@ -1,7 +1,7 @@
 package org.example.user_microservice.controller;
 
-import org.example.user_microservice.service.UserService;
 import org.example.user_microservice.model.UserModel;
+import org.example.user_microservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 
 @RestController
 public class UserController {
@@ -19,17 +17,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getAllSubscription")
-    public ResponseEntity<List<String>> getAllSubscription(@RequestParam String name) {
-        System.out.println("Getting the subscriptions");
-        System.out.println(name);
-        List<String> tournamentNames = userService.getTournamentNamesBySubscription(name);
-        if (tournamentNames != null && !tournamentNames.isEmpty()) {
-            return ResponseEntity.ok(tournamentNames);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-    }
+    // @GetMapping("/getAllSubscription")
+    // public ResponseEntity<List<String>> getAllSubscription(@RequestParam String name) {
+    //     System.out.println("Getting the subscriptions");
+    //     System.out.println(name);
+    //     List<String> tournamentNames = userService.getTournamentNamesBySubscription(name);
+    //     if (tournamentNames != null && !tournamentNames.isEmpty()) {
+    //         return ResponseEntity.ok(tournamentNames);
+    //     } else {
+    //         return ResponseEntity.noContent().build();
+    //     }
+    // }
 
     @GetMapping("/getUserRole")
     public ResponseEntity<Integer> getUserRole(@RequestParam String username) {
@@ -55,9 +53,10 @@ public class UserController {
         userService.saveUser(new UserModel(username, role));
     }
 
-    @PostMapping("/addSubscription")
-    public void addSubscription(@RequestParam String tournament, @RequestParam String username) {
-        userService.addSubscription(tournament, username);
-    }
+
+    // @PostMapping("/addSubscription")
+    // public void addSubscription(@RequestParam String tournament, @RequestParam String username) {
+    //     userService.addSubscription(tournament, username);
+    // }
 
 }

@@ -1,13 +1,10 @@
 package org.example.tournament_microservice.service;
 
-import org.checkerframework.common.value.qual.EnsuresMinLenIf;
 import org.example.tournament_microservice.model.TournamentModel;
 import org.example.tournament_microservice.repository.TournamentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,5 +31,7 @@ public class TournamentService {
         System.out.println(tournamentRepository.findNamesByCreator(creator));
         return tournamentRepository.findNamesByCreator(creator);
     }
+
+
 
 }

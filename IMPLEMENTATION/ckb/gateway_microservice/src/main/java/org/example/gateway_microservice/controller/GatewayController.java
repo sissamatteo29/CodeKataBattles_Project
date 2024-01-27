@@ -107,17 +107,23 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return new String(Base64.getUrlEncoder().encode(file));
     }
 
+
     @PostMapping("/subscribe")
     public String subscribe(@RequestParam String tournamentName, @RequestParam String username) {
         System.out.println("Received form data - Tournament: " + tournamentName);
-        String createNewTournamentUrl = "http://localhost:8086/addSubscription?"
-                + "tournament=" + tournamentName + "&username=" + username;
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(createNewTournamentUrl, null, String.class);
+
+        // Update the port to 8085
+        String url = "http://localhost:8085/addStudent?"
+                + "tourId=" + tournamentName + "&studId=" + username;
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, null, String.class);
+
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            System.out.println("Subscription successfully");
+            System.out.println("Subscription successful");
         } else {
-            System.out.println("Subscription error")  ;
+            System.out.println("Subscription error");
         }
+
         return "profile";
     }
 
