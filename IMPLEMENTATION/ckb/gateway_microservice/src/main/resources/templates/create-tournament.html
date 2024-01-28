@@ -14,16 +14,96 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 40%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 40%;
+            left: 38%;
+            max-width: 600px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        form {
+            text-align: center;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+
+        }
+
+        /* Style for form labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Style for form inputs */
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Style for form submit button */
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
 
 <h2>Create Tournament</h2>
 
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="username"></span>
-    <button onClick="logout()" class="btn btn-primary">Logout</button>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display: none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
 
+<div class="container">
+<div class="form-container">
 <form th:action="@{/createTournament}" method="post" id="createTournamentForm">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
@@ -40,9 +120,16 @@
     <br>
 
     <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+
 </form>
+</div>
+</div>
 
 <script type="text/javascript">
+    function goBack() {
+        window.history.back();
+    }
     $.get("/user", function (data) {
         $("#username").html(data.name);
         $("#creator").val(data.name);
@@ -74,6 +161,33 @@
                 }
             }
         }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the form element
+        var createTournamentForm = document.getElementById("createTournamentForm");
+
+        // Add an event listener for form submission
+        createTournamentForm.addEventListener("submit", function (event) {
+            // Get the input element for subscription date
+            var subscriptionDateInput = document.getElementById("subscriptionDate");
+
+            // Get the selected date from the input
+            var selectedDate = new Date(subscriptionDateInput.value);
+
+            // Get the current date
+            var currentDate = new Date();
+
+            // Compare the selected date with the current date
+            if (selectedDate <= currentDate) {
+                // If the selected date is not after today, prevent form submission
+                event.preventDefault();
+                // Display an alert message
+                alert("Please select a date after today.");
+                // Clear the input value
+                subscriptionDateInput.value = "";
+            }
+        });
     });
 
 </script>

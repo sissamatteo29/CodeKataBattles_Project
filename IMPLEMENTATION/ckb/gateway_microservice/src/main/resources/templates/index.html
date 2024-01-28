@@ -1,57 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Demo</title>
+    <title>Code Kata Battle</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ecf4f9; /* Light Blue Background */
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #333; /* Dark Text Color */
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .container button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3498db; /* Vibrant Blue Button Color */
+            border: none;
+            color: #fff; /* White Text Color */
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .container button:hover {
+            background-color: #2980b9; /* Darker Blue on Hover */
+        }
+
+        .container button.logout {
+            margin-top: 10px;
+            background-color: #e74c3c; /* Red Logout Button Color */
+            border-color: #e74c3c;
+        }
+
+        .container button.logout:hover {
+            background-color: #c0392b; /* Darker Red on Hover */
+            border-color: #c0392b;
+        }
+
+        .container .authenticated {
+            display: none;
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .container .authenticated button.logout {
+            margin-top: 10px;
+            background-color: #e74c3c; /* Red Logout Button Color */
+            border-color: #e74c3c;
+        }
+
+        .container .authenticated button.logout:hover {
+            background-color: #c0392b; /* Darker Red on Hover */
+            border-color: #c0392b;
+        }
+
+        .container .profile-button {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .container .profile-button button {
+            background-color: #4CAF50; /* Green Profile Button Color */
+            border-color: #4CAF50;
+        }
+
+        .container .profile-button button:hover {
+            background-color: #45a049; /* Darker Green on Hover */
+            border-color: #45a049;
+        }
+
+    </style>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
 </head>
 <body>
 
-<div class="container unauthenticated">
-    With GitHub: <a href="/oauth2/authorization/github">click here</a>
-</div>
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="username"></span>
-    <button onClick="logout()" class="btn btn-primary">Logout</button>
-</div>
-<div class="container role_sel" style="display:none">
-    <form th:action="@{/selectRole}" method="post">
-        <label for="role">Select your role:</label>
-        <select name="role" id="role" class="form-control">
-            <option value="0">Student</option>
-            <option value="1">Educator</option>
-        </select>
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-</div>
-<div class="container authenticated" style="display:none">
-    <a href="/profile">click here to see your profile</a>
+<div class="container">
+    <div class="unauthenticated">
+    <h2>Click here to register or to Log In</h2>
+    <button onclick="window.location.href='/oauth2/authorization/github'" class="btn btn-primary">
+        Login with GitHub
+    </button>
+    </div>
+    <div class="authenticated">
+        <span id="username"></span>
+        <button onclick="logout()" class="btn btn-primary logout">Logout</button>
+    </div>
+    <div class="role_sel" style="display:none">
+        <form th:action="@{/selectRole}" method="post">
+            <label for="role">Select your role:</label>
+            <select name="role" id="role" class="form-control">
+                <option value="0">Student</option>
+                <option value="1">Educator</option>
+            </select>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+    <div class="profile-button">
+        <button onclick="window.location.href='/profile'" class="btn btn-success">Click here to see your profile</button>
+    </div>
 </div>
 
 <script type="text/javascript">
     $.get("/user", function(data) {
         $("#username").html(data.name);
-        $(".unauthenticated").hide()
+        $(".unauthenticated").hide();
         if (data.userCheckResult === true) {
-            $(".authenticated").show()
+            $(".authenticated").show();
             $(".role_sel").hide();
+            $(".profile-button").show();
         } else {
-            $(".authenticated").hide()
+            $(".authenticated").hide();
             $(".role_sel").show();
+            $(".profile-button").hide();
         }
     });
+
     var logout = function() {
         $.post("/logout", function() {
             $("#username").html('');
             $(".unauthenticated").show();
             $(".authenticated").hide();
+            $(".profile-button").hide();
         })
         return true;
     }

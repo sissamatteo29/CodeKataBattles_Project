@@ -33,7 +33,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         this.restTemplate = new RestTemplate();
     }
 
-    // checks if user exists, returuns http response
+    // checks if user exists, returns http response
     @GetMapping("/user")
     public ResponseEntity<Map<String, Object>> user(@AuthenticationPrincipal OAuth2User principal) {
         String username = (String) principal.getAttribute("login");
