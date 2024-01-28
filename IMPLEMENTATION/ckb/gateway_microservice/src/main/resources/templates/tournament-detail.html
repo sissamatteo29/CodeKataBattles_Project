@@ -10,16 +10,71 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 40%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 40%;
+            left: 32%;
+            max-width: 800px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        .name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+        li {
+            cursor: pointer;
+            color: #555; /* Gray Text Color */
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px; /* Adjust as needed */
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none; /* Remove underline */
+        }
+
+        li:hover {
+            color: #777; /* Darker Gray on Hover */
+        }
+    </style>
 </head>
 <body>
 <h2>Tournament Details</h2>
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="username"></span>
-    <button onClick="logout()" class="btn btn-primary">Logout</button>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display:none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
-<p>Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
-<div class="container role-1" style="display:none">
-    <p>User with Role 1! (Educator)</p>
+<div class="container">
+<p class="name"> Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
+<div class="role-1" style="display:none">
     <p>Battles:</p>
     <ul>
         <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
@@ -27,8 +82,7 @@
     <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
     <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
 </div>
-<div class="container role-0" style="display:none">
-    <p>User with Role 0! (Student) </p>
+<div class="role-0" style="display:none">
     <div class="container battles_display" style="display:none">
     <p>Battles:</p>
     <ul>
@@ -37,11 +91,12 @@
     </div>
     <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Tournament</a>
 </div>
+</div>
 </body>
 
 <script type="text/javascript">
     function goBack() {
-        window.history.back();
+        window.location.href = '/profile';
     }
 
     $.get("/user", function (data) {
