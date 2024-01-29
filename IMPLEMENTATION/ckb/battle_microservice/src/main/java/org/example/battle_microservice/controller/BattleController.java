@@ -1,14 +1,16 @@
 package org.example.battle_microservice.controller;
 
 import org.example.battle_microservice.model.BattleModel;
+import org.example.battle_microservice.service.BattleRankingService;
 import org.example.battle_microservice.service.BattleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,8 @@ import java.util.List;
 public class BattleController {
     @Autowired
     private BattleService battleService;
+    @Autowired
+    private BattleRankingService battleRankingService;
 
     private Date parseDate(String dateString) {
         try {
@@ -68,5 +72,22 @@ public class BattleController {
     public List<String> getBattlesByTournament(@RequestParam String tournamentName, Model model) {
         System.out.println("Getting all battles by tournament (controller)");
         return battleService.getBattlesByTournament(tournamentName);
+    }
+
+    @PostMapping("/addStudent")
+    public ResponseEntity<String> addStudent(
+            @RequestParam String tour,
+            @RequestParam String battle,
+            @RequestParam String stud,
+            @RequestParam String team) {
+        return battleRankingService.addStudent(tour, battle, stud, team);
+    }
+
+    @GetMapping("/getBattlesByTourAndStud")
+    public ResponseEntity<List<String>> getBattlesByTourAndStud(
+            @RequestParam String tour,
+            @RequestParam String stud) {
+        List<String> battles = battleRankingService.getBattlesByTourAndStud(tour, stud);
+        return ResponseEntity.ok(battles);
     }
 }
