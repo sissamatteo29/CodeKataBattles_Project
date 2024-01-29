@@ -2,13 +2,14 @@ package org.example.user_microservice.controller;
 
 import org.example.user_microservice.model.UserModel;
 import org.example.user_microservice.service.UserService;
+import org.example.user_microservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -16,18 +17,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    // @GetMapping("/getAllSubscription")
-    // public ResponseEntity<List<String>> getAllSubscription(@RequestParam String name) {
-    //     System.out.println("Getting the subscriptions");
-    //     System.out.println(name);
-    //     List<String> tournamentNames = userService.getTournamentNamesBySubscription(name);
-    //     if (tournamentNames != null && !tournamentNames.isEmpty()) {
-    //         return ResponseEntity.ok(tournamentNames);
-    //     } else {
-    //         return ResponseEntity.noContent().build();
-    //     }
-    // }
 
     @GetMapping("/getUserRole")
     public ResponseEntity<Integer> getUserRole(@RequestParam String username) {
@@ -54,9 +43,29 @@ public class UserController {
     }
 
 
-    // @PostMapping("/addSubscription")
-    // public void addSubscription(@RequestParam String tournament, @RequestParam String username) {
-    //     userService.addSubscription(tournament, username);
-    // }
+    @PostMapping(value = "/saveMessage", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void saveMessage(@RequestBody String message) {
+        System.out.println("Message received: " + message);
+        List<UserModel> userList = userService.getAllUsers();
+        String name_temp = "";
+        for (UserModel user : userList) {
+            String name = user.getUsername();
+            if (name.equals(name_temp)) continue;
+            Integer role = user.getRole();
+            name_temp = name;
 
+            saveMessageForUser(name, role, message);
+        }
+    }
+    @GetMapping("/getNotifications")
+    public List<String> getNotifications(@RequestParam String username) {
+        System.out.println("Username: "+ username);
+        return userService.getNotifications(username);
+    }
+
+
+    private void saveMessageForUser(String name, Integer role, String message) {
+        System.out.println("Saving message for user - Nome: " + name + ", Ruolo: " + role + ", Message: " + message);
+        userService.saveUser((new UserModel(name, role, message)));
+    }
 }
