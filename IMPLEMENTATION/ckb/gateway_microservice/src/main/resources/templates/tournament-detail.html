@@ -80,6 +80,7 @@
         <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
     </ul>
     <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
+    <button type="button" class="btn btn-secondary" onclick="endTournament()">End the Tournament</button>
     <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
 </div>
 <div class="role-0" style="display:none">
@@ -97,6 +98,17 @@
 <script type="text/javascript">
     function goBack() {
         window.location.href = '/profile';
+    }
+
+    function endTournament() {
+        var tournamentName = $("#tournamentName").text().trim();
+
+        $.post("/end-tournament", { tournamentName: tournamentName }, function (response) {
+            window.location.href = '/profile';
+        })
+            .fail(function (error) {
+                console.error(error);
+            });
     }
 
     $.get("/user", function (data) {

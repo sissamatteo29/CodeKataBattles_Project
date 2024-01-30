@@ -35,8 +35,11 @@ public class TournamentModel {
     public String getName() {
         return this.name;
     }
+    public Long getId() {return this.id;}
+    public void setEndDate(Date date) {this.end_date = date; }
     public Date getSubscriptionDeadline() {return this.subscription_deadline; }
     public String getCreator() {return this.creator; }
     public boolean getEnded() {return this.ended; }
+    public void setEnded(Boolean ended) {this.ended=ended; }
     public Date getEndDate() {return this.end_date; }
 }

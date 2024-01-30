@@ -122,12 +122,24 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "profile";
     }
 
+    @PostMapping("/end-tournament")
+    public String endTournament(@RequestParam String tournamentName) {
+        System.out.println("Tournament name for end-tournament: " + tournamentName);
+        String url = "http://localhost:8085/endTournament?tournament=" + tournamentName;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, null, String.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Ended tournament successful");
+        } else {
+            System.out.println("Tournament cannot be ended");
+        }
+        return "profile";
+    }
+
 
     @PostMapping("/subscribe")
     public String subscribe(@RequestParam String tournamentName, @RequestParam String username) {
         System.out.println("Received form data - Tournament: " + tournamentName);
 
-        // Update the port to 8085
         String url = "http://localhost:8085/addStudent?"
                 + "tourId=" + tournamentName + "&studId=" + username;
 

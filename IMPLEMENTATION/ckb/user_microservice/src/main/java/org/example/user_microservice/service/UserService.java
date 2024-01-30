@@ -30,6 +30,11 @@ public class UserService {
     }
     public Integer getUserRole(String username) { return userRepository.getUserRole(username); }
 
+    public Optional<UserModel> getUserModelById(Long id) {return userRepository.findById(id);}
+
+    public UserModel getUserModel(String username) { return userRepository.getUserModel(username); }
+
+
     public boolean isUserExists(String username) {
         return userRepository.existsByUsername(username);
     }
