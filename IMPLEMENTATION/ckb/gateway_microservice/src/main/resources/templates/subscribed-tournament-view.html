@@ -126,10 +126,12 @@ function displayBattle(battles) {
 
     if (battles.length > 0) {
         for (var i = 0; i < battles.length; i++) {
+            var tournamentName = document.getElementById("tournamentName").innerText;
             var userNameFromFrontend = $("#username").text().trim();
             var tournamentLink = $("<a>", {
-                // ancora non esiste questo link, conviene passare pure il tournament forse
-                href: "/battle-detail?name=" + encodeURIComponent(battles[i]),
+
+                href: "/battle-detail?tournament_name=" + encodeURIComponent(tournamentName)
+                + "&battle_name=" + encodeURIComponent(battles[i]),
                 class: "tournament-link",
                 text: (i + 1) + ". " + battles[i]
             });

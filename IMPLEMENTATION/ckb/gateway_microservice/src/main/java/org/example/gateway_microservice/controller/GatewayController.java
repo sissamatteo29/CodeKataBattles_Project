@@ -327,6 +327,16 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
             return null;
         }
     }
+    @GetMapping("/battle-detail")
+    public String showBattleDetail(
+            @RequestParam("tournament_name") String tournamentName,
+            @RequestParam("battle_name") String battleName, Model model) {
+        model.addAttribute("tournamentName", tournamentName);
+        model.addAttribute("battleName", battleName);
+        System.out.println("Get Mapping battle-detail");
+        return "battle-detail";
+
+    }
 
     @GetMapping("/getBattlesByTour")
     @ResponseBody
