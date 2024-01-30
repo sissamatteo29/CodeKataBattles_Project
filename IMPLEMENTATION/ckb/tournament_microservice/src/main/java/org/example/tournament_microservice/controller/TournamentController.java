@@ -57,4 +57,9 @@ public class TournamentController {
         return ResponseEntity.ok(tourIds);
     }
 
+    @PostMapping("/endTournament")
+    public ResponseEntity<String> endTournament(@RequestParam String tournament) {
+        tournamentService.endTournament(tournament);
+        return ResponseEntity.ok(tournament);
+    }
 }

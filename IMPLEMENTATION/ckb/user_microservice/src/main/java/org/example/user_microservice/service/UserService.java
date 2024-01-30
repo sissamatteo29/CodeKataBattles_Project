@@ -4,6 +4,8 @@ import org.example.user_microservice.model.UserModel;
 import org.example.user_microservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,26 +25,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-// public List<String> getTournamentNamesBySubscription(String name) {
-//     System.out.println(userRepository.findNamesBySubscription(name));
-//     return userRepository.findNamesBySubscription(name);
-// }
-//
-//
-// public void addSubscription(String tournament, String username) {
-//     Optional<UserModel> optionalUser = userRepository.findByUsername(username);
-//
-//     if (optionalUser.isPresent()) {
-//         UserModel user = optionalUser.get();
-//         user.setTournament(tournament);
-//
-//         // Save the updated user back to the database
-//         userRepository.save(user);
-//     }
-// }
-//
-
+    public List<UserModel> getAllUsers() {
+        return userRepository.findAll();
+    }
     public Integer getUserRole(String username) { return userRepository.getUserRole(username); }
+
+    public Optional<UserModel> getUserModelById(Long id) {return userRepository.findById(id);}
+
+    public UserModel getUserModel(String username) { return userRepository.getUserModel(username); }
+
 
     public boolean isUserExists(String username) {
         return userRepository.existsByUsername(username);
@@ -55,5 +46,27 @@ public class UserService {
             user.setRole(role);
             userRepository.save(user);
         });
+    }
+
+    public List<String> getNotifications(String username) {
+        List<UserModel> users = userRepository.findAllByUsername(username);
+        System.out.println("Users retrieved: " + users.toString());
+        List<String> notificationsList = new ArrayList<>();
+
+        for (UserModel user : users) {
+            // For each user, call the NotificationService to get notifications
+            String userNotifications = user.getNotifications();
+
+            // Add user notifications to the overall list
+            notificationsList.add(userNotifications);
+        }
+
+        System.out.println("Notifications retrieved: "+notificationsList.toString());
+        if (!notificationsList.isEmpty()) {
+            return notificationsList;
+        } else {
+            // Handle the case when no notifications are found
+            return List.of("No notifications found");
+        }
     }
 }

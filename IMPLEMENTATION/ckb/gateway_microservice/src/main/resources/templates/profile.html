@@ -5,7 +5,7 @@
     <title>User Profile</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Demo</title>
+    <title>Profile</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
@@ -57,6 +57,11 @@
         a:hover {
             color: #777; /* Darker Gray on Hover */
         }
+        .divNotif {
+            top: 10px;
+            left: 10px;
+            position: fixed;
+        }
     </style>
 </head>
 <body>
@@ -74,9 +79,11 @@
     </div>
 </div>
 <div class="role-0" style="display:none">
+    <button onclick="window.location.href='/notification'" class="btn btn-success divNotif">Notification</button>
+
     <h3>Welcome, Student</h3> <br>
     <div>
-        <a href="#" id="displayTournamentsLinkStudent" class="btn btn-primary">Display your tournaments</a>
+        <a href="#" id="displayTournamentsLinkStudent" class="btn btn-primary">Display all tournaments</a>
         <a href="#" id="displaySubscribed" class="btn btn-primary">Display tournaments you are subscribed in</a>
     </div>
 </div>

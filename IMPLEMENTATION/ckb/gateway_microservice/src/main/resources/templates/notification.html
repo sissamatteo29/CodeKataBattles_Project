@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Tournament Details</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Notification</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
@@ -21,7 +22,7 @@
         }
         h2 {
             top: 10px;
-            right: 40%;
+            right: 44%;
             position: fixed;
             font-family: 'Open Sans', sans-serif;
             font-size: 36px;
@@ -41,17 +42,7 @@
             text-align: center;
             align-items: center;
         }
-        .name {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        p {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 18px;
-            font-weight: lighter;
-        }
-        li {
+        a {
             cursor: pointer;
             color: #555; /* Gray Text Color */
             font-family: 'Open Sans', sans-serif;
@@ -61,100 +52,53 @@
             text-decoration: none; /* Remove underline */
         }
 
-        li:hover {
+        a:hover {
             color: #777; /* Darker Gray on Hover */
+        }
+
+        .divNotif {
+            top: 10px;
+            left: 10px;
+            position: fixed;
         }
     </style>
 </head>
 <body>
-<h2>Tournament Details</h2>
+<h2>Notification</h2>
+<button onclick="goBack();" class="btn btn-secondary divNotif">Back</button>
 <div class="authenticated" style="display:none">
     <span id="username" style="display:none"></span>
     <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
 <div class="container">
-<p class="name"> Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
-<div class="role-1" style="display:none">
-    <p>Battles:</p>
-    <ul>
-        <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
-    </ul>
-    <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
-    <button type="button" class="btn btn-secondary" onclick="endTournament()">End the Tournament</button>
-    <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+        <h3>Here are your notifications</h3><br>
+        <div id="notification-list"></div>
+    <br>
+    <div id="tournamentList"></div>
 </div>
-<div class="role-0" style="display:none">
-    <div class="container battles_display" style="display:none">
-    <p>Battles:</p>
-    <ul>
-        <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
-    </ul>
-    </div>
-    <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Tournament</a>
-</div>
-</div>
-</body>
 
 <script type="text/javascript">
     function goBack() {
         window.location.href = '/profile';
     }
-
-    function endTournament() {
-        var tournamentName = $("#tournamentName").text().trim();
-
-        $.post("/end-tournament", { tournamentName: tournamentName }, function (response) {
-            window.location.href = '/profile';
-        })
-            .fail(function (error) {
-                console.error(error);
-            });
-    }
-
     $.get("/user", function (data) {
         $("#username").html(data.name);
         $(".unauthenticated").hide()
         if (data.userCheckResult === true) {
-            $(".authenticated").show()
-            $(".role_sel").hide();
-            if (data.role === 1) {
-                $(".role-1").show();
-            }
-            else {
-                $(".role-0").show();
-            }
+            $(".authenticated").show();
+            // Get and display notifications for the authenticated user
+            var username = data.name;
+            getAndDisplayNotifications(username);
         } else {
-            $(".authenticated").hide()
-            $(".role_sel").show();
+            $(".authenticated").hide();
         }
     });
+
     var logout = function () {
         $.post("/logout", function () {
             window.location.href = '/';
         })
         return true;
-    }
-
-    function subscribe() {
-        var tournamentName = $("#tournamentName").text();
-        var username = $("#username").text().trim();
-
-        // Make a POST request
-        $.ajax({
-            type: 'POST',
-            url: '/subscribe',
-            data: {
-                tournamentName: tournamentName,
-                username: username
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                // Handle error
-                console.error(error);
-            }
-        });
     }
 
     $.ajaxSetup({
@@ -171,5 +115,34 @@
         }
     });
 
+
+    function getAndDisplayNotifications(username) {
+        $.get("/getNotifications", { username: username }, function (notifications) {
+            displayNotifications(notifications);
+        })
+            .fail(function (xhr, textStatus, error) {
+                console.error("Error:", error);
+                console.log("Status Code:", xhr.status);
+            });
+    }
+
+    function displayNotifications(notifications) {
+        var notificationListDiv = $("#notification-list");
+        notificationListDiv.empty();
+
+        if (notifications.length > 0) {
+            for (var i = 0; i < notifications.length; i++) {
+                var notificationElement = $("<div>", {
+                    class: "notification-item",
+                    text: notifications[i]
+                });
+                notificationListDiv.append(notificationElement);
+            }
+        } else {
+            notificationListDiv.text("No notifications available.");
+        }
+    }
+
 </script>
+</body>
 </html>

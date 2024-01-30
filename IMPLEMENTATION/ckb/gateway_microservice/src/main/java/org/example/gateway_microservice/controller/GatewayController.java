@@ -67,9 +67,28 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "index";
     }
 
+    @GetMapping("/getNotifications")
+    @ResponseBody
+    public ResponseEntity<List<String>> getNotifications(@RequestParam String username) {
+        String microserviceEndpoint = "http://localhost:8086/getNotifications?username=" + username;
+        RestTemplate restTemplate = new RestTemplate();
+        List<String> notifications = restTemplate.getForObject(microserviceEndpoint, List.class);
+        System.out.println("Obtained a list: "+ notifications.toString());
+        if (notifications != null) {
+            return ResponseEntity.ok(notifications);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
     @GetMapping("/profile")
-    public String profile() {
+    public String showProfile() {
         return "profile";
+    }
+
+    @GetMapping("/notification")
+    public String showNotification() {
+        return "notification";
     }
 
     @GetMapping("/create-tournament")
@@ -128,8 +147,17 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return "profile";
     }
 
-    private String encodeToBase64(byte[] file) throws IOException {
-        return new String(Base64.getUrlEncoder().encode(file));
+    @PostMapping("/end-tournament")
+    public String endTournament(@RequestParam String tournamentName) {
+        System.out.println("Tournament name for end-tournament: " + tournamentName);
+        String url = "http://localhost:8085/endTournament?tournament=" + tournamentName;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, null, String.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            System.out.println("Ended tournament successful");
+        } else {
+            System.out.println("Tournament cannot be ended");
+        }
+        return "profile";
     }
 
 
@@ -137,7 +165,6 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
     public String subscribe(@RequestParam String tournamentName, @RequestParam String username) {
         System.out.println("Received form data - Tournament: " + tournamentName);
 
-        // Update the port to 8085
         String url = "http://localhost:8085/addStudent?"
                 + "tourId=" + tournamentName + "&studId=" + username;
 
