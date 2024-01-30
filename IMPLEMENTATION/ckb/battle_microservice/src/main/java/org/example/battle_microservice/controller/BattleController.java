@@ -74,6 +74,11 @@ public class BattleController {
         return battleService.getBattlesByTournament(tournamentName);
     }
 
+    @GetMapping("/getBattlesByTour")
+    public List<String> getBattlesByTournament(@RequestParam String tournamentName) {
+        return battleService.getBattlesByTournament(tournamentName);
+    }
+
     @PostMapping("/addStudent")
     public ResponseEntity<String> addStudent(
             @RequestParam String tour,

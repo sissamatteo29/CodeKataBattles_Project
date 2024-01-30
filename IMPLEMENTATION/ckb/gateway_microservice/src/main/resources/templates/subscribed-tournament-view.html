@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Profile</title>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Demo</title>
+    <title>Tournament Details</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
@@ -24,7 +21,7 @@
         }
         h2 {
             top: 10px;
-            right: 47%;
+            right: 40%;
             position: fixed;
             font-family: 'Open Sans', sans-serif;
             font-size: 36px;
@@ -44,7 +41,17 @@
             text-align: center;
             align-items: center;
         }
-        a {
+        .name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+        li {
             cursor: pointer;
             color: #555; /* Gray Text Color */
             font-family: 'Open Sans', sans-serif;
@@ -54,48 +61,56 @@
             text-decoration: none; /* Remove underline */
         }
 
-        a:hover {
+        li:hover {
             color: #777; /* Darker Gray on Hover */
         }
     </style>
 </head>
 <body>
-<h2>Profile</h2>
+<h2>Tournament Page</h2>
 <div class="authenticated" style="display:none">
     <span id="username" style="display:none"></span>
     <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
 <div class="container">
-<div class="role-1" style="display:none">
-    <h3>Welcome, Educator</h3><br>
-    <div>
-        <a href="/create-tournament" class="btn btn-primary">Create a new tournament</a>
-        <a href="#" id="displayTournamentsLink" class="btn btn-primary">Display your tournaments</a>
+    <p class="name"> Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
+      <div class="role-1" style="display:none">
+          <p>Battles:</p>
+          <ul>
+              <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+      </div>
+    <!-- New buttons for displaying lists -->
+    <div class="role-0" style="display:none">
+      <div style="text-align: center; margin-top: 20px;">
+        <!--
+        <button class="btn btn-info" onclick="displayListOfBattles()">Display List of Battles</button>
+        <button class="btn btn-warning" onclick="displayListOfYourBattles()">Display List of Your Battles</button>
+        -->
+          <a href="#" id="displayBattleLink" class="btn btn-primary">Display List of Battles</a>
+          <a href="#" id="displaySubscribedBattleLink" class="btn btn-primary">Display List of Your Battles</a>
+      </div>
+        <br>
+        <div id="BattleList"></div>
     </div>
-</div>
-<div class="role-0" style="display:none">
-    <h3>Welcome, Student</h3> <br>
-    <div>
-        <a href="#" id="displayTournamentsLinkStudent" class="btn btn-primary">Display your tournaments</a>
-        <a href="#" id="displaySubscribed" class="btn btn-primary">Display tournaments you are subscribed in</a>
-    </div>
-</div>
-    <br>
-    <div id="tournamentList"></div>
 </div>
 
-<script type="text/javascript"> <!-- For educator -->
+<script type="text/javascript">
 $(document).ready(function () {
-    $("#displayTournamentsLink").on("click", function (event) {
+    $("#displayBattleLink").on("click", function (event) {
         event.preventDefault(); // Prevent the default behavior of the anchor element
 
-        var userNameFromFrontend = $("#username").text().trim();
+        var tournamentName = document.getElementById("tournamentName").innerText;
+        var url = "/getBattlesByTour?tournamentName=" + encodeURIComponent(tournamentName);
+        console.log(url);
 
-        $.get("/all-tournaments", { name: userNameFromFrontend }, function (data, textStatus, xhr) {
+
+        $.get(url , function (data, textStatus, xhr) {
             console.log("Success:", data);
             console.log("Status Code:", xhr.status);
             if (xhr.status === 200) {
-                displayTournaments(data);
+                displayBattle(data);
             }
         })
             .fail(function (xhr, textStatus, error) {
@@ -104,77 +119,42 @@ $(document).ready(function () {
             });
     });
 });
-function displayTournaments(tournaments) {
-    var tournamentListDiv = $("#tournamentList");
-    tournamentListDiv.empty();
 
-    if (tournaments.length > 0) {
-        for (var i = 0; i < tournaments.length; i++) {
-            var tournamentLink = $("<a>", {
-                href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
-                class: "tournament-link",
-                text: (i + 1) + ". " + tournaments[i]
-            });
-            tournamentListDiv.append(tournamentLink);
-            tournamentListDiv.append("<br>");
-        }
-    } else {
-        tournamentListDiv.text("No tournaments available.");
-    }
-}
-</script>
-<script type="text/javascript"> <!-- For students -->
-$(document).ready(function () {
-    $("#displayTournamentsLinkStudent").on("click", function (event) {
-        event.preventDefault(); // Prevent the default behavior of the anchor element
+function displayBattle(battles) {
+    var BattleListDiv = $("#BattleList");
+    BattleListDiv.empty();
 
-
-        $.get("/all-tournaments-abs", function (data, textStatus, xhr) {
-            console.log("Success:", data);
-            console.log("Status Code:", xhr.status);
-            if (xhr.status === 200) {
-                displayTournamentsAbs(data);
-            }
-        })
-            .fail(function (xhr, textStatus, error) {
-                console.error("Error:", error);
-                console.log("Status Code:", xhr.status);
-            });
-    });
-});
-function displayTournamentsAbs(tournaments) {
-    var tournamentListDiv = $("#tournamentList");
-    tournamentListDiv.empty();
-
-    if (tournaments.length > 0) {
-        for (var i = 0; i < tournaments.length; i++) {
+    if (battles.length > 0) {
+        for (var i = 0; i < battles.length; i++) {
             var userNameFromFrontend = $("#username").text().trim();
             var tournamentLink = $("<a>", {
-                href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
+                // ancora non esiste questo link, conviene passare pure il tournament forse
+                href: "/battle-detail?name=" + encodeURIComponent(battles[i]),
                 class: "tournament-link",
-                text: (i + 1) + ". " + tournaments[i]
+                text: (i + 1) + ". " + battles[i]
             });
-            tournamentListDiv.append(tournamentLink);
-            tournamentListDiv.append("<br>");
+            BattleListDiv.append(tournamentLink);
+            BattleListDiv.append("<br>");
         }
     } else {
-        tournamentListDiv.text("No tournaments available.");
+        BattleListDiv.text("No battles available.");
     }
 }
-</script>
-<script type="text/javascript">
-    <!-- for students -->
+
+
 $(document).ready(function () {
-    $("#displaySubscribed").on("click", function (event) {
+    $("#displaySubscribedBattleLink").on("click", function (event) {
         event.preventDefault(); // Prevent the default behavior of the anchor element
 
         var userNameFromFrontend = $("#username").text().trim();
+        var tournamentName = document.getElementById("tournamentName").innerText;
+        var url = "/getBattlesByTourAndStud?tour=" + encodeURIComponent(tournamentName) + "&stud=" + userNameFromFrontend;
 
-        $.get("/all-tournaments-subscribed", { name: userNameFromFrontend }, function (data, textStatus, xhr) {
+        $.get(url, function (data, textStatus, xhr) {
             console.log("Success:", data);
             console.log("Status Code:", xhr.status);
             if (xhr.status === 200) {
-                displayTournamentsSubscribed(data);
+                displayBattlesSubscribed(data);
             }
         })
             .fail(function (xhr, textStatus, error) {
@@ -183,33 +163,35 @@ $(document).ready(function () {
             });
     });
 });
-    // - Sara ho modificato il link così porta alla pagina subscribedtournaments
-function displayTournamentsSubscribed(tournaments) {
-    var tournamentListDiv = $("#tournamentList");
-    tournamentListDiv.empty();
 
-    if (tournaments && tournaments.length > 0) {
-        for (var i = 0; i < tournaments.length; i++) {
-            if (tournaments[i]!=null) {
+function displayBattlesSubscribed(battles) {
+    var battleListDiv = $("#BattleList");
+    battleListDiv.empty();
+
+    if (battles && battles.length > 0) {
+        for (var i = 0; i < battles.length; i++) {
+            if (battles[i] != null) {
                 var tournamentLink = $("<a>", {
-                    //href: "/tournament-detail?name=" + encodeURIComponent(tournaments[i]),
-                    href: "/subscribed-tournament-view?name=" + encodeURIComponent(tournaments[i]),
+                    href: "/subscribed-battle-view?name=" + encodeURIComponent(battles[i]),
                     class: "tournament-link",
-                    text: (i + 1) + ". " + tournaments[i]
+                    text: (i + 1) + ". " + battles[i]
                 });
-                tournamentListDiv.append(tournamentLink);
-                tournamentListDiv.append("<br>");
-            }
-            else {
-                tournamentListDiv.text("No tournaments available.");
+                battleListDiv.append(tournamentLink);
+                battleListDiv.append("<br>");
+            } else {
+                battleListDiv.text("No battles available.");
             }
         }
     } else {
-        tournamentListDiv.text("No tournaments available.");
+        battleListDiv.text("No battles available.");
     }
 }
 </script>
 <script type="text/javascript">
+    function goBack() {
+        window.location.href = '/profile';
+    }
+
     $.get("/user", function (data) {
         $("#username").html(data.name);
         $(".unauthenticated").hide()
@@ -218,8 +200,7 @@ function displayTournamentsSubscribed(tournaments) {
             $(".role_sel").hide();
             if (data.role === 1) {
                 $(".role-1").show();
-            }
-            else {
+            } else {
                 $(".role-0").show();
             }
         } else {
@@ -227,7 +208,6 @@ function displayTournamentsSubscribed(tournaments) {
             $(".role_sel").show();
         }
     });
-
     var logout = function () {
         $.post("/logout", function () {
             window.location.href = '/';
@@ -248,7 +228,6 @@ function displayTournamentsSubscribed(tournaments) {
             }
         }
     });
-
 </script>
 </body>
 </html>

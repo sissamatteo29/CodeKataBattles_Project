@@ -83,6 +83,31 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         model.addAttribute("tournamentName", tournamentName);
         return "create-battle";
     }
+    // -Sara, per indirizzare alla view del subscribed tournament, ancora è una versione semplice
+    @GetMapping("/subscribed-tournament-view")
+    public String showSubscribedTournamentView(@RequestParam("name") String tournamentName, Model model) {
+        String createUrl = "http://localhost:8083/getAllBattles?tournamentName=" + tournamentName;
+        System.out.println("Tournament name: " + tournamentName);
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        System.out.println(responseEntity.getBody());
+
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> battleNames = responseEntity.getBody();
+            model.addAttribute("tournamentName", tournamentName);
+            model.addAttribute("battleNames", battleNames);
+            System.out.println("getAllBattles status OK");
+            return "subscribed-tournament-view";
+        } else {
+            System.out.println("getAllTournaments status KO");
+            return null;
+        }
+    }
 
     @PostMapping("/createTournament")
     public String createTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator) {
@@ -276,6 +301,72 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @GetMapping("/getBattlesByTour")
+    @ResponseBody
+    public List<String> getBattlesByTournament(@RequestParam String tournamentName, Model model) {
+        String battleMicroserviceUrl = "http://localhost:8083";
+        String endpoint = "/getBattlesByTour";
+
+        String createUrl = battleMicroserviceUrl + endpoint + "?tournamentName=" + tournamentName;
+
+        System.out.println("Tournament name: " + tournamentName);
+
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+
+        System.out.println(responseEntity.getBody());
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            List<String> battleNames = responseEntity.getBody();
+            model.addAttribute("battleNames", battleNames);
+            System.out.println("getBattlesByTournament status OK");
+            return battleNames;
+        } else {
+            System.out.println("getBattlesByTournament status KO");
+            return null;
+        }
+    }
+
+    // parte da testare ancora per iscriversi a battaglie
+    @GetMapping("/getBattlesByTourAndStud")
+    @ResponseBody
+    public List<String> getBattlesByTourAndStud(
+            @RequestParam String tour,
+            @RequestParam String stud) {
+        String url = "http://localhost:8083" + "/getBattlesByTourAndStud?tour=" + tour + "&stud=" + stud;
+
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+
+        if (responseEntity != null && responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<String> battles = responseEntity.getBody();
+            System.out.println("getBattlesByTourAndStud status OK");
+            return battles;
+        } else {
+            System.out.println("getBattlesByTourAndStud status KO");
+            return null;
+        }
+    }
+
+    @PostMapping("/addStudent")
+    public ResponseEntity<String> addStudent(
+            @RequestParam String tour,
+            @RequestParam String battle,
+            @RequestParam String stud,
+            @RequestParam String team) {
+        String url = "http://localhost:8083" + "/addStudent?tour=" + tour + "&battle=" + battle +
+                "&stud=" + stud + "&team=" + team;
+        return restTemplate.postForEntity(url, null, String.class);
+    }
+    // fine parte nuova da testare
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
