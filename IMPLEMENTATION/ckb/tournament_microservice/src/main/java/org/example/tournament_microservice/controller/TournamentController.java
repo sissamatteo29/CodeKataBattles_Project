@@ -57,6 +57,12 @@ public class TournamentController {
         return ResponseEntity.ok(tourIds);
     }
 
+
+    @GetMapping("/studScores")
+    public List<Object[]> getStudAndScoreByTour(@RequestParam String tour) {
+        return tournamentRankingService.getStudAndScoreByTour(tour);
+    }
+
     @PostMapping("/endTournament")
     public ResponseEntity<String> endTournament(@RequestParam String tournament) {
         tournamentService.endTournament(tournament);

@@ -64,6 +64,37 @@
         li:hover {
             color: #777; /* Darker Gray on Hover */
         }
+        .score-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+        .score-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .filled-bar {
+            height: 30px;
+            background-color: #4caf50;
+        }
+
+        .empty-bar {
+            height: 30px;
+            background-color: #ddd; /* Slightly grey color for the empty part */
+        }
+
+        .score-label {
+            font-size: 18px;
+            margin-left: 10px; /* Adjust the margin to create space between bar and label */
+        }
+
     </style>
 </head>
 <body>
@@ -91,9 +122,60 @@
     </ul>
     </div>
     <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Tournament</a>
-</div>
+</div >
+    <div class="score-label">Battle Ranking:</div>
+    <div class="score-container">
+    <script>
+        $(function () {
+            var endpoint = "/all-scores-by-tour?tour=" + $("#tournamentName").text();
+            fetchAndDisplayObjects(endpoint);
+        });
+    </script>
+    </div>
 </div>
 </body>
+
+<script>
+    function fetchAndDisplayObjects(objectsEndpoint) {
+        $.get(objectsEndpoint, function (objectArrays) {
+            var objects = objectArrays.map(function (objArray) {
+                return {
+                    label: objArray[0],
+                    score: objArray[1]
+                };
+            });
+            displayObjects(objects);
+        }).fail(function (xhr, textStatus, error) {
+            console.error("Error fetching objects:", error);
+        });
+    }
+
+    function displayObjects(objects) {
+        var scoreContainer = document.querySelector('.score-container');
+
+        objects.forEach(function (obj) {
+            var scoreBar = document.createElement('div');
+            scoreBar.className = 'score-bar';
+
+            var filledBar = document.createElement('div');
+            filledBar.className = 'filled-bar';
+            filledBar.style.width = obj.score + '%';
+
+            var emptyBar = document.createElement('div');
+            emptyBar.className = 'empty-bar';
+            emptyBar.style.width = (100 - obj.score) + '%';
+
+            var scoreLabel = document.createElement('div');
+            scoreLabel.className = 'score-label';
+            scoreLabel.textContent = obj.label +": "+ obj.score;
+
+            scoreBar.appendChild(filledBar);
+            scoreBar.appendChild(emptyBar);
+            scoreBar.appendChild(scoreLabel);
+            scoreContainer.appendChild(scoreBar);
+        });
+    }
+</script>
 
 <script type="text/javascript">
     function goBack() {

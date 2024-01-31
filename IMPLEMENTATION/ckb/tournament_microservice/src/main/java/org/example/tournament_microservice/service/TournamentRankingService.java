@@ -35,6 +35,10 @@ public class TournamentRankingService {
         tournamentRankingRepository.updateScoreByTourIdAndStudId(tourId, studId, newScore);
     }
 
+    public List<Object[]> getStudAndScoreByTour(String tour) {
+        return tournamentRankingRepository.findStudAndScoreByTour(tour);
+    }
+
     public ResponseEntity<String> addStudent(String tourId, String studId) {
         // Check if the entry already exists
         TourIdStudId id = new TourIdStudId(tourId, studId);

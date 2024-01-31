@@ -437,6 +437,27 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @GetMapping("/all-scores-by-tour")
+    @ResponseBody
+    public List<Object[]> getAllTourScores(@RequestParam String tour) {
+        String createUrl = "http://localhost:8085/studScores?tour=" + tour;
+        ResponseEntity<List<Object[]>> responseEntity = (ResponseEntity<List<Object[]>>) restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Object[]>>() {}
+        );
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<Object[]> scores = responseEntity.getBody();
+            System.out.println("request scores status OK");
+            return scores;
+        } else {
+            System.out.println("request scores status KO");
+            return null;
+        }
+    }
+
     @GetMapping("/score")
     public ResponseEntity<Integer> getScoreByTourBattleStud(
             @RequestParam String tour,

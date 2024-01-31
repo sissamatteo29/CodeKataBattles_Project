@@ -24,6 +24,11 @@ public interface TournamentRankingRepository extends JpaRepository<TournamentRan
     @Query("SELECT tr.id.tourId FROM TournamentRankingModel tr WHERE tr.id.studId = :studId")
     List<String> findTourIdsByStudId(@Param("studId") String studId);
 
+    @Query("SELECT tr.id.studId, tr.score FROM TournamentRankingModel tr " +
+            "WHERE tr.id.tourId = :tour ")
+    List<Object[]> findStudAndScoreByTour(@Param("tour") String tour);
+
+
     // Custom query to update the score given a tourId and studId
     @Modifying
     @Transactional
