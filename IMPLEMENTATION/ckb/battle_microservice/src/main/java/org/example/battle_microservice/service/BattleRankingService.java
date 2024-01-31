@@ -45,4 +45,16 @@ public class BattleRankingService {
         return ResponseEntity.ok("Entry added successfully for tour: " + tour +
                 ", battle: " + battle + ", stud: " + stud + ", and team: " + team);
     }
+
+    public Integer getScore(String tour,String battle,String stud){
+        return rankingRepository.findScoreByTourBattleStud(tour, battle, stud);
+    }
+    public List<Object[]> getDistinctTeamNameAndScoreByTourAndBattle(String tour, String battle) {
+        return rankingRepository.findDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
+    }
+
+    public String findTeamNameByTourBattleStud(String tour, String battle, String stud) {
+        TourBattleStud tourBattleStud = new TourBattleStud(tour, battle, stud);
+        return rankingRepository.findTeamNameByTourBattleStud(tourBattleStud);
+    }
 }

@@ -173,8 +173,10 @@ function displayBattlesSubscribed(battles) {
     if (battles && battles.length > 0) {
         for (var i = 0; i < battles.length; i++) {
             if (battles[i] != null) {
+                var tournamentName = document.getElementById("tournamentName").innerText;
                 var tournamentLink = $("<a>", {
-                    href: "/subscribed-battle-view?name=" + encodeURIComponent(battles[i]),
+                    href: "/battle-home?tournament_name=" + encodeURIComponent(tournamentName)
+                        + "&battle_name=" + encodeURIComponent(battles[i]),
                     class: "tournament-link",
                     text: (i + 1) + ". " + battles[i]
                 });

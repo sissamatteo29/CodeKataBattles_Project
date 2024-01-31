@@ -95,4 +95,28 @@ public class BattleController {
         List<String> battles = battleRankingService.getBattlesByTourAndStud(tour, stud);
         return ResponseEntity.ok(battles);
     }
+
+    @GetMapping("/score")
+    public Integer getScoreByTourBattleStud(
+            @RequestParam String tour,
+            @RequestParam String battle,
+            @RequestParam String stud) {
+
+        return battleRankingService.getScoreByTourBattleStud(tour, battle, stud);
+    }
+
+    @GetMapping("/teamName")
+    public String getTeamName(
+            @RequestParam("tour") String tour,
+            @RequestParam("battle") String battle,
+            @RequestParam("stud") String stud) {
+        return battleRankingService.findTeamNameByTourBattleStud(tour, battle, stud);
+    }
+    @GetMapping("/distinctScoresAndTeamNames")
+    public List<Object[]> getDistinctTeamNameAndScoreByTourAndBattle(
+            @RequestParam String tour,
+            @RequestParam String battle
+    ) {
+        return battleRankingService.getDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
+    }
 }

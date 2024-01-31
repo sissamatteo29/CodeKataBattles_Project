@@ -338,6 +338,17 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
 
     }
 
+    @GetMapping("/battle-home")
+    public String showBattleHome(
+            @RequestParam("tournament_name") String tournamentName,
+            @RequestParam("battle_name") String battleName, Model model) {
+        model.addAttribute("tournamentName", tournamentName);
+        model.addAttribute("battleName", battleName);
+        System.out.println("Get Mapping battle-home");
+        return "battle-home";
+
+    }
+
     @GetMapping("/getBattlesByTour")
     @ResponseBody
     public List<String> getBattlesByTournament(@RequestParam String tournamentName, Model model) {
@@ -368,7 +379,7 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
-    // parte da testare ancora per iscriversi a battaglie
+
     @GetMapping("/getBattlesByTourAndStud")
     @ResponseBody
     public List<String> getBattlesByTourAndStud(
@@ -404,6 +415,61 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         return restTemplate.postForEntity(url, null, String.class);
     }
     // fine parte nuova da testare
+
+    @GetMapping("/all-scores-by-battle")
+    @ResponseBody
+    public List<Object[]> getAllScores(@RequestParam String tour, @RequestParam String battle) {
+        String createUrl = "http://localhost:8083/distinctScoresAndTeamNames?tour=" + tour + "&battle=" + battle;
+        ResponseEntity<List<Object[]>> responseEntity = (ResponseEntity<List<Object[]>>) restTemplate.exchange(
+                createUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Object[]>>() {}
+        );
+
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            List<Object[]> scores = responseEntity.getBody();
+            System.out.println("request scores status OK");
+            return scores;
+        } else {
+            System.out.println("request scores status KO");
+            return null;
+        }
+    }
+
+    @GetMapping("/score")
+    public ResponseEntity<Integer> getScoreByTourBattleStud(
+            @RequestParam String tour,
+            @RequestParam String battle,
+            @RequestParam String stud) {
+
+        String serviceUrl = "http://localhost:8083/score";
+
+        ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
+                serviceUrl + "?tour={tour}&battle={battle}&stud={stud}",
+                Integer.class, tour, battle, stud);
+
+        return ResponseEntity.status(responseEntity.getStatusCode())
+                .headers(responseEntity.getHeaders())
+                .body(responseEntity.getBody());
+    }
+    @GetMapping("/student-team")
+    public ResponseEntity<String> getTeamName(
+            @RequestParam("tour") String tour,
+            @RequestParam("battle") String battle,
+            @RequestParam("stud") String stud) {
+
+        String serviceUrl = "http://localhost:8083/teamName";
+
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(
+                serviceUrl + "?tour={tour}&battle={battle}&stud={stud}",
+                String.class, tour, battle, stud);
+
+        return ResponseEntity.status(responseEntity.getStatusCode())
+                .headers(responseEntity.getHeaders())
+                .body(responseEntity.getBody());
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
