@@ -46,8 +46,8 @@ public class BattleController {
                                                   @RequestParam boolean manual_evaluation,
                                                   @RequestParam String reg_deadline,
                                                   @RequestParam String sub_deadline,
-                                                  @RequestParam String creator,
-                                                  Model model) {
+                                                  @RequestParam String creator
+                                                  ) {
         try {
             // Decode Base64-encoded parameters
             byte[] automationBuildScriptBytes = Base64.getUrlDecoder().decode(automation_build_script);
