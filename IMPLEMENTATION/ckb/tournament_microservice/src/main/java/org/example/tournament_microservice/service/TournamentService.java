@@ -39,6 +39,11 @@ public class TournamentService {
         tournamentRepository.save(tournament);
     }
 
+    public Optional<TournamentModel> getTournamentByName(String tournamentName) {
+        return tournamentRepository.findByName(tournamentName);
+    }
+
+
     public void endTournament(String tournamentName) {
         System.out.println("Ending the tournament");
 
