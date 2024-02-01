@@ -128,6 +128,17 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @GetMapping("/isTournamentEnded")
+    public ResponseEntity<Boolean> isTournamentEnded(@RequestParam String tournamentName) {
+        // Make a REST request to the external service to check if the tournament has ended
+        String externalServiceUrl = "http://localhost:8085/isTournamentEnded?tournamentName=" + tournamentName;
+
+        RestTemplate restTemplate = new RestTemplate();
+        Boolean tournamentEnded = restTemplate.getForObject(externalServiceUrl, Boolean.class);
+
+        return ResponseEntity.ok(tournamentEnded);
+    }
+
     @PostMapping("/createTournament")
     public String createTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator) {
         System.out.println("Received form data - Name: " + name + ", Submission Date: " + subscriptionDate + ", Name: " + creator);
