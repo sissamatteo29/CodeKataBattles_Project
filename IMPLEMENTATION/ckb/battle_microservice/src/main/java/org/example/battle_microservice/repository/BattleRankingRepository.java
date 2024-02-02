@@ -24,5 +24,8 @@ public interface BattleRankingRepository extends JpaRepository<BattleRankingMode
 
     @Query("SELECT br.teamName FROM BattleRankingModel br WHERE br.id = :tourBattleStud")
     String findTeamNameByTourBattleStud(@Param("tourBattleStud") TourBattleStud tourBattleStud);
+    @Query("SELECT  brm.id.stud, brm.score FROM BattleRankingModel brm " +
+            "WHERE brm.id.tour = :tour AND brm.id.battle = :battle")
+    List<Object[]> findStudAndScoreByTourAndBattle(@Param("tour") String tour, @Param("battle") String battle);
 
 }

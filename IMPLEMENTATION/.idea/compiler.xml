@@ -10,6 +10,7 @@
         <module name="battle_microservice" />
         <module name="gateway_microservice" />
         <module name="ckb" />
+        <module name="notification_microservice" />
         <module name="tournament_microservice" />
       </profile>
     </annotationProcessing>
@@ -22,6 +23,7 @@
       <module name="battle_microservice" options="-parameters" />
       <module name="ckb" options="-parameters" />
       <module name="gateway_microservice" options="-parameters" />
+      <module name="notification_microservice" options="-parameters" />
       <module name="tournament_microservice" options="-parameters" />
       <module name="user_microservice" options="-parameters" />
       <module name="user_microservice (1)" options="-parameters" />

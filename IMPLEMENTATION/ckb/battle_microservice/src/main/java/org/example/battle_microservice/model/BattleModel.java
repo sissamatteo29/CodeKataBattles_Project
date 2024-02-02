@@ -61,6 +61,7 @@ public class BattleModel {
         this.reg_deadline = reg_deadline;
         this.sub_deadline = sub_deadline;
         this.creator = creator;
+        this.ended = false;
     }
 
     public String getName() {
@@ -90,4 +91,11 @@ public class BattleModel {
     public void setEnded(Boolean ended) {this.ended = ended; }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

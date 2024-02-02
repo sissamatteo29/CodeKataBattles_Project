@@ -23,4 +23,8 @@ public class BattleService {
         return battles.stream().map(BattleModel::getName).collect(Collectors.toList());
     }
 
+    public void markBattleAsEnded(Long battleId) {
+        battleRepository.markBattleAsEnded(battleId);
+    }
+
 }

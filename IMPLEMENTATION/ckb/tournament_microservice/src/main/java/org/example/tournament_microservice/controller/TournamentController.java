@@ -6,10 +6,7 @@ import org.example.tournament_microservice.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -79,5 +76,18 @@ public class TournamentController {
     public ResponseEntity<String> endTournament(@RequestParam String tournament) {
         tournamentService.endTournament(tournament);
         return ResponseEntity.ok(tournament);
+    }
+
+    @PostMapping("/updateResultsBattle")
+    public ResponseEntity<String> updateValues(
+            @RequestParam String tour,
+            @RequestBody List<Object[]> stud_scores) {
+
+
+        System.out.println("tournament: " + tour);
+        System.out.println("stud_scores: " + stud_scores);
+
+        tournamentRankingService.updateScoreByTourAndStudent( stud_scores, tour);
+        return ResponseEntity.ok("Values updated successfully");
     }
 }

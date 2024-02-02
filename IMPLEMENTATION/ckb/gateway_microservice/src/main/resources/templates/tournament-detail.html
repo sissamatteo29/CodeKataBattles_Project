@@ -123,7 +123,7 @@
     </div>
     <a id="subscriptionLink" href="profile" class="btn btn-success btn-end-tournament" onclick="subscribe()">Subscribe to the Tournament</a>
 </div >
-    <div class="score-label">Battle Ranking:</div>
+    <div class="score-label">Tournament Ranking:</div>
     <div class="score-container">
     <script>
         $(function () {
@@ -159,11 +159,11 @@
 
             var filledBar = document.createElement('div');
             filledBar.className = 'filled-bar';
-            filledBar.style.width = obj.score + '%';
+            filledBar.style.width = (obj.score*0.1) + '%';
 
             var emptyBar = document.createElement('div');
             emptyBar.className = 'empty-bar';
-            emptyBar.style.width = (100 - obj.score) + '%';
+            emptyBar.style.width = (100 - (obj.score*0.1)) + '%';
 
             var scoreLabel = document.createElement('div');
             scoreLabel.className = 'score-label';

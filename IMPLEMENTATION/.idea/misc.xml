@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/ckb/tournament_microservice/pom.xml" />
         <option value="$PROJECT_DIR$/ckb/pom.xml" />
         <option value="$PROJECT_DIR$/ckb/notification-microservice/pom.xml" />
+        <option value="$PROJECT_DIR$/ckb/notification_microservice/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,22 @@ public class TournamentRankingService {
         tournamentRankingRepository.save(newEntry);
 
         return ResponseEntity.ok("Entry added successfully for tourId: " + tourId + " and studId: " + studId);
+    }
+
+
+    @Transactional
+    public void updateScoreByTourAndStudent( List<Object[]> stud_scores, String tour) {
+        for (Object[] stud_score : stud_scores) {
+            if (stud_score.length == 2 && stud_score[0] instanceof String && stud_score[1] instanceof Integer) {
+                String stud = (String) stud_score[0];
+                int battleScore = (int) stud_score[1];
+
+                tournamentRankingRepository.updateScoreByTourAndStudent(tour, stud, battleScore);
+
+
+            }
+        }
+
     }
 
 

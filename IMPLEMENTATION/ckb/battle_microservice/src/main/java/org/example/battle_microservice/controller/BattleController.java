@@ -119,4 +119,10 @@ public class BattleController {
     ) {
         return battleRankingService.getDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
     }
+
+    @PostMapping("/markAsEnded")
+    public ResponseEntity<String> markBattleAsEnded(@RequestParam Long battleId) {
+        battleService.markBattleAsEnded(battleId);
+        return ResponseEntity.ok("Battle marked as ended successfully");
+    }
 }

@@ -53,6 +53,10 @@ public class BattleRankingService {
         return rankingRepository.findDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
     }
 
+    public List<Object[]> getStudAndScoreByTourAndBattle(String tour, String battle){
+        return rankingRepository.findStudAndScoreByTourAndBattle(tour, battle);
+    }
+
     public String findTeamNameByTourBattleStud(String tour, String battle, String stud) {
         TourBattleStud tourBattleStud = new TourBattleStud(tour, battle, stud);
         return rankingRepository.findTeamNameByTourBattleStud(tourBattleStud);
