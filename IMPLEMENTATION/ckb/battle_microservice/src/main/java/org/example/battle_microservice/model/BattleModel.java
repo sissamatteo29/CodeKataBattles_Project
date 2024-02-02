@@ -40,6 +40,7 @@ public class BattleModel {
     private Date reg_deadline;
     @Temporal(TemporalType.DATE)
     private Date sub_deadline;
+    private Boolean ended;
 
     private String creator;
     public BattleModel() {
@@ -72,6 +73,7 @@ public class BattleModel {
     public Date getRegDeadline() { return this.reg_deadline; }
     public Date getSubDeadline() { return this.sub_deadline; }
     public String getCreator() { return this.creator; }
+    public Boolean getEnded() { return this.ended; }
 
     public void setAutomation_build_script(byte[] automation_build_script) {
         this.automation_build_script = automation_build_script;
@@ -84,5 +86,8 @@ public class BattleModel {
     public void setCode(byte[] code) {
         this.code = code;
     }
+
+    public void setEnded(Boolean ended) {this.ended = ended; }
+
 
 }

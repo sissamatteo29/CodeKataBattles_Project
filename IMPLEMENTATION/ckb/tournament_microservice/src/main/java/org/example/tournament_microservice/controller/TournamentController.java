@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TournamentController {
@@ -35,6 +36,15 @@ public class TournamentController {
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @GetMapping("/isTournamentEnded")
+    public Boolean isTournamentEnded(@RequestParam String tournamentName) {
+        // Retrieve the tournament using Optional
+        Optional<TournamentModel> optionalTournament = tournamentService.getTournamentByName(tournamentName);
+
+        // Check if the tournament is present and has ended
+        return optionalTournament.map(TournamentModel::getEnded).orElse(false);
     }
 
     @GetMapping("/getAllTournamentsAbs")
