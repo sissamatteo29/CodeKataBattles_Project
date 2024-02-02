@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament Details</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 40%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 40%;
+            left: 32%;
+            max-width: 800px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        .name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+        li {
+            cursor: pointer;
+            color: #555; /* Gray Text Color */
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px; /* Adjust as needed */
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none; /* Remove underline */
+        }
+
+        li:hover {
+            color: #777; /* Darker Gray on Hover */
+        }
+        .score-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+        .score-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .filled-bar {
+            height: 30px;
+            background-color: #4caf50;
+        }
+
+        .empty-bar {
+            height: 30px;
+            background-color: #ddd; /* Slightly grey color for the empty part */
+        }
+
+        .score-label {
+            font-size: 18px;
+            margin-left: 10px; /* Adjust the margin to create space between bar and label */
+        }
+    </style>
+</head>
+<body>
+<h2>Battle Details</h2>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display:none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
+</div>
+<div class="container">
+    <p class="name"> Tournament : <span id="tournamentName" th:text="${tournamentName}"></span></p>
+    <p class="name"> Battle : <span id="battleName" th:text="${battleName}"></span></p>
+
+    <div class="score-container">
+        <div class="score-label">Your team Score: <span id="totalScore" th:text="${totalScore}"></span></div>
+        <div class="score-label">Battle Ranking:</div>
+        <!-- JavaScript will generate individual score bars here -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var objectsEndpoint = '/all-scores-by-battle?tour=' + $("#tournamentName").text() + "&battle=" + $("#battleName").text().trim();
+
+                function fetchTotalScore() {
+                    var totalScoreSpan = $("#totalScore");
+                    var totalScoreEndpoint = '/score?tour=' + $("#tournamentName").text()
+                        + '&battle=' + $("#battleName").text() + '&stud=' + $("#username").text();
+
+                    $.get(totalScoreEndpoint, function (totalScore) {
+                        // Update the content of the totalScore span with the fetched value
+                        console.log("Fetched total score:", totalScore); // Debug print
+                        totalScoreSpan.text(totalScore);
+                    }).fail(function (xhr, textStatus, error) {
+                        console.error("Error fetching total score:", error);
+                    });
+                }
+
+                function fetchAndDisplayObjects() {
+                    $.get("/user", function (userData) {
+                        $("#username").html(userData.name);
+                        $(".unauthenticated").hide()
+                        if (userData.userCheckResult === true) {
+                            $(".authenticated").show()
+                            $(".role_sel").hide();
+                            if (userData.role === 1) {
+                                $(".role-1").show();
+                            } else {
+                                $(".role-0").show();
+                            }
+                        } else {
+                            $(".authenticated").hide()
+                            $(".role_sel").show();
+                        }
+
+                        // Fetch user information before making the score request
+                        fetchTotalScore();
+
+                        // Now, fetch and display other objects
+                        $.get(objectsEndpoint, function (objectArrays) {
+                            // Convert each Object[] to an object with label and score properties
+                            var objects = objectArrays.map(function (objArray) {
+                                return {
+                                    label: objArray[0],
+                                    score: objArray[1]
+                                };
+                            });
+
+                            displayObjects(objects);
+                        }).fail(function (xhr, textStatus, error) {
+                            console.error("Error fetching objects:", error);
+                        });
+                    });
+                }
+
+                function displayObjects(objects) {
+                    var scoreContainer = document.querySelector('.score-container');
+
+                    objects.forEach(function (obj) {
+                        var scoreBar = document.createElement('div');
+                        scoreBar.className = 'score-bar';
+
+                        var filledBar = document.createElement('div');
+                        filledBar.className = 'filled-bar';
+                        filledBar.style.width = obj.score + '%';
+
+                        var emptyBar = document.createElement('div');
+                        emptyBar.className = 'empty-bar';
+                        emptyBar.style.width = (100 - obj.score) + '%';
+
+                        var scoreLabel = document.createElement('div');
+                        scoreLabel.className = 'score-label';
+                        scoreLabel.textContent = obj.label +": "+ obj.score;
+
+                        scoreBar.appendChild(filledBar);
+                        scoreBar.appendChild(emptyBar);
+                        scoreBar.appendChild(scoreLabel);
+                        scoreContainer.appendChild(scoreBar);
+                    });
+                }
+
+                // Call the function to fetch and display objects
+                fetchAndDisplayObjects();
+            });
+        </script>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function goBack() {
+        window.location.href = '/profile';
+    }
+
+    var logout = function () {
+        $.post("/logout", function () {
+            window.location.href = '/';
+        })
+        return true;
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (settings.type == 'POST' || settings.type == 'PUT'
+                || settings.type == 'DELETE') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                    .test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-XSRF-TOKEN",
+                        Cookies.get('XSRF-TOKEN'));
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

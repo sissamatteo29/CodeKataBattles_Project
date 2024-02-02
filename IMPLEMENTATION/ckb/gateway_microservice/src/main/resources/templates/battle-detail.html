@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament Details</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 40%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 40%;
+            left: 32%;
+            max-width: 800px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        .name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+        li {
+            cursor: pointer;
+            color: #555; /* Gray Text Color */
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px; /* Adjust as needed */
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none; /* Remove underline */
+        }
+
+        li:hover {
+            color: #777; /* Darker Gray on Hover */
+        }
+    </style>
+</head>
+<body>
+<h2>Battle Details</h2>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display:none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
+</div>
+<div class="container">
+    <!-- qua devo capire come prendere il Battle name -->
+    <p class="name"> Tournament : <span id="tournamentName" th:text="${tournamentName}"></span></p>
+    <p class="name"> Battle : <span id="battleName" th:text="${battleName}"></span></p>
+    <div class="role-0" style="display:none">
+        <div class="form-group">
+            <label for="teamNameInput">Enter Team Name:</label>
+            <input type="text" class="form-control" id="teamNameInput">
+        </div>
+        <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Battle</a>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    function goBack() {
+        window.location.href = '/profile';
+    }
+
+    $.get("/user", function (data) {
+        $("#username").html(data.name);
+        $(".unauthenticated").hide()
+        if (data.userCheckResult === true) {
+            $(".authenticated").show()
+            $(".role_sel").hide();
+            if (data.role === 1) {
+                $(".role-1").show();
+            }
+            else {
+                $(".role-0").show();
+            }
+        } else {
+            $(".authenticated").hide()
+            $(".role_sel").show();
+        }
+    });
+    var logout = function () {
+        $.post("/logout", function () {
+            window.location.href = '/';
+        })
+        return true;
+    }
+
+    function subscribe() {
+        var tournamentName = $("#tournamentName").text();
+        var username = $("#username").text().trim();
+        var battleName = $("#battleName").text().trim();
+        var teamName = document.getElementById("teamNameInput").value;
+
+        // Make a POST request
+        $.ajax({
+            type: 'POST',
+            url: '/addStudent',
+            data: {
+                tour: tournamentName,
+                battle: battleName,
+                stud: username,
+                team: teamName
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                // Handle error
+                console.error(error);
+            }
+        });
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (settings.type == 'POST' || settings.type == 'PUT'
+                || settings.type == 'DELETE') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                    .test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-XSRF-TOKEN",
+                        Cookies.get('XSRF-TOKEN'));
+                }
+            }
+        }
+    });
+
+</script>
+</html>

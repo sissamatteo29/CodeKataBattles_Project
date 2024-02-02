@@ -1,23 +1,24 @@
 package org.example.tournament_microservice.controller;
 
-import org.example.tournament_microservice.service.TournamentService;
 import org.example.tournament_microservice.model.TournamentModel;
+import org.example.tournament_microservice.service.TournamentRankingService;
+import org.example.tournament_microservice.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.format.annotation.DateTimeFormat;
 @RestController
 public class TournamentController {
     @Autowired
     private TournamentService tournamentService;
+    @Autowired
+    private TournamentRankingService tournamentRankingService;
     @PostMapping("/createNewTournament")
     public ResponseEntity<String> createNewTournament(@RequestParam String name, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date subscriptionDate, @RequestParam String creator, Model model) {
             tournamentService.saveTournament(new TournamentModel(name, subscriptionDate, creator));
@@ -35,6 +36,15 @@ public class TournamentController {
         }
     }
 
+    @GetMapping("/isTournamentEnded")
+    public Boolean isTournamentEnded(@RequestParam String tournamentName) {
+        // Retrieve the tournament using Optional
+        Optional<TournamentModel> optionalTournament = tournamentService.getTournamentByName(tournamentName);
+
+        // Check if the tournament is present and has ended
+        return optionalTournament.map(TournamentModel::getEnded).orElse(false);
+    }
+
     @GetMapping("/getAllTournamentsAbs")
     public ResponseEntity<List<String>> getAllTournamentsAbs() {
         System.out.println("Getting all the tournaments for students");
@@ -46,4 +56,26 @@ public class TournamentController {
         }
     }
 
+    @PostMapping("/addStudent")
+    public ResponseEntity<String> addStudent(@RequestParam String tourId, @RequestParam String studId) {
+        return tournamentRankingService.addStudent(tourId, studId);
+    }
+
+    @GetMapping("/getAllSubscription")
+    public ResponseEntity<List<String>> getTourIdsByStudId(@RequestParam String name) {
+        List<String> tourIds = tournamentRankingService.findTourIdsByStudId(name);
+        return ResponseEntity.ok(tourIds);
+    }
+
+
+    @GetMapping("/studScores")
+    public List<Object[]> getStudAndScoreByTour(@RequestParam String tour) {
+        return tournamentRankingService.getStudAndScoreByTour(tour);
+    }
+
+    @PostMapping("/endTournament")
+    public ResponseEntity<String> endTournament(@RequestParam String tournament) {
+        tournamentService.endTournament(tournament);
+        return ResponseEntity.ok(tournament);
+    }
 }

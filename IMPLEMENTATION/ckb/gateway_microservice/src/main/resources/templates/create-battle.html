@@ -14,16 +14,97 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 42%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 85px;
+            left: 38%;
+            max-width: 600px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        form {
+            text-align: center;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+
+        }
+
+        /* Style for form labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Style for form inputs */
+        input[type="text"],
+        input[type="date"],
+        input[type="file"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Style for form submit button */
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
 
 <h2>Create Battle</h2>
 
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="username"></span>
-    <button onClick="logout()" class="btn btn-primary">Logout</button>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display: none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
-
+<div class="container">
+<div class="form-container">
 <form th:action="@{/createBattle}" method="post" id="createBattleForm" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
@@ -45,7 +126,7 @@
     <br>
 
     <label for="code">Code:</label>
-    <input type="file" id="code" name="code" accept=".zip">
+    <input type="file" id="code" name="code" accept=".zip" style="display:none">
 
     <br>
 
@@ -85,8 +166,11 @@
     <br>
 
     <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+
 </form>
-<button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+</div>
+</div>
 
 <script type="text/javascript">
     // JavaScript function to go back to the previous page
@@ -125,6 +209,45 @@
                 }
             }
         }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the form element
+        var createBattleForm = document.getElementById("createBattleForm");
+
+        // Add an event listener for form submission
+        createBattleForm.addEventListener("submit", function (event) {
+            // Get the input elements
+            var regDeadlineInput = document.getElementById("reg_deadline");
+            var subDeadlineInput = document.getElementById("sub_deadline");
+            var maxTeamSizeInput = document.getElementById("max_team_size");
+            var minTeamSizeInput = document.getElementById("min_team_size");
+
+            // Get the selected dates
+            var regDeadline = new Date(regDeadlineInput.value);
+            var subDeadline = new Date(subDeadlineInput.value);
+            var today = new Date();
+
+            // Get the team sizes
+            var maxTeamSize = parseInt(maxTeamSizeInput.value);
+            var minTeamSize = parseInt(minTeamSizeInput.value);
+
+            // Check if regDeadline is after subDeadline
+            if (regDeadline >= subDeadline) {
+                event.preventDefault();
+                alert("Registration Deadline must be before Submission Deadline.");
+            }
+
+            // Check if maxTeamSize is greater than or equal to minTeamSize
+            if (maxTeamSize < minTeamSize) {
+                event.preventDefault();
+                alert("Max Team Size must be greater than or equal to Min Team Size.");
+            }
+            if (subDeadline <= today) {
+                event.preventDefault();
+                alert("Submission Deadline must be after today.");
+            }
+        });
     });
 
 </script>

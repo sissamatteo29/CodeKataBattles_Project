@@ -10,38 +10,213 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        body {
+            background-color: #ecf4f9;
+        }
+        .divLogout {
+            top: 10px;
+            right: 10px;
+            position: fixed;
+        }
+        h2 {
+            top: 10px;
+            right: 40%;
+            position: fixed;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333; /* Dark Text Color */
+        }
+        .container {
+            top: 40%;
+            left: 32%;
+            max-width: 800px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            text-align: center;
+            align-items: center;
+        }
+        .name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            font-weight: lighter;
+        }
+        li {
+            cursor: pointer;
+            color: #555; /* Gray Text Color */
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px; /* Adjust as needed */
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none; /* Remove underline */
+        }
+
+        li:hover {
+            color: #777; /* Darker Gray on Hover */
+        }
+        .score-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+        .score-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .filled-bar {
+            height: 30px;
+            background-color: #4caf50;
+        }
+
+        .empty-bar {
+            height: 30px;
+            background-color: #ddd; /* Slightly grey color for the empty part */
+        }
+
+        .score-label {
+            font-size: 18px;
+            margin-left: 10px; /* Adjust the margin to create space between bar and label */
+        }
+
+    </style>
 </head>
 <body>
 <h2>Tournament Details</h2>
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="username"></span>
-    <button onClick="logout()" class="btn btn-primary">Logout</button>
+<div class="authenticated" style="display:none">
+    <span id="username" style="display:none"></span>
+    <button onClick="logout()" class="btn btn-primary divLogout">Logout</button>
 </div>
-<p>Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
-<div class="container role-1" style="display:none">
-    <p>User with Role 1! (Educator)</p>
+<div class="container">
+<p class="name"> Nome del Torneo: <span id="tournamentName" th:text="${tournamentName}"></span></p>
+<div class="role-1" style="display:none">
     <p>Battles:</p>
     <ul>
         <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
     </ul>
-    <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success">Create a new Battle</a>
+    <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success btn-create-battle">Create a new Battle</a>
+    <button type="button" class="btn btn-secondary btn-end-tournament" onclick="endTournament()">End the Tournament</button>
     <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
 </div>
-<div class="container role-0" style="display:none">
-    <p>User with Role 0! (Student) </p>
+<div class="role-0" style="display:none">
     <div class="container battles_display" style="display:none">
     <p>Battles:</p>
     <ul>
         <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
     </ul>
     </div>
-    <a id="subscriptionLink" href="profile" class="btn btn-success" onclick="subscribe()">Subscribe to the Tournament</a>
+    <a id="subscriptionLink" href="profile" class="btn btn-success btn-end-tournament" onclick="subscribe()">Subscribe to the Tournament</a>
+</div >
+    <div class="score-label">Battle Ranking:</div>
+    <div class="score-container">
+    <script>
+        $(function () {
+            var endpoint = "/all-scores-by-tour?tour=" + $("#tournamentName").text();
+            fetchAndDisplayObjects(endpoint);
+        });
+    </script>
+    </div>
 </div>
 </body>
 
+<script>
+    function fetchAndDisplayObjects(objectsEndpoint) {
+        $.get(objectsEndpoint, function (objectArrays) {
+            var objects = objectArrays.map(function (objArray) {
+                return {
+                    label: objArray[0],
+                    score: objArray[1]
+                };
+            });
+            displayObjects(objects);
+        }).fail(function (xhr, textStatus, error) {
+            console.error("Error fetching objects:", error);
+        });
+    }
+
+    function displayObjects(objects) {
+        var scoreContainer = document.querySelector('.score-container');
+
+        objects.forEach(function (obj) {
+            var scoreBar = document.createElement('div');
+            scoreBar.className = 'score-bar';
+
+            var filledBar = document.createElement('div');
+            filledBar.className = 'filled-bar';
+            filledBar.style.width = obj.score + '%';
+
+            var emptyBar = document.createElement('div');
+            emptyBar.className = 'empty-bar';
+            emptyBar.style.width = (100 - obj.score) + '%';
+
+            var scoreLabel = document.createElement('div');
+            scoreLabel.className = 'score-label';
+            scoreLabel.textContent = obj.label +": "+ obj.score;
+
+            scoreBar.appendChild(filledBar);
+            scoreBar.appendChild(emptyBar);
+            scoreBar.appendChild(scoreLabel);
+            scoreContainer.appendChild(scoreBar);
+        });
+    }
+</script>
+
 <script type="text/javascript">
+    function checkTournamentEnded() {
+        var tournamentName = $("#tournamentName").text().trim();
+
+        // Make a GET request to check if the tournament has ended
+        $.get("/isTournamentEnded", { tournamentName: tournamentName }, function (response) {
+            // If the tournament has ended, hide the buttons
+            if (response === true) {
+                $(".btn-end-tournament, .btn-create-battle").hide();
+            }
+        })
+            .fail(function (error) {
+                console.error(error);
+            });
+    }
+
+    // Call the function when the page loads
+    checkTournamentEnded();
+
     function goBack() {
-        window.history.back();
+        window.location.href = '/profile';
+    }
+
+    function endTournament() {
+        // Display a confirmation dialog
+        var confirmation = window.confirm("Are you sure you want to end the tournament? Be careful that all the battles involved in it must be ended!");
+        if (confirmation) {
+
+            var tournamentName = $("#tournamentName").text().trim();
+
+            $.post("/end-tournament", {tournamentName: tournamentName}, function (response) {
+                window.location.href = '/profile';
+            })
+                .fail(function (error) {
+                    console.error(error);
+                });
+        }
+        else {
+            /*nothing happens*/
+        }
     }
 
     $.get("/user", function (data) {

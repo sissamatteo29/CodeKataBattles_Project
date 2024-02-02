@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     boolean existsByUsername(@Param("username") String username);
     @Query("SELECT u.role FROM UserModel u WHERE u.username = :username")
     Integer getUserRole(@Param("username") String username);
-
-    @Query("SELECT u.subscription FROM UserModel u WHERE u.username = :user")
-    List<String> findNamesBySubscription(String user);
+    List<UserModel> findAllByUsername(String username);
+    @Query("SELECT u FROM UserModel u WHERE u.username = :username AND u.notification is null")
+    UserModel getUserModel(String username);
 }
