@@ -108,7 +108,9 @@
 <div class="role-1" style="display:none">
     <p>Battles:</p>
     <ul>
-        <li th:each="battleName : ${battleNames}" th:text="${battleName}"></li>
+        <li th:each="battleName : ${battleNames}">
+            <a th:href="@{'/battle-home?tournament_name=' + ${tournamentName} + '&battle_name=' + ${battleName}}" th:text="${battleName}"></a>
+        </li>
     </ul>
     <a th:href="@{/create-battle(tournamentName=${tournamentName})}" class="btn btn-success btn-create-battle">Create a new Battle</a>
     <button type="button" class="btn btn-secondary btn-end-tournament" onclick="endTournament()">End the Tournament</button>

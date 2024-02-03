@@ -109,101 +109,18 @@
     <p class="name"> Battle : <span id="battleName" th:text="${battleName}"></span></p>
 
     <div class="score-container">
-        <div class="score-label">Your team Score: <span id="totalScore" th:text="${totalScore}"></span></div>
-        <div class="score-label">Battle Ranking:</div>
-        <!-- JavaScript will generate individual score bars here -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var objectsEndpoint = '/all-scores-by-battle?tour=' + $("#tournamentName").text() + "&battle=" + $("#battleName").text().trim();
+        <div class="role-0" style="display:none">
+            <div class="score-label">Your team Score: <span id="totalScore" th:text="${totalScore}"></span></div>
+            <div class="score-label">Battle Ranking:</div>
+        </div>
 
-                function fetchTotalScore() {
-                    var totalScoreSpan = $("#totalScore");
-                    var totalScoreEndpoint = '/score?tour=' + $("#tournamentName").text()
-                        + '&battle=' + $("#battleName").text() + '&stud=' + $("#username").text();
-
-                    $.get(totalScoreEndpoint, function (totalScore) {
-                        // Update the content of the totalScore span with the fetched value
-                        console.log("Fetched total score:", totalScore); // Debug print
-                        totalScoreSpan.text(totalScore);
-                    }).fail(function (xhr, textStatus, error) {
-                        console.error("Error fetching total score:", error);
-                    });
-                }
-
-                function fetchAndDisplayObjects() {
-                    $.get("/user", function (userData) {
-                        $("#username").html(userData.name);
-                        $(".unauthenticated").hide()
-                        if (userData.userCheckResult === true) {
-                            $(".authenticated").show()
-                            $(".role_sel").hide();
-                            if (userData.role === 1) {
-                                $(".role-1").show();
-                            } else {
-                                $(".role-0").show();
-                            }
-                        } else {
-                            $(".authenticated").hide()
-                            $(".role_sel").show();
-                        }
-
-                        // Fetch user information before making the score request
-                        fetchTotalScore();
-
-                        // Now, fetch and display other objects
-                        $.get(objectsEndpoint, function (objectArrays) {
-                            // Convert each Object[] to an object with label and score properties
-                            var objects = objectArrays.map(function (objArray) {
-                                return {
-                                    label: objArray[0],
-                                    score: objArray[1]
-                                };
-                            });
-
-                            displayObjects(objects);
-                        }).fail(function (xhr, textStatus, error) {
-                            console.error("Error fetching objects:", error);
-                        });
-                    });
-                }
-
-                function displayObjects(objects) {
-                    var scoreContainer = document.querySelector('.score-container');
-
-                    objects.forEach(function (obj) {
-                        var scoreBar = document.createElement('div');
-                        scoreBar.className = 'score-bar';
-
-                        var filledBar = document.createElement('div');
-                        filledBar.className = 'filled-bar';
-                        filledBar.style.width = obj.score + '%';
-
-                        var emptyBar = document.createElement('div');
-                        emptyBar.className = 'empty-bar';
-                        emptyBar.style.width = (100 - obj.score) + '%';
-
-                        var scoreLabel = document.createElement('div');
-                        scoreLabel.className = 'score-label';
-                        scoreLabel.textContent = obj.label +": "+ obj.score;
-
-                        scoreBar.appendChild(filledBar);
-                        scoreBar.appendChild(emptyBar);
-                        scoreBar.appendChild(scoreLabel);
-                        scoreContainer.appendChild(scoreBar);
-                    });
-                }
-
-                // Call the function to fetch and display objects
-                fetchAndDisplayObjects();
-            });
-        </script>
-
+        <div class="role-1" style="display:none">
+            <div class="score-label">Battle Ranking:</div>
+        </div>
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
     function goBack() {
         window.location.href = '/profile';
     }
@@ -211,22 +128,96 @@
     var logout = function () {
         $.post("/logout", function () {
             window.location.href = '/';
-        })
+        });
         return true;
     }
 
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
-            if (settings.type == 'POST' || settings.type == 'PUT'
-                || settings.type == 'DELETE') {
-                if (!(/^http:.*/.test(settings.url) || /^https:.*/
-                    .test(settings.url))) {
-                    // Only send the token to relative URLs i.e. locally.
-                    xhr.setRequestHeader("X-XSRF-TOKEN",
-                        Cookies.get('XSRF-TOKEN'));
+            if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                    xhr.setRequestHeader("X-XSRF-TOKEN", Cookies.get('XSRF-TOKEN'));
                 }
             }
         }
+    });
+
+    $(document).ready(function () {
+        var objectsEndpoint = '/all-scores-by-battle?tour=' + $("#tournamentName").text() + "&battle=" + $("#battleName").text().trim();
+
+        function fetchTotalScore(role) {
+            if (role === 1) {
+                var totalScoreSpan = $("#totalScore");
+                var totalScoreEndpoint = '/score?tour=' + $("#tournamentName").text()
+                    + '&battle=' + $("#battleName").text() + '&stud=' + $("#username").text();
+
+                $.get(totalScoreEndpoint, function (totalScore) {
+                    console.log("Fetched total score:", totalScore);
+                    totalScoreSpan.text(totalScore);
+                }).fail(function (xhr, textStatus, error) {
+                    console.error("Error fetching total score:", error);
+                    // Handle error as needed
+                });
+            }
+        }
+
+        function fetchAndDisplayObjects() {
+            $.get("/user", function (userData) {
+                $("#username").html(userData.name);
+                $(".unauthenticated").hide()
+
+                if (userData.userCheckResult === true) {
+                    $(".authenticated").show()
+                    $(".role_sel").hide();
+                    $(".role-" + userData.role).show();
+                    fetchTotalScore(userData.role);
+                } else {
+                    $(".authenticated").hide()
+                    $(".role_sel").show();
+                }
+
+                $.get(objectsEndpoint, function (objectArrays) {
+                    var objects = objectArrays.map(function (objArray) {
+                        return {
+                            label: objArray[0],
+                            score: objArray[1]
+                        };
+                    });
+
+                    displayObjects(objects);
+                }).fail(function (xhr, textStatus, error) {
+                    console.error("Error fetching objects:", error);
+                });
+            });
+        }
+
+        function displayObjects(objects) {
+            var scoreContainer = document.querySelector('.score-container');
+
+            objects.forEach(function (obj) {
+                var scoreBar = document.createElement('div');
+                scoreBar.className = 'score-bar';
+
+                var filledBar = document.createElement('div');
+                filledBar.className = 'filled-bar';
+                filledBar.style.width = obj.score + '%';
+
+                var emptyBar = document.createElement('div');
+                emptyBar.className = 'empty-bar';
+                emptyBar.style.width = (100 - obj.score) + '%';
+
+                var scoreLabel = document.createElement('div');
+                scoreLabel.className = 'score-label';
+                scoreLabel.textContent = obj.label +": "+ obj.score;
+
+                scoreBar.appendChild(filledBar);
+                scoreBar.appendChild(emptyBar);
+                scoreBar.appendChild(scoreLabel);
+                scoreContainer.appendChild(scoreBar);
+            });
+        }
+
+        fetchAndDisplayObjects();
     });
 </script>
 </body>
