@@ -33,7 +33,6 @@ public class BattleControllerTest {
     @Test
     @Order(1)
     void testCreateNewBattle() {
-        // Arrange
         String name = "Battle1";
         String tournament = "Tournament1";
         String automationBuildScript = Base64.getUrlEncoder().encodeToString("AutomationScript".getBytes());
@@ -47,10 +46,8 @@ public class BattleControllerTest {
         String subDeadline = "2022-03-15";
         String creator = "Admin";
 
-        // Mock the service method
         doNothing().when(battleService).saveBattle(any(BattleModel.class));
 
-        // Act
         ResponseEntity<String> responseEntity = battleController.createNewBattle(
                 name, tournament, automationBuildScript, codeTest, code, maxTeamSize, minTeamSize,
                 repositoryLink, manualEvaluation, regDeadline, subDeadline, creator);
@@ -62,14 +59,11 @@ public class BattleControllerTest {
     @Test
     @Order(2)
     void testGetBattlesByTournament() {
-        // Arrange
         String tournamentName = "Tournament1";
         List<String> expectedBattles = Arrays.asList("Battle1", "Battle2");
 
-        // Mock the service method
         when(battleService.getBattlesByTournament(tournamentName)).thenReturn(expectedBattles);
 
-        // Act
         List<String> actualBattles = battleController.getBattlesByTournament(tournamentName);
 
         // Assert
@@ -78,17 +72,14 @@ public class BattleControllerTest {
     @Test
     @Order(3)
     void testAddStudent() {
-        // Arrange
         String tour = "Tour1";
         String battle = "Battle1";
         String stud = "Student1";
         String team = "Team1";
 
-        // Mock the repository behavior
         when(battleRankingService.addStudent(tour, battle, stud, team))
                 .thenReturn(ResponseEntity.ok("Entry added successfully"));
 
-        // Act
         ResponseEntity<String> responseEntity = battleController.addStudent(tour, battle, stud, team);
 
         // Assert
@@ -98,16 +89,13 @@ public class BattleControllerTest {
     @Test
     @Order(4)
     void testGetBattlesByTourAndStud() {
-        // Arrange
         String tour = "Tour1";
         String stud = "Student1";
         List<String> expectedBattles = Arrays.asList("Battle1", "Battle2");
 
-        // Mock the service behavior
         when(battleRankingService.getBattlesByTourAndStud(tour, stud))
                 .thenReturn(expectedBattles);
 
-        // Act
         ResponseEntity<List<String>> responseEntity = battleController.getBattlesByTourAndStud(tour, stud);
 
         // Assert
@@ -117,17 +105,14 @@ public class BattleControllerTest {
     @Test
     @Order(5)
     void testGetScoreByTourBattleStud() {
-        // Arrange
         String tour = "Tour1";
         String battle = "Battle1";
         String stud = "Student1";
         int expectedScore = 50;
 
-        // Mock the service behavior
         when(battleRankingService.getScoreByTourBattleStud(tour, battle, stud))
                 .thenReturn(expectedScore);
 
-        // Act
         Integer resultScore = battleController.getScoreByTourBattleStud(tour, battle, stud);
 
         // Assert
@@ -137,18 +122,15 @@ public class BattleControllerTest {
     @Test
     @Order(6)
     void testGetDistinctTeamNameAndScoreByTourAndBattle() {
-        // Arrange
         String tour = "Tour1";
         String battle = "Battle1";
         Object[] expectedData1 = {"TeamA", 100};
         Object[] expectedData2 = {"TeamB", 80};
         List<Object[]> expectedResults = Arrays.asList(expectedData1, expectedData2);
 
-        // Mock the service behavior
         when(battleRankingService.getDistinctTeamNameAndScoreByTourAndBattle(tour, battle))
                 .thenReturn(expectedResults);
 
-        // Act
         List<Object[]> actualResults = battleController
                 .getDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
 

@@ -55,7 +55,7 @@ public class UserService {
 
         for (UserModel user : users) {
             // For each user, call the NotificationService to get notifications
-            String userNotifications = user.getNotifications();
+            String userNotifications = user.getNotification();
 
             // Add user notifications to the overall list
             notificationsList.add(userNotifications);

@@ -36,10 +36,8 @@ public class BattleServiceTest {
     @Test
     @Order(1)
     public void testSaveBattle() {
-        // Arrange
         BattleModel battle = new BattleModel("Battle1", "Tournament1", null, null, null,
                 5, 3, "http://repository.com", true, new Date(), new Date(), "Creator1");
-        // Act
         battleService.saveBattle(battle);
         // Assert
         // Verify that the save method of the repository is called with the correct argument
@@ -48,7 +46,6 @@ public class BattleServiceTest {
     @Test
     @Order(2)
     public void testGetBattlesByTournament() {
-        // Arrange
         String tournamentName = "Tournament1";
         List<BattleModel> mockBattles = Arrays.asList(
                 new BattleModel("Battle1", tournamentName, null, null, null, 5, 3, "http://repository.com", true, null, null, "Creator1"),
@@ -57,7 +54,6 @@ public class BattleServiceTest {
 
         when(battleRepository.findByTournament(tournamentName)).thenReturn(mockBattles);
 
-        // Act
         List<String> result = battleService.getBattlesByTournament(tournamentName);
 
         // Assert
@@ -66,16 +62,13 @@ public class BattleServiceTest {
     @Test
     @Order(3)
     void testGetBattlesByTourAndStud() {
-        // Arrange
         String tour = "Tournament1";
         String stud = "Student1";
         List<String> expectedBattles = Arrays.asList("Battle1", "Battle2");
 
-        // Mock the repository method
         when(battleRankingRepository.findBattlesByTourAndStud(anyString(), anyString()))
                 .thenReturn(expectedBattles);
 
-        // Act
         List<String> actualBattles = battleRankingService.getBattlesByTourAndStud(tour, stud);
 
         // Assert
@@ -84,17 +77,14 @@ public class BattleServiceTest {
     @Test
     @Order(4)
     void testGetScoreByTourBattleStud() {
-        // Arrange
         String tour = "Tournament1";
         String battle = "Battle1";
         String stud = "Student1";
         int expectedScore = 100;
 
-        // Mock the repository method
         when(battleRankingRepository.findScoreByTourBattleStud(anyString(), anyString(), anyString()))
                 .thenReturn(expectedScore);
 
-        // Act
         int actualScore = battleRankingService.getScoreByTourBattleStud(tour, battle, stud);
 
         // Assert
@@ -103,16 +93,13 @@ public class BattleServiceTest {
     @Test
     @Order(5)
     void testAddStudent_EntryDoesNotExist() {
-        // Arrange
         String tour = "Tournament1";
         String battle = "Battle1";
         String stud = "Student1";
         String team = "Team1";
 
-        // Mock the repository method to simulate that the entry does not exist
         when(battleRankingRepository.findById(any())).thenReturn(Optional.empty());
 
-        // Act
         ResponseEntity<String> responseEntity = battleRankingService.addStudent(tour, battle, stud, team);
 
         // Assert
@@ -123,16 +110,13 @@ public class BattleServiceTest {
     @Test
     @Order(6)
     void testAddStudent_EntryExists() {
-        // Arrange
         String tour = "Tournament1";
         String battle = "Battle1";
         String stud = "Student1";
         String team = "Team1";
 
-        // Mock the repository method to simulate that the entry already exists
         when(battleRankingRepository.findById(any())).thenReturn(Optional.of(new BattleRankingModel()));
 
-        // Act
         ResponseEntity<String> responseEntity = battleRankingService.addStudent(tour, battle, stud, team);
 
         // Assert
@@ -142,15 +126,12 @@ public class BattleServiceTest {
     @Test
     @Order(7)
     void testGetDistinctTeamNameAndScoreByTourAndBattle() {
-        // Arrange
         String tour = "Tournament1";
         String battle = "Battle1";
 
-        // Mock the repository method to return sample data
         when(battleRankingRepository.findDistinctTeamNameAndScoreByTourAndBattle(anyString(), anyString()))
                 .thenReturn(Arrays.asList(new Object[]{"Team1", 100}, new Object[]{"Team2", 90}));
 
-        // Act
         List<Object[]> result = battleRankingService.getDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
 
         // Assert

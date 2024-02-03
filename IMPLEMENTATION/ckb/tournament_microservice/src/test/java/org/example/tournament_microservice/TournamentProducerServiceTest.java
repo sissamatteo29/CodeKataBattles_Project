@@ -28,20 +28,15 @@ public class TournamentProducerServiceTest {
     private TournamentProducerService tournamentProducerService;
     @Test
     public void testProduceTournamentEventEnding() throws JsonProcessingException {
-        // Arrange
         String message = "Tournament ended!";
         List<String> userIds = Arrays.asList("user1", "user2");
 
-        // Expected payload as a JSON string
         String expectedJsonPayload = "{\"message\":\"Tournament ended!\",\"userIds\":[\"user1\",\"user2\"]}";
 
-        // Mock the ObjectMapper to return the expected JSON string
         when(objectMapperMock.writeValueAsString(any())).thenReturn(expectedJsonPayload);
 
-        // Act
         tournamentProducerService.produceTournamentEventEnding(message, userIds);
 
-        // Assert
         // Verify that the send method is called with the expected topic and JSON payload
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode expectedJson = objectMapper.readTree(expectedJsonPayload);
