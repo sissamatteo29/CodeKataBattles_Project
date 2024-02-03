@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -118,5 +115,34 @@ public class BattleController {
             @RequestParam String battle
     ) {
         return battleRankingService.getDistinctTeamNameAndScoreByTourAndBattle(tour, battle);
+    }
+
+    @GetMapping("/updateScore")
+    public void updateScore( @RequestParam String tour,
+                             @RequestParam String battle,
+                             @RequestParam String teamName,
+                             @RequestParam int score){
+        battleRankingService.updateScoreForANewSolution(tour, battle, teamName, score);
+    }
+
+    @GetMapping("/getTests/{tour}/{battle}")
+    public byte[] getTests(@PathVariable String tour, @PathVariable String battle){
+        return battleService.getTests(tour, battle);
+
+    }
+
+    @GetMapping("/getScripts/{tour}/{battle}")
+    public byte[] getScripts(@PathVariable String tour, @PathVariable String battle){
+        return battleService.getBuildAutomationScripts(tour, battle);
+    }
+
+    @GetMapping("/getRegDeadline/{tour}/{battle}")
+    public Date getRegDeadline(@PathVariable String tour, @PathVariable String battle){
+        return battleService.getRegDeadline(tour, battle);
+    }
+
+    @GetMapping("/getSubDeadline/{tour}/{battle}")
+    public Date getSubDeadline(@PathVariable String tour, @PathVariable String battle){
+        return battleService.getSubDeadline(tour, battle);
     }
 }

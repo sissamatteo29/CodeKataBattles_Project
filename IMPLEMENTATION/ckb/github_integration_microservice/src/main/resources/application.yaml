@@ -1,0 +1,16 @@
+githubDownloader:
+    baseURL: http://api.github.com
+    PersonalAccessToken: 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
+    username: ckbGitHub
+    password: MatteoSaraAle9!
+
+downloadDir: code_download
+
+server:
+    port: 8090
+
+datasource:
+    url: jdbc:postgresql://localhost:5432/ckb_db
+    username: postgres
+    password: Dolphin!
+    driver-class-name: org.postgresql.Driver

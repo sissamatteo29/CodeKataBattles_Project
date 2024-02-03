@@ -3,9 +3,11 @@ package org.example.battle_microservice.repository;
 import org.example.battle_microservice.model.BattleModel;
 import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +22,23 @@ public interface BattleRepository extends JpaRepository<BattleModel, Long> {
 
     List<BattleModel> findByTournament(String tournamentName);
 
+    @Query("SELECT b.code_test FROM BattleModel b " +
+            "WHERE b.tournament = :tournamentName AND b.name = :battleName")
+    List<byte[]> findCodeTestByTournamentAndBattle(
+            @Param("tournamentName") String tournamentName,
+            @Param("battleName") String battleName
+    );
+
+    @Query("SELECT b.automation_build_script FROM BattleModel b " +
+            "WHERE b.tournament = :tournamentName AND b.name = :battleName")
+    List<byte[]> findBuildAutomationScriptsByTournamentAndBattle(
+            @Param("tournamentName") String tournamentName,
+            @Param("battleName") String battleName
+    );
+
+    @Query("SELECT b.reg_deadline FROM BattleModel b WHERE b.tournament = :tournament AND b.name = :name")
+    Date findRegDeadlineByTournamentAndName(@Param("tournament") String tournament, @Param("name") String name);
+
+    @Query("SELECT b.sub_deadline FROM BattleModel b WHERE b.tournament = :tournament AND b.name = :name")
+    Date findSubDeadlineByTournamentAndName(@Param("tournament") String tournament, @Param("name") String name);
 }

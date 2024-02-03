@@ -57,4 +57,9 @@ public class BattleRankingService {
         TourBattleStud tourBattleStud = new TourBattleStud(tour, battle, stud);
         return rankingRepository.findTeamNameByTourBattleStud(tourBattleStud);
     }
+
+    public void updateScoreForANewSolution(String tour, String battle, String teamName, int newScore){
+
+        rankingRepository.updateScoreByTourAndBattleAndTeamName(tour, battle, teamName, newScore);
+    }
 }
