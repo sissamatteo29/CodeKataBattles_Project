@@ -93,6 +93,7 @@ public class Controller {
         /* Create a new local repository for the battle to be created (inside the dedicated local folder "battles" */
         Path localPathToBattle = GitHubIntegrationMain.BASE_DIR.resolve(Path.of("battles", battle));
         localPathToBattle.toFile().mkdirs();
+        System.out.println("Created local directory on the path: " + localPathToBattle);
 
         /* Get the build automation scripts and test cases from the battle microservice (through API calls) */
         HttpClient client = HttpClient.newHttpClient();
@@ -103,18 +104,24 @@ public class Controller {
                 .GET().uri(new URI(String.format("http://localhost:8083/getScripts/%s/%s", tournament, battle)))
                 .build();
         HttpResponse<Path> getTests = client.send(testCasesRequest, HttpResponse.BodyHandlers.ofFile(localPathToBattle.resolve("tests.zip")));
+        System.out.println("Retrieved tests from the database for the battle: " + battle);
         HttpResponse<Path> getScripts = client.send(buildAutomationScriptsRequest, HttpResponse.BodyHandlers.ofFile(localPathToBattle.resolve("scripts.zip")));
+        System.out.println("Retrieved scripts from the database for the battle: " + battle);
 
         /* Extract the two zip files */
+        System.out.println("Unzipping both tests and scripts for the battle: "+ battle);
         UnzipUtil.unzipFileFromTo(localPathToBattle.resolve("tests.zip"), null);
         UnzipUtil.unzipFileFromTo(localPathToBattle.resolve("scripts.zip"), null);
 
+
         /* Remove zip files */
+        System.out.println("Eliminating the zip files...");
         localPathToBattle.resolve("tests.zip").toFile().delete();
         localPathToBattle.resolve("scripts.zip").toFile().delete();
 
 
         /* Create the empty directory on Github with the name of the battle */
+        System.out.println("Sending Github the request to create a new empty repository for the battle: " + battle);
         HttpRequest newRepo = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(String.format("{ \"name\": \"%s\" }", battle)))
                 .uri(new URI(String.format("https://api.github.com/user/repos")))
@@ -122,8 +129,10 @@ public class Controller {
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response = client.send(newRepo, HttpResponse.BodyHandlers.ofString());
+        System.out.println("The response from GitHub was: " + response.body());
 
         /* Associate local repository to remote repository and push all the content */
+        System.out.println("Starting git operations to push all the content of the repository for the battle: " + battle);
         URIish uri = new URIish(String.format("https://github.com/ckbGitHub/%s.git", battle));
         git.performGitOperations(localPathToBattle, uri);
     }
