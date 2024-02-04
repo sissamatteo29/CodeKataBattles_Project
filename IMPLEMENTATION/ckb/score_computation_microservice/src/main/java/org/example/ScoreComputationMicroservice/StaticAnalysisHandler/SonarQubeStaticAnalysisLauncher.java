@@ -13,15 +13,9 @@ import java.nio.file.Path;
 /***
  * This class handles the creation of a separate process on the local machine to launch the sonar-scanner
  * which is responsible for analyzing the code and sending the results to the local instance of the web server
-<<<<<<< HEAD
- * sonarQube, by default listening at http://localhost:9000
- * As the projectKey to create a new project on the sonarQube web server, the username of the user performing the commit
- * on Github is used. In this way a new analysis is run for all the commits and commits coming from the same user will override previous
-=======
  * sonarQube, by default listening at "http://localhost:9000"
  * As the projectKey to create a new project on the sonarQube web server, the username of the user performing the commit
  * on GitHub is used. In this way a new analysis is run for all the commits and commits coming from the same user will override previous
->>>>>>> matte
  * analysis.
  *
  */
