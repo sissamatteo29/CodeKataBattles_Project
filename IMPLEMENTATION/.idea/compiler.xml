@@ -9,9 +9,9 @@
         <module name="user_microservice" />
         <module name="battle_microservice" />
         <module name="gateway_microservice" />
-        <module name="ckb" />
         <module name="notification_microservice" />
         <module name="tournament_microservice" />
+        <module name="score_computation_microservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,9 +21,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="battle_microservice" options="-parameters" />
-      <module name="ckb" options="-parameters" />
+      <module name="ckb" options="" />
       <module name="gateway_microservice" options="-parameters" />
       <module name="notification_microservice" options="-parameters" />
+      <module name="score_computation_microservice" options="-parameters" />
       <module name="tournament_microservice" options="-parameters" />
       <module name="user_microservice" options="-parameters" />
       <module name="user_microservice (1)" options="-parameters" />

@@ -5,7 +5,10 @@
     <file url="file://$PROJECT_DIR$/ckb/gateway_microservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ckb/notification-microservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ckb/notification_microservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ckb/score_computation_microservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ckb/score_computation_microservice/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ckb/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ckb/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ckb/tournament_microservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ckb/user_microservice/src/main/java" charset="UTF-8" />
   </component>
