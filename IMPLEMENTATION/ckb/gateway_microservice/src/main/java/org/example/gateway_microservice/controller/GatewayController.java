@@ -13,14 +13,16 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -522,6 +524,20 @@ public class GatewayController extends WebSecurityConfigurerAdapter {
                 .csrf(c -> c
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 );
+    }
+
+    @GetMapping("/newSubmission/{username}/{repository}")
+    public void redirectRequestToGitHubMicroservice(@PathVariable String username, @PathVariable String repository,
+                                                    @RequestParam String tour, @RequestParam String battle, @RequestParam String teamName) throws URISyntaxException {
+
+        /* Send the request as it is to the GitHub integration microservice */
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest sendGitHub = HttpRequest.newBuilder()
+                .GET()
+                .uri(new URI(String.format("http://localhost:8090/newSubmission/%s/%s?tour=%s&battle=%s&teamName=%s", username, repository, tour, battle, teamName)))
+                .build();
+        client.sendAsync(sendGitHub, HttpResponse.BodyHandlers.discarding());
+
     }
 
 }

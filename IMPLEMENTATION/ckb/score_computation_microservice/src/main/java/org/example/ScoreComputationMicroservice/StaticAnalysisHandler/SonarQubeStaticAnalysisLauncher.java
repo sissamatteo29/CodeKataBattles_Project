@@ -2,7 +2,6 @@ package org.example.ScoreComputationMicroservice.StaticAnalysisHandler;
 
 import org.example.ScoreComputationMicroservice.ScoreComputationMain;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -14,9 +13,15 @@ import java.nio.file.Path;
 /***
  * This class handles the creation of a separate process on the local machine to launch the sonar-scanner
  * which is responsible for analyzing the code and sending the results to the local instance of the web server
+<<<<<<< HEAD
  * sonarQube, by default listening at http://localhost:9000
  * As the projectKey to create a new project on the sonarQube web server, the username of the user performing the commit
  * on Github is used. In this way a new analysis is run for all the commits and commits coming from the same user will override previous
+=======
+ * sonarQube, by default listening at "http://localhost:9000"
+ * As the projectKey to create a new project on the sonarQube web server, the username of the user performing the commit
+ * on GitHub is used. In this way a new analysis is run for all the commits and commits coming from the same user will override previous
+>>>>>>> matte
  * analysis.
  *
  */
@@ -34,8 +39,7 @@ public class SonarQubeStaticAnalysisLauncher {
         String sonarScannerCommand = String.format("sonar-scanner -D sonar.projectKey=%s -D sonar.host.url=http://localhost:9000 -D sonar.token=%s -D sonar.java.sources=src/main/java -D sonar.java.binaries=target/classes",
                 username, sonarAccessToken);
 
-        System.out.println(sonarScannerCommand);
-
+        System.out.println("The complete command launched on the terminal is: " + sonarScannerCommand);
 
         // Run the SonarScanner command with a ProcessBuilder
         ProcessBuilder analyzeSourceCode;
@@ -49,7 +53,7 @@ public class SonarQubeStaticAnalysisLauncher {
 
         /* Set the directory to the CODE directory for the specified user */
         Path pathToProjectUser = ScoreComputationMain.BASE_DIR.resolve(Path.of("github_integration_microservice", "code_download", username, "CODE"));
-        System.out.println(pathToProjectUser);
+        System.out.println("The path to the project to be analyzed is: " + pathToProjectUser);
         analyzeSourceCode.directory(pathToProjectUser.toFile());
 
         /* Launch the new process */
@@ -75,9 +79,7 @@ public class SonarQubeStaticAnalysisLauncher {
     public static void main(String[] args) {
         try {
             new SonarQubeStaticAnalysisLauncher().launchAnalysis("sissa");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -36,9 +36,10 @@ public class ResultsFetcher {
         List<Double> scores = new ArrayList<>(0);
         /* Repeat the http request because the server might need time to store the new analysis info */
         do {
+            System.out.println("Sleeping one second...");
             Thread.sleep(1000);
             HttpResponse<String> results = client.send(fetchStaticAnalysisResults, HttpResponse.BodyHandlers.ofString());
-            System.out.println(results.body());
+            System.out.println("Tried to fetch the results of the analysis, this is the response: "+ results.body());
 
             /* Use the Jackson library to extract specific fields of the json response */
             ObjectMapper objectMapper = new ObjectMapper();

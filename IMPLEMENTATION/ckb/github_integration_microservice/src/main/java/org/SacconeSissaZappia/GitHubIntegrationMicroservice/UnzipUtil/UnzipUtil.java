@@ -2,6 +2,8 @@ package org.SacconeSissaZappia.GitHubIntegrationMicroservice.UnzipUtil;
 
 import java.io.*;
 import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.EnumSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -80,4 +82,37 @@ public class UnzipUtil {
         }
     }
 
+    public static void removeFolderRecursively(Path pathToFolder) {
+        try {
+            Files.walkFileTree(pathToFolder, EnumSet.noneOf(FileVisitOption.class), Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    // Handle failure to visit a file (e.g., permission issue)
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            // Handle IOException
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        removeFolderRecursively(Path.of("C:\\Users\\matte\\Desktop\\target"));
+    }
+
 }
+
+

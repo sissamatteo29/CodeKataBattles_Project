@@ -12,8 +12,6 @@ public class ScoreComputationMain {
 
     public static final Path BASE_DIR;
 
-    @Value("${downloadDir}")
-    private Path downloadDir;
 
     static{
         /* Create a customary system property to point to the home directory of the project */
