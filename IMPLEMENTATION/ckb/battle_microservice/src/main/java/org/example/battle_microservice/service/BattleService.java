@@ -4,6 +4,7 @@ import org.example.battle_microservice.model.BattleModel;
 import org.example.battle_microservice.repository.BattleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,22 @@ public class BattleService {
 
     public void markBattleAsEnded(Long battleId) {
         battleRepository.markBattleAsEnded(battleId);
+    }
+
+    public byte[] getTests(String tour, String battle){
+        return battleRepository.findCodeTestByTournamentAndBattle(tour, battle).get(0);
+    }
+
+    public byte[] getBuildAutomationScripts(String tour, String battle){
+        return battleRepository.findBuildAutomationScriptsByTournamentAndBattle(tour, battle).get(0);
+    }
+
+    public Date getRegDeadline(String tour, String battle){
+        return battleRepository.findRegDeadlineByTournamentAndName(tour, battle);
+    }
+
+    public Date getSubDeadline(String tour, String battle){
+        return battleRepository.findSubDeadlineByTournamentAndName(tour, battle);
     }
 
 }

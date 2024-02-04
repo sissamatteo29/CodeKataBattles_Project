@@ -1,0 +1,5 @@
+githubDownloader:
+  baseURL: http://localhost:8080   # port to where the wiremock server will be listening to on the local machine
+  PersonalAccessToken: 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
+
+downloadDir: github_integration_microservice/code_download

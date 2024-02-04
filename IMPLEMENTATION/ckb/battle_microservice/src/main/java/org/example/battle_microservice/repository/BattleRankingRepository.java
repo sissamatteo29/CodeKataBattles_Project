@@ -3,8 +3,10 @@ package org.example.battle_microservice.repository;
 import org.example.battle_microservice.model.BattleRankingModel;
 import org.example.battle_microservice.model.TourBattleStud;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +29,18 @@ public interface BattleRankingRepository extends JpaRepository<BattleRankingMode
     @Query("SELECT  brm.id.stud, brm.score FROM BattleRankingModel brm " +
             "WHERE brm.id.tour = :tour AND brm.id.battle = :battle")
     List<Object[]> findStudAndScoreByTourAndBattle(@Param("tour") String tour, @Param("battle") String battle);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE BattleRankingModel brm " +
+            "SET brm.score = CASE WHEN :score > brm.score THEN :score ELSE brm.score END " +
+            "WHERE brm.id.tour = :tour AND brm.id.battle = :battle AND brm.teamName = :teamName")
+    void updateScoreByTourAndBattleAndTeamName(
+            @Param("tour") String tour,
+            @Param("battle") String battle,
+            @Param("teamName") String teamName,
+            @Param("score") int score
+    );
+
 
 }
