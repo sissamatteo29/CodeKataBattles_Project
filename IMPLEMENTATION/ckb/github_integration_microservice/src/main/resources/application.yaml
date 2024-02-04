@@ -1,10 +1,6 @@
 githubDownloader:
     baseURL: http://api.github.com
-    PersonalAccessToken: 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
-    username: ckbGitHub
-    password: MatteoSaraAle9!
-
-downloadDir: code_download
+    PersonalAccessToken: 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
 
 server:
     port: 8090

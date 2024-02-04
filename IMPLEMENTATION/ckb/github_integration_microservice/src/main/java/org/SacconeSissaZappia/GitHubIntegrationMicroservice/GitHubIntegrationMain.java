@@ -21,8 +21,6 @@ public class GitHubIntegrationMain {
 
     public static final Path BASE_DIR;
 
-    @Value("${downloadDir}")
-    private Path downloadDir;
 
     static{
         /* Create a customary system property to point to the home directory of the project */
@@ -30,10 +28,6 @@ public class GitHubIntegrationMain {
             System.setProperty("app.base.dir", System.getProperty("user.dir"));
         }
         BASE_DIR = Paths.get(System.getProperty("app.base.dir"));
-    }
-
-    public Path getDownloadDir(){
-        return downloadDir;
     }
 
     public static void main(String[] args) {

@@ -27,8 +27,6 @@ public class GitHubCodeDownloader implements Downloader {
     private String personalAccessToken;
     @Value("${githubDownloader.baseURL}")
     private URI baseURL;
-    @Value("${downloadDir}")
-    private Path downloadDirectory;
 
     /* Constructor showing the dependency on HttpClient */
     public GitHubCodeDownloader(HttpClient githubClient) {
@@ -45,9 +43,10 @@ public class GitHubCodeDownloader implements Downloader {
         is built starting from the BASE DIR (home directory of the project obtained by external user environment), resolved with the
         downloadDirectory (field injected, it is the path to the directory dedicated to the download inside the home project folder), resolved
         with the localDestinationPath that is basically the path internal do the download folder where the file will be placed. */
-        Path absoluteLocalPath = GitHubIntegrationMain.BASE_DIR.resolve(downloadDirectory).resolve(localDestinationPath);
-        System.out.println(completeURL);
-        System.out.println(absoluteLocalPath);
+        Path absoluteLocalPath = GitHubIntegrationMain.BASE_DIR.resolve(Path.of("github_integration_microservice", "code_download")).resolve(localDestinationPath);
+        System.out.println("The complete URL sent to github is: "+completeURL);
+        System.out.println("The BASE_DIR is set to: "+  GitHubIntegrationMain.BASE_DIR);
+        System.out.println("The absolute path in which the zip is going to be downloaded is: "+ absoluteLocalPath);
         if (!absoluteLocalPath.getParent().toFile().exists()) {
             absoluteLocalPath.getParent().toFile().mkdirs();
         }
@@ -70,6 +69,7 @@ public class GitHubCodeDownloader implements Downloader {
         System.out.println("finished reading the response");
 
     }
+
 
 
 
