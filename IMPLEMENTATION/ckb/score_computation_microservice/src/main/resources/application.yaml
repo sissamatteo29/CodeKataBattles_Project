@@ -1,6 +1,6 @@
 githubDownloader:
   baseURL: http://api.github.com
-  PersonalAccessToken: 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
+  PersonalAccessToken: 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
 
 sonarQube:
   accessToken: squ_eea4183c5d8215f5ecb3800076ff4fcf42e9d476
