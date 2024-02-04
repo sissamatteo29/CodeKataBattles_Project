@@ -52,6 +52,7 @@ public class GitOp {
 
         // Push changes to the remote repository
         pushToRemote(git, "main");
+        System.out.println("Pushed to github the entire directory content");
 
         // Close the Git repository
         git.close();
