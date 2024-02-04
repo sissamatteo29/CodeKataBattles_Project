@@ -67,6 +67,13 @@ public class Controller {
         localRepoPath.toFile().delete();
 
         /* Contact the Score Computation Microservice to calculate the new score and update it in the DB */
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(new URI(String.format("http://localhost:8089/computeScore/%s?tour=%s&battle=%s&teamName=%s",
+                        username, tour, battle, teamName)))
+                .build();
+        client.sendAsync(request, HttpResponse.BodyHandlers.discarding());
 
 
     }
@@ -86,7 +93,7 @@ public class Controller {
                 .GET().uri(new URI(String.format("http://localhost:8083/getScripts/%s/%s", tournament, battle)))
                 .build();
         HttpResponse<Path> getTests = client.send(testCasesRequest, HttpResponse.BodyHandlers.ofFile(localPathToBattle.resolve("tests.zip")));
-        HttpResponse<Path> getScripts = client.send(testCasesRequest, HttpResponse.BodyHandlers.ofFile(localPathToBattle.resolve("scripts.zip")));
+        HttpResponse<Path> getScripts = client.send(buildAutomationScriptsRequest, HttpResponse.BodyHandlers.ofFile(localPathToBattle.resolve("scripts.zip")));
 
         /* Extract the two zip files */
         UnzipUtil.unzipFileFromTo(localPathToBattle.resolve("tests.zip"), null);

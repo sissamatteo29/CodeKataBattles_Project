@@ -2,10 +2,13 @@ githubDownloader:
   baseURL: http://api.github.com
   PersonalAccessToken: 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
 
-downloadDir: code_download
+downloadDir: github_integration_microservice/code_download
+
+sonarQube:
+  accessToken: squ_eea4183c5d8215f5ecb3800076ff4fcf42e9d476
 
 server:
-  port: 8088
+  port: 8089
 
 datasource:
   url: jdbc:postgresql://localhost:5432/ckb_db
