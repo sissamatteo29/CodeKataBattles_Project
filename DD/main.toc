@@ -21,25 +21,25 @@
 \contentsline {subsubsection}{\numberline {2.3.2}Detailed Deployment View}{24}{}%
 \contentsline {subsection}{\numberline {2.4}Run Time View}{26}{}%
 \contentsline {subsection}{\numberline {2.5}Component Interfaces}{48}{}%
-\contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{62}{}%
-\contentsline {subsubsection}{\numberline {2.6.1}Database Management}{63}{}%
-\contentsline {section}{\numberline {3}User Interface Design}{65}{}%
-\contentsline {subsection}{\numberline {3.1}Login Phase}{65}{}%
-\contentsline {subsection}{\numberline {3.2}Educator personal profile}{66}{}%
-\contentsline {subsection}{\numberline {3.3}Creation of a new tournament}{67}{}%
-\contentsline {subsection}{\numberline {3.4}Tournament home page}{68}{}%
-\contentsline {subsection}{\numberline {3.5}Creation of a new battle}{69}{}%
-\contentsline {subsection}{\numberline {3.6}Student personal profile}{70}{}%
-\contentsline {subsection}{\numberline {3.7}Notification interface}{71}{}%
-\contentsline {subsection}{\numberline {3.8}Joining a tournament}{72}{}%
-\contentsline {subsection}{\numberline {3.9}Joining a Battle}{73}{}%
-\contentsline {subsection}{\numberline {3.10}Adding badges to a tournament}{74}{}%
-\contentsline {section}{\numberline {4}Requirements Traceability}{75}{}%
-\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{81}{}%
-\contentsline {subsection}{\numberline {5.1}Overview}{81}{}%
-\contentsline {subsection}{\numberline {5.2}Implementation Plan}{82}{}%
-\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{82}{}%
-\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{84}{}%
-\contentsline {subsection}{\numberline {5.3}System Testing}{91}{}%
-\contentsline {section}{\numberline {6}Effort spent}{92}{}%
-\contentsline {section}{\numberline {7}References}{92}{}%
+\contentsline {subsection}{\numberline {2.6}Selected Architectural Styles and Patterns}{60}{}%
+\contentsline {subsubsection}{\numberline {2.6.1}Database Management}{61}{}%
+\contentsline {section}{\numberline {3}User Interface Design}{63}{}%
+\contentsline {subsection}{\numberline {3.1}Login Phase}{63}{}%
+\contentsline {subsection}{\numberline {3.2}Educator personal profile}{64}{}%
+\contentsline {subsection}{\numberline {3.3}Creation of a new tournament}{65}{}%
+\contentsline {subsection}{\numberline {3.4}Tournament home page}{66}{}%
+\contentsline {subsection}{\numberline {3.5}Creation of a new battle}{67}{}%
+\contentsline {subsection}{\numberline {3.6}Student personal profile}{68}{}%
+\contentsline {subsection}{\numberline {3.7}Notification interface}{69}{}%
+\contentsline {subsection}{\numberline {3.8}Joining a tournament}{70}{}%
+\contentsline {subsection}{\numberline {3.9}Joining a Battle}{71}{}%
+\contentsline {subsection}{\numberline {3.10}Adding badges to a tournament}{72}{}%
+\contentsline {section}{\numberline {4}Requirements Traceability}{73}{}%
+\contentsline {section}{\numberline {5}Implementation, Integration and Test plan}{79}{}%
+\contentsline {subsection}{\numberline {5.1}Overview}{79}{}%
+\contentsline {subsection}{\numberline {5.2}Implementation Plan}{80}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Features Identification}{80}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Components Integration and Testing}{82}{}%
+\contentsline {subsection}{\numberline {5.3}System Testing}{89}{}%
+\contentsline {section}{\numberline {6}Effort spent}{90}{}%
+\contentsline {section}{\numberline {7}References}{90}{}%

@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class TournamentController {
+public class
+TournamentController {
     @Autowired
     private TournamentService tournamentService;
     @Autowired
